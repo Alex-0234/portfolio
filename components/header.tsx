@@ -20,7 +20,7 @@ export default function Header() {
     const [activeLink, setActiveLink] = useState('/')
 
     return (
-        <header className='flex justify-between items-center fixed top-0 w-full h-16 bg-transparent mix-blend-difference pl-4 pr-4 z-10 backdrop-blur-xl'>
+        <header className='flex justify-between items-center fixed top-0 w-full h-16 bg-transparent mix-blend-difference pl-4 pr-4 z-10 backdrop-blur-xl font-jet font-bold'>
             <div className='flex w-14 h-14 bg-white'></div>
             <nav>
                 <ul className='flex w-fit gap-8'>

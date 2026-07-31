@@ -30,7 +30,7 @@ const TYPE_LABEL: Record<PortfolioType, string> = {
 const portfolio: PortfolioPiece[] = [
     { number: 1, name: 'Portfolio Site', type: 'personal', startYear: 2026, startMonth: 7, description: 'This site.', href: '', video: '' },
     { number: 2, name: 'Client Rebrand', type: 'freelance', startYear: 2026, startMonth: 4, endYear: 2026, endMonth: 5, description: '', href: '', video: '' },
-    { number: 3, name: 'Internal Dashboard', type: 'work', startYear: 2026, startMonth: 1, endYear: 2026, endMonth: 3, description: '', href: '', video: '', large: true },
+    { number: 3, name: 'cali-ascension', type: 'personal', startYear: 2026, startMonth: 1, endYear: 2026, endMonth: 3, description: 'Gamifikovany tracker pro kalisteniku', href: 'https://cali-ascension.vercel.app/', video: '', large: true },
     { number: 4, name: 'Landing Page', type: 'freelance', startYear: 2025, startMonth: 10, endYear: 2025, endMonth: 11, description: '', href: '', video: '' },
     { number: 5, name: 'Design System', type: 'work', startYear: 2025, startMonth: 6, endYear: 2025, endMonth: 9, description: '', href: '', video: '' },
     { number: 6, name: 'Side Project', type: 'personal', startYear: 2025, startMonth: 6, description: '', href: '', video: '' },
@@ -58,8 +58,6 @@ export default function Portfolio() {
     const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
     const dragState = useRef<{ startX: number; startY: number; originX: number; originY: number } | null>(null)
 
-    // content and layout never change with the filter - only dimming does -
-    // so the scroll track only needs to be built once.
     useGSAP(() => {
         const track = trackRef.current
         const section = sectionRef.current
@@ -122,14 +120,10 @@ export default function Portfolio() {
             style={{ containerType: 'size' }}
             className='relative w-full h-screen overflow-hidden bg-dark pt-16 pb-24'
         >
-            {/* 9 rows tall - a normal card spans 1 row x 1 column (wider than
-                tall, since a column is much wider than a single row is high).
-                a "large" card spans 2 rows x 1 column, which lands close to
-                square since column-width was derived as roughly 2x row-height. */}
             <div
                 ref={trackRef}
                 className='grid h-full w-max grid-flow-col-dense grid-rows-9 gap-2 p-2'
-                style={{ gridAutoColumns: 'calc(1600cqh / 81)' }}
+                style={{ gridAutoColumns: 'calc(1600cqh / 40)' }}
             >
                 {portfolio.map((project) => {
                     const dimmed = activeType !== 'all' && project.type !== activeType
@@ -137,9 +131,9 @@ export default function Portfolio() {
                         <button
                             key={project.number}
                             onClick={() => openProject(project)}
-                            className='relative flex shrink-0 flex-col justify-between border border-light/10 p-3 text-left transition-[opacity,border-color] duration-300 hover:border-light/30'
+                            className='relative flex shrink-0 flex-col justify-between border border-light/10 p-3 rounded-md text-left transition-[opacity,border-color] duration-300 hover:border-light/30 cursor-pointer'
                             style={{
-                                gridRow: project.large ? 'span 2' : undefined,
+                                gridRow: project.large ? 'span 3' : undefined,
                                 backgroundColor: cardBg(project),
                                 opacity: dimmed ? 0.25 : 1,
                             }}
