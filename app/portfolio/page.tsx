@@ -187,7 +187,7 @@ export default function Portfolio() {
                             ✕
                         </button>
                         <p className='text-light/50 text-xs'>
-                            {String(selected.month).padStart(2, '0')}/{selected.year} — {TYPE_LABEL[selected.type]}
+                            {String(selected.startMonth).padStart(2, '0')}/{selected.startYear} — {TYPE_LABEL[selected.type]}
                         </p>
                         <h2 className='text-light text-2xl mt-1'>{selected.name}</h2>
                         {selected.description && (
