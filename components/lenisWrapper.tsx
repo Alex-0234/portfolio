@@ -1,0 +1,37 @@
+'use client'
+import ReactLenis, { LenisRef } from "lenis/react";
+import { useRef, type ReactNode } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
+
+export default function LenisSetup({ children }: { children: ReactNode }) {
+    const lenisRef = useRef<LenisRef>(null);
+
+    useGSAP(() => {
+        function update(time: number) {
+            lenisRef.current?.lenis?.raf(time * 1000);
+        }
+
+        lenisRef.current?.lenis?.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add(update);
+        gsap.ticker.lagSmoothing(0);
+
+        return () => {
+            lenisRef.current?.lenis?.off('scroll', ScrollTrigger.update);
+            gsap.ticker.remove(update);
+        };
+    }, []);
+
+    return (
+        <ReactLenis
+            root
+            ref={lenisRef}
+            options={{ lerp: 0.5, autoRaf: false }}
+        >
+            {children}
+        </ReactLenis>
+    )
+}
