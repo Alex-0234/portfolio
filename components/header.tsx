@@ -80,18 +80,18 @@ export default function Header() {
                 </Link>
 
                 <nav aria-label='Hlavní navigace' className='hidden md:block'>
-                    <ul className='flex w-fit gap-8'>
+                    <ul className='flex w-fit gap-6 lg:gap-8'>
                         {NAVIGATION.map((link) => {
                             const active = pathname === link.redirect
                             return (
                                 <li
                                     key={link.redirect}
-                                    className='flex cursor-pointer text-[1.2rem] text-light'
+                                    className='flex cursor-pointer text-[0.7rem] uppercase tracking-[0.15em] text-light'
                                     >
                                         <Link
                                             href={link.redirect}
                                             aria-current={active ? 'page' : undefined}
-                                            className={active ? 'underline underline-offset-8' : 'hover:underline hover:underline-offset-8'}
+                                            className={active ? 'underline underline-offset-6' : 'hover:underline hover:underline-offset-6'}
                                         >
                                             {link.name}
                                         </Link>
