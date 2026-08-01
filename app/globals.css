@@ -11,8 +11,6 @@
   --color-light: var(--foreground);
   --color-confirm: var(--confirm);
   --font-jet: var(--font-jetbrains);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,5 +23,35 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fade-in 0.35s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    animation: none;
+  }
+}
+
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 140px 140px;
+}
+
+.raster {
+  --raster-line: color-mix(in srgb, var(--foreground) 7%, transparent);
+  background-image:
+    repeating-linear-gradient(to right, var(--raster-line) 0 1px, transparent 1px 6rem),
+    repeating-linear-gradient(to bottom, var(--raster-line) 0 1px, transparent 1px 6rem);
+  -webkit-mask-image: radial-gradient(ellipse 65% 55% at 50% 45%, #000, transparent);
+  mask-image: radial-gradient(ellipse 65% 55% at 50% 45%, #000, transparent);
 }
