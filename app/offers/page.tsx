@@ -1,20 +1,16 @@
-import type { Metadata } from "next"
-
 import Button from "@/components/button"
 import ContactForm from "@/components/contactForm"
 import PricingPackages from "@/components/pricingPackages"
 import SplitReveal from "@/components/splitReveal"
 import { PACKAGES } from "@/data/pricing"
+import { pageMetadata } from "@/utils/metadata"
 import { formatPrice } from "@/utils/price"
 
-const description = "Landing page, firemní web, webová aplikace nebo správa webu — pevné ceny od, kalkulačka a poptávkový formulář."
-
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
     title: "Služby a ceník",
-    description,
-    alternates: { canonical: "/offers" },
-    openGraph: { title: "Služby a ceník | Alex Liška", description, url: "/offers" },
-}
+    description: "Landing page, firemní web, webová aplikace nebo správa webu — pevné ceny od, kalkulačka a poptávkový formulář.",
+    path: "/offers",
+})
 
 const PROCESS = [
     { title: 'Poptávka', description: 'Napíšete mi přes formulář nebo e-mail, co potřebujete.' },

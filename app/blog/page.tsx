@@ -1,13 +1,12 @@
-import type { Metadata } from "next"
-
 import Button from "@/components/button"
 import SplitReveal from "@/components/splitReveal"
+import { pageMetadata } from "@/utils/metadata"
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
     title: "Blog",
     description: "Tipy k tvorbě webů, poznámky z praxe a rozbory vlastních projektů.",
-    alternates: { canonical: "/blog" },
-}
+    path: "/blog",
+})
 
 const PLANNED = [
     'Jak vybrat mezi landing page a firemním webem',

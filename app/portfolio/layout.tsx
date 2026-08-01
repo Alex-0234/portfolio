@@ -1,14 +1,12 @@
-import type { Metadata } from "next"
+import { pageMetadata } from "@/utils/metadata"
 
-const description = "Vybrané projekty — osobní, freelance i pracovní. Weby a webové aplikace postavené na míru."
-
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
     title: "Portfolio",
-    description,
-    alternates: { canonical: "/portfolio" },
-    openGraph: { title: "Portfolio | Alex Liška", description, url: "/portfolio" },
-}
+    description: "Vybrané projekty — osobní, freelance i pracovní. Weby a webové aplikace postavené na míru.",
+    path: "/portfolio",
+})
 
+// stránka sama je interaktivní, takže metadata musí viset o patro výš
 export default function PortfolioLayout({ children }: { children: React.ReactNode }) {
     return children
 }

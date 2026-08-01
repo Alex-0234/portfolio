@@ -1,16 +1,12 @@
-import type { Metadata } from "next"
-
 import Button from "@/components/button"
 import SplitReveal from "@/components/splitReveal"
+import { pageMetadata } from "@/utils/metadata"
 
-const description = "Full-stack vývojář s technickým vzděláním (mechatronika, informační systémy). Poznejte, kdo stojí za Vaším projektem."
-
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
     title: "O mně",
-    description,
-    alternates: { canonical: "/about" },
-    openGraph: { title: "O mně | Alex Liška", description, url: "/about" },
-}
+    description: "Full-stack vývojář s technickým vzděláním (mechatronika, informační systémy). Poznejte, kdo stojí za Vaším projektem.",
+    path: "/about",
+})
 
 const EDUCATION = [
     { period: '2025 – nyní', title: 'Vývoj webových aplikací', place: 'samouk', description: 'Stavím reálné projekty s Reactem, Node.js a MongoDB.' },
