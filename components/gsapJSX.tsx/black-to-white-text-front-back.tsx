@@ -26,6 +26,12 @@ export default function BlackToWhiteTextFrontToBack() {
                 scrub: true,
                 pin: true,
                 pinSpacing: true,
+                snap: {
+                    snapTo: 'labelsDirectional',
+                    duration: {min: 0.2, max: 0.5},
+                    delay: 0.1,
+                    ease: 'power1.inOut'
+                }
             }
         });
 
@@ -42,12 +48,14 @@ export default function BlackToWhiteTextFrontToBack() {
                 ease: 'power2.out',
                 immediateRender: false,
             }, at)
+                .addLabel(`step-${i}`, at + 0.8)
                 .to(stepRefs.current[i], {
                     y: () => -window.innerHeight * 2 / 3,
                     opacity: 0,
                     duration: 1.2,
                     ease: 'power2.in',
                 }, at + 0.8)
+                
         })
 
         const afterSteps = STEPS.length * UNITS_PER_STEP
@@ -66,10 +74,11 @@ export default function BlackToWhiteTextFrontToBack() {
                 y: '100px',
             }, {
                 fontSize: '2.5rem',
-                duration: 3,
+                duration: 6,
                 ease: 'power3.out',
                 immediateRender: false,
             }, afterSteps)
+            .addLabel('svg-end', afterSteps + 3)
 
     }, [])
 
@@ -81,7 +90,7 @@ export default function BlackToWhiteTextFrontToBack() {
                     ref={(el) => { stepRefs.current[i] = el }}
                     className='absolute inset-0 flex flex-col items-center justify-center gap-6 opacity-0'
                 >
-                    <span className='font-jet text-[0.9vw] tracking-[0.4em] text-light/40'>
+                    <span className='font-jet text-[0.9vw] tracking-[0.4em] text-light/50'>
                         {String(i + 1).padStart(2, '0')}
                     </span>
                     <span className='text-[3vw] font-bold uppercase leading-[1.3] text-light'>
@@ -90,7 +99,7 @@ export default function BlackToWhiteTextFrontToBack() {
                 </div>
             ))}
 
-            <svg viewBox='0 0 800 120' className='absolute top-0 left-0 h-full w-full font-jet'>
+            <svg viewBox='0 0 800 120' className='absolute top-0 left-0 h-full w-full font-jet pointer-events-none'>
                 <text
                     ref={svgRef}
                     x={400}
@@ -98,7 +107,7 @@ export default function BlackToWhiteTextFrontToBack() {
                     textAnchor='middle'
                     dominantBaseline='middle'
                     fill='var(--background)'
-                    className='text-[2.5vw] font-bold opacity-0'
+                    className='text-[2.5vw] font-bold opacity-0 pointer-events-none'
                 >
                     KEEP BUILDING
                 </text>

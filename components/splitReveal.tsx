@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import gsap from "gsap"
-import { SplitText } from "gsap/all"
+import { SplitText } from "gsap/SplitText"
 import { useGSAP } from "@gsap/react"
 
 gsap.registerPlugin(SplitText)
@@ -54,6 +54,11 @@ export default function SplitReveal({
     useGSAP(() => {
         if (!elRef.current) return
 
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            onReady?.(gsap.timeline())
+            return
+        }
+
         SplitText.create(elRef.current, {
             type: split,
             // wraps every piece in its own overflow:clip element, so the text
@@ -72,6 +77,15 @@ export default function SplitReveal({
                         trigger: elRef.current,
                         start,
                         once: true,
+                    },
+                    // po dojetí split zahodíme a text se vrátí do původní podoby.
+                    // masky mají overflow: clip a jsou vysoké přesně jako znak, takže
+                    // by při těsném leadingu natrvalo uřízly háčky nad em boxem;
+                    // zbylé transformy navíc rasterizují znaky ve vlastní vrstvě
+                    // a ty pak sedí o pixel jinak než okolní text.
+                    // timeline, kterou řídí rodič, si musí zůstat rozdělená
+                    onComplete: onReady ? undefined : () => {
+                        gsap.delayedCall(0, () => self.revert())
                     },
                 })
 
