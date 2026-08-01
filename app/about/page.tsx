@@ -1,4 +1,16 @@
-'use client'
+import type { Metadata } from "next"
+
+import Button from "@/components/button"
+import SplitReveal from "@/components/splitReveal"
+
+const description = "Full-stack vývojář s technickým vzděláním (mechatronika, informační systémy). Poznejte, kdo stojí za Vaším projektem."
+
+export const metadata: Metadata = {
+    title: "O mně",
+    description,
+    alternates: { canonical: "/about" },
+    openGraph: { title: "O mně | Alex Liška", description, url: "/about" },
+}
 
 const EDUCATION = [
     { period: '2025 – nyní', title: 'Vývoj webových aplikací', place: 'samouk', description: 'Stavím reálné projekty s Reactem, Node.js a MongoDB.' },
@@ -13,106 +25,189 @@ const EXPERIENCE = [
     { period: '05.2021', title: 'Úvod do výroby', place: 'Manag', description: 'První praktický kontakt s průmyslovou výrobou.' },
 ]
 
-const FRONTEND_STACK = ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'GSAP', 'Lenis']
-const BACKEND_STACK = ['Node.js', 'Express', 'MongoDB', 'REST API']
+const STACK = [
+    { label: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'GSAP', 'Lenis'] },
+    { label: 'Backend', items: ['Node.js', 'Express', 'MongoDB', 'REST API'] },
+]
+
+const USP = [
+    { title: 'Full-stack pod jednou střechou', description: 'Nepotřebujete koordinovat tři různé dodavatele.' },
+    { title: 'Pevná cena předem', description: 'Žádná překvapení ve faktuře.' },
+    { title: 'Smysl pro detail', description: 'Technické vzdělání = spolehlivost, ne jen hezký vzhled.' },
+    { title: 'Komunikace bez žargonu', description: 'Vysvětlím, co a proč děláme. Rychlá odezva, jasné termíny.' },
+]
+
+const INDEX = [
+    { number: '01', name: 'Přístup', note: 'jak pracuju', href: '#pristup' },
+    { number: '02', name: 'Vzdělání a praxe', note: 'odkud jdu', href: '#cesta' },
+    { number: '03', name: 'Technologie', note: 'v čem stavím', href: '#stack' },
+    { number: '04', name: 'Proč se mnou', note: 'co z toho máte', href: '#proc' },
+]
+
+const microClasses = 'font-jet text-xs uppercase tracking-[0.2em] text-light/50'
 
 export default function About() {
-
     return (
-        <section className='flex flex-col w-full h-auto bg-dark text-light'>
-            <div className='flex flex-col lg:flex-row items-center gap-12 w-full max-w-6xl mx-auto min-h-screen px-6 py-32'>
-                <div className='w-full max-w-sm aspect-square rounded-xl border border-light/10 bg-light/5 flex items-center justify-center shrink-0 order-2 lg:order-1'>
-                    {/* TODO: profilová fotka */}
-                    <span className='text-light/30 text-sm'>fotka</span>
-                </div>
-                <div className='flex flex-col gap-5 max-w-xl order-1 lg:order-2'>
-                    <h1 className='text-3xl md:text-4xl'>Alex Liška - Freelance developer</h1>
-                    <p className='text-light/70'>
-                        Jsem freelance webový vývojář z Pardubic a okolí. Weby a webové aplikace stavím na míru —
-                        od jednoduché prezentace po plnohodnotnou webovou aplikaci s vlastním backendem, databází
-                        a administrací.
-                    </p>
-                    <p className='text-light/70'>
-                        Ke kódování jsem se dostal jako samouk, souběžně studuji mechatroniku na TUL (a předtím
-                        obor Technik informačních systémů). Ta kombinace — technické vzdělání a praxe s automatizací
-                        a řídicími systémy — je vidět i na tom, jak k webu přistupuju: záleží mi na tom, aby fungoval
-                        spolehlivě, ne jen aby vypadal dobře.
-                    </p>
-                    <p className='text-light/70'>
-                        Nemám rád zbytečný žargon ani nekonečné revize. Domluvíme si rozsah, cenu a termín předem,
-                        a Vy víte, co dostanete a kdy. Práci nad rámec zadání účtuju férově a hodinově — žádná
-                        skrytá překvapení ve faktuře.
-                    </p>
-                </div>
-            </div>
+        <section className='flex w-full flex-col bg-dark font-jet text-light'>
+            <header className='flex min-h-screen w-full flex-col justify-center gap-10 px-6 pt-32 pb-16'>
+                <div className='mx-auto flex w-full max-w-6xl flex-col-reverse gap-12 lg:flex-row lg:items-end lg:justify-between'>
+                    <div className='flex flex-col gap-8 lg:max-w-2xl'>
+                        <p className={microClasses}>[ pardubice a okolí · full-stack · od backendu po scroll ]</p>
 
-            <div className='w-full max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-12'>
-                <div>
-                    <h2 className='text-2xl mb-6'>Vzdělání</h2>
-                    <ul className='flex flex-col gap-5'>
-                        {EDUCATION.map((item) => (
-                            <li key={item.title} className='border-l border-light/10 pl-4'>
-                                <p className='text-light/50 text-sm'>{item.period}</p>
-                                <p className='mt-1'>{item.title} <span className='text-light/50'>— {item.place}</span></p>
-                                <p className='text-light/60 text-sm mt-1'>{item.description}</p>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                <div>
-                    <h2 className='text-2xl mb-6'>Praxe</h2>
-                    <ul className='flex flex-col gap-5'>
-                        {EXPERIENCE.map((item) => (
-                            <li key={`${item.title}-${item.period}`} className='border-l border-light/10 pl-4'>
-                                <p className='text-light/50 text-sm'>{item.period}</p>
-                                <p className='mt-1'>{item.title} <span className='text-light/50'>— {item.place}</span></p>
-                                <p className='text-light/60 text-sm mt-1'>{item.description}</p>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-            <p className='w-full max-w-6xl mx-auto px-6 text-light/40 text-sm'>Kompletní životopis na vyžádání.</p>
+                        {/* leading-[1.4] dělá masce místo na háčky a čárky, -mt na druhém
+                            řádku vrátí řádkům původní těsný odstup a -my celému nadpisu
+                            původní výšku */}
+                        <h1 className='-my-[0.2em] uppercase font-black leading-[1.4] tracking-[-0.042em] text-[clamp(2.75rem,11vw,9rem)]'>
+                            <SplitReveal as='span' on='mount' split='chars' stagger={0.02} className='block'>
+                                Alex
+                            </SplitReveal>
+                            <SplitReveal as='span' on='mount' split='chars' stagger={0.02} delay={0.15} className='-mt-[0.5em] block ml-[12%] sm:ml-[30%]'>
+                                Liška
+                            </SplitReveal>
+                        </h1>
 
-            <div className='w-full max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-12'>
-                <div>
-                    <h2 className='text-xl mb-4'>Frontend technologie</h2>
-                    <ul className='flex flex-wrap gap-2'>
-                        {FRONTEND_STACK.map((tech) => (
-                            <li key={tech} className='rounded-xl border border-light/10 px-3 py-1 text-sm text-light/70'>{tech}</li>
-                        ))}
-                    </ul>
-                </div>
-                <div>
-                    <h2 className='text-xl mb-4'>Backend technologie</h2>
-                    <ul className='flex flex-wrap gap-2'>
-                        {BACKEND_STACK.map((tech) => (
-                            <li key={tech} className='rounded-xl border border-light/10 px-3 py-1 text-sm text-light/70'>{tech}</li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
+                        <div className='flex flex-col gap-4'>
+                            <SplitReveal on='mount' delay={0.4} className='text-light/70 leading-relaxed'>
+                                Jsem freelance webový vývojář z Pardubic a okolí. Weby a webové aplikace stavím na míru — od
+                                jednoduché prezentace po plnohodnotnou webovou aplikaci s vlastním backendem, databází a administrací.
+                            </SplitReveal>
+                            <p className='text-sm text-confirm'>Aktuálně přijímám nové projekty</p>
+                        </div>
 
-            <div className='w-full max-w-6xl mx-auto px-6 pb-32'>
-                <h2 className='text-2xl mb-6'>Proč se mnou</h2>
-                <ul className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-                    <li className='rounded-xl border border-light/10 p-6'>
-                        <p className='font-medium'>Full-stack pod jednou střechou</p>
-                        <p className='text-light/60 mt-1'>Nepotřebujete koordinovat tři různé dodavatele.</p>
-                    </li>
-                    <li className='rounded-xl border border-light/10 p-6'>
-                        <p className='font-medium'>Pevná cena předem</p>
-                        <p className='text-light/60 mt-1'>Žádná překvapení ve faktuře.</p>
-                    </li>
-                    <li className='rounded-xl border border-light/10 p-6'>
-                        <p className='font-medium'>Smysl pro detail</p>
-                        <p className='text-light/60 mt-1'>Technické vzdělání = spolehlivost, ne jen hezký vzhled.</p>
-                    </li>
-                    <li className='rounded-xl border border-light/10 p-6'>
-                        <p className='font-medium'>Komunikace bez žargonu</p>
-                        <p className='text-light/60 mt-1'>Vysvětlím, co a proč děláme. Rychlá odezva, jasné termíny.</p>
-                    </li>
+                        <div className='flex flex-wrap gap-4'>
+                            <Button href='/offers' variant='solid'>Služby a ceník</Button>
+                            <Button href='/portfolio'>Portfolio</Button>
+                        </div>
+                    </div>
+
+                    <div className='flex aspect-square w-full max-w-xs shrink-0 items-center justify-center border border-light/10 bg-light/2'>
+                        <span className={microClasses}>[ fotka ]</span>
+                    </div>
+                </div>
+
+                <ul className='mx-auto mt-8 grid w-full max-w-6xl grid-cols-1 border-t border-light/10 sm:grid-cols-2 lg:grid-cols-4'>
+                    {INDEX.map((item) => (
+                        <li key={item.number} className='border-b border-light/10 lg:border-b-0 lg:border-r lg:last:border-r-0'>
+                            <a href={item.href} className='flex flex-col gap-1 px-4 py-5 transition-colors hover:bg-light/5'>
+                                <span className={microClasses}>{item.number}</span>
+                                <span className='text-sm uppercase tracking-wide'>{item.name}</span>
+                                <span className='text-sm text-light/50'>{item.note}</span>
+                            </a>
+                        </li>
+                    ))}
                 </ul>
+            </header>
+
+            <div id='pristup' className='mx-auto w-full max-w-6xl px-6 py-24 scroll-mt-16'>
+                <div className='mb-10 flex flex-col gap-3'>
+                    <p className={microClasses}>[ přístup ]</p>
+                    <SplitReveal as='h2' split='chars' stagger={0.02} className='text-2xl md:text-4xl uppercase font-bold leading-[1.4] tracking-tight'>
+                        Jak k tomu přistupuju
+                    </SplitReveal>
+                </div>
+
+                <div className='grid grid-cols-1 gap-8 md:grid-cols-2'>
+                    <p className='text-light/60 leading-relaxed'>
+                        Ke kódování jsem se dostal jako samouk, souběžně studuji mechatroniku na TUL (a předtím obor
+                        Technik informačních systémů). Ta kombinace — technické vzdělání a praxe s automatizací a řídicími
+                        systémy — je vidět i na tom, jak k webu přistupuju: záleží mi na tom, aby fungoval spolehlivě,
+                        ne jen aby vypadal dobře.
+                    </p>
+                    <p className='text-light/60 leading-relaxed'>
+                        Nemám rád zbytečný žargon ani nekonečné revize. Domluvíme si rozsah, cenu a termín předem,
+                        a Vy víte, co dostanete a kdy. Práci nad rámec zadání účtuju férově a hodinově — žádná skrytá
+                        překvapení ve faktuře.
+                    </p>
+                </div>
+            </div>
+
+            <div id='cesta' className='mx-auto w-full max-w-6xl px-6 py-24 scroll-mt-16'>
+                <div className='mb-10 flex flex-col gap-3'>
+                    <p className={microClasses}>[ vzdělání a praxe ]</p>
+                    <SplitReveal as='h2' split='chars' stagger={0.02} className='text-2xl md:text-4xl uppercase font-bold leading-[1.4] tracking-tight'>
+                        Odkud jdu
+                    </SplitReveal>
+                </div>
+
+                <div className='grid grid-cols-1 gap-12 lg:grid-cols-2'>
+                    {[{ label: 'Vzdělání', items: EDUCATION }, { label: 'Praxe', items: EXPERIENCE }].map((group) => (
+                        <div key={group.label}>
+                            <h3 className={`${microClasses} mb-4`}>{group.label}</h3>
+                            <ul className='flex flex-col'>
+                                {group.items.map((item) => (
+                                    <li key={`${item.title}-${item.period}`} className='flex flex-col gap-1 border-t border-light/10 py-5'>
+                                        <span className={microClasses}>{item.period}</span>
+                                        <p className='uppercase tracking-wide'>
+                                            {item.title} <span className='text-light/50'>— {item.place}</span>
+                                        </p>
+                                        <p className='text-sm text-light/50'>{item.description}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+
+                <p className='mt-8 text-sm text-light/50'>Kompletní životopis na vyžádání.</p>
+            </div>
+
+            <div id='stack' className='mx-auto w-full max-w-6xl px-6 py-24 scroll-mt-16'>
+                <div className='mb-10 flex flex-col gap-3'>
+                    <p className={microClasses}>[ technologie ]</p>
+                    <SplitReveal as='h2' split='chars' stagger={0.02} className='text-2xl md:text-4xl uppercase font-bold leading-[1.4] tracking-tight'>
+                        V čem stavím
+                    </SplitReveal>
+                </div>
+
+                <div className='grid grid-cols-1 gap-8 md:grid-cols-2'>
+                    {STACK.map((group) => (
+                        <div key={group.label} className='flex flex-col gap-4 border-t border-light/10 pt-6'>
+                            <h3 className={microClasses}>{group.label}</h3>
+                            <ul className='flex flex-wrap gap-2'>
+                                {group.items.map((tech) => (
+                                    <li key={tech} className='border border-light/15 px-3 py-1 text-xs text-light/60'>
+                                        {tech}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <div id='proc' className='mx-auto w-full max-w-6xl px-6 py-24 scroll-mt-16'>
+                <div className='mb-10 flex flex-col gap-3'>
+                    <p className={microClasses}>[ proč se mnou ]</p>
+                    <SplitReveal as='h2' split='chars' stagger={0.02} className='text-2xl md:text-4xl uppercase font-bold leading-[1.4] tracking-tight'>
+                        Co z toho máte
+                    </SplitReveal>
+                </div>
+
+                <ul className='grid grid-cols-1 gap-px bg-light/10 sm:grid-cols-2'>
+                    {USP.map((item, index) => (
+                        <li key={item.title} className='flex flex-col gap-2 bg-dark p-6'>
+                            <span className={microClasses}>{String(index + 1).padStart(2, '0')}</span>
+                            <p className='uppercase tracking-wide'>{item.title}</p>
+                            <p className='text-sm text-light/50'>{item.description}</p>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            <div className='mx-auto w-full max-w-6xl px-6 pb-40'>
+                <div className='flex flex-col gap-6 border border-light/10 bg-light/2 p-8 sm:p-12'>
+                    <p className={microClasses}>[ pojďme na to ]</p>
+                    <SplitReveal as='h2' split='chars' stagger={0.02} className='text-2xl md:text-4xl uppercase font-bold leading-[1.4] tracking-tight'>
+                        Postavíme něco spolu
+                    </SplitReveal>
+                    <p className='max-w-xl text-sm text-light/50'>
+                        Napište mi, co potřebujete. Rozsah, cenu i termín si domluvíme předem.
+                    </p>
+                    <div className='flex flex-wrap gap-4'>
+                        <Button href='/offers#poptavka' variant='solid'>Napsat mi</Button>
+                        <Button href='/offers'>Služby a ceník</Button>
+                    </div>
+                </div>
             </div>
         </section>
     )
