@@ -3,73 +3,104 @@ import gsap from "gsap"
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 
+const STEPS = [
+    'Napíšete mi, co potřebujete.',
+    'Domluvíme rozsah, cenu a termín.',
+    'Postavím to na míru.',
+    'Předám vám hotový web.',
+]
 
-export default function BlackToWhiteTextFrontToBack({text}: {text: string}) {
+const UNITS_PER_STEP = 2
+
+export default function BlackToWhiteTextFrontToBack() {
     const containerRef = useRef<HTMLDivElement>(null);
-    const textRef = useRef<HTMLParagraphElement>(null);
+    const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
     const svgRef = useRef<SVGTextElement>(null);
-    
-    useGSAP(() => {
 
-        const timeline = gsap.timeline({
+    useGSAP(() => {
+        const tl1 = gsap.timeline({
             scrollTrigger: {
-                id: 'black-to-white',
                 trigger: containerRef.current,
                 start: 'top top',
-                end: '+=5000',
+                end: '+=6500',
                 scrub: true,
                 pin: true,
                 pinSpacing: true,
             }
         });
 
-        timeline
+        STEPS.forEach((_, i) => {
+            const at = i * UNITS_PER_STEP
 
-        .to(textRef.current, {
-            color: 'var(--foreground)',
-            opacity: 1,
-            scale: 1.5,
-            duration: 1
-        }, 1)
-        .to(textRef.current, {
-            y: () => window.innerHeight*2/3,
-            duration: 1.5,
-        },2)
-        .to(containerRef.current, {
+            tl1.fromTo(stepRefs.current[i], {
+                opacity: 0,
+                scale: 0.6,
+            }, {
+                opacity: 1,
+                scale: 1,
+                duration: 0.8,
+                ease: 'power2.out',
+                immediateRender: false,
+            }, at)
+                .to(stepRefs.current[i], {
+                    y: () => -window.innerHeight * 2 / 3,
+                    opacity: 0,
+                    duration: 1.2,
+                    ease: 'power2.in',
+                }, at + 0.8)
+        })
+
+        const afterSteps = STEPS.length * UNITS_PER_STEP
+
+        tl1.to(containerRef.current, {
             backgroundColor: 'var(--foreground)',
-            duration: 0.1
-        }, 3)
-        .fromTo(svgRef.current, {
-            fontSize: '1000rem',
-            z: -1
-        },{
-            fontSize: '2.5rem',
-            z: 9,
-            duration: 3,
-        }, 4)
-        .to(textRef.current, {
-            display: 'none'
+            duration: 0.1,
+        }, afterSteps)
 
-        }, '-=1')
-        
+            .to(svgRef.current, {
+                opacity: 1,
+                duration: 0.01,
+            }, afterSteps)
+            .fromTo(svgRef.current, {
+                fontSize: '1500rem',
+                y: '100px',
+            }, {
+                fontSize: '2.5rem',
+                duration: 3,
+                ease: 'power3.out',
+                immediateRender: false,
+            }, afterSteps)
 
-
-    },[])
+    }, [])
 
     return (
-        <div ref={containerRef} className='flex flex-col justify-center items-center w-full h-screen bg-dark'>
-            <p ref={textRef} className={`text-[2rem] opacity-0 scale-[0.2%] color-white z-2`}>Vývojář se zájmem o responzivní a interaktivní design.</p>
-            <svg viewBox="0 0 800 120" className="fixed top-0 left-0 w-full h-full font-jet">
+        <div ref={containerRef} className='relative flex w-full h-screen flex-col items-center justify-center bg-dark'>
+            {STEPS.map((step, i) => (
+                <div
+                    key={step}
+                    ref={(el) => { stepRefs.current[i] = el }}
+                    className='absolute inset-0 flex flex-col items-center justify-center gap-6 opacity-0'
+                >
+                    <span className='font-jet text-[0.9vw] tracking-[0.4em] text-light/40'>
+                        {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span className='text-[3vw] font-bold uppercase leading-[1.3] text-light'>
+                        {step}
+                    </span>
+                </div>
+            ))}
+
+            <svg viewBox='0 0 800 120' className='absolute top-0 left-0 h-full w-full font-jet'>
                 <text
                     ref={svgRef}
                     x={400}
                     y={60}
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                    fill="var(--background)"
-                    className="text-[2.5rem] font-bold"
+                    textAnchor='middle'
+                    dominantBaseline='middle'
+                    fill='var(--background)'
+                    className='text-[2.5vw] font-bold opacity-0'
                 >
-                    {'KEEP BUILDING'}
+                    KEEP BUILDING
                 </text>
             </svg>
         </div>

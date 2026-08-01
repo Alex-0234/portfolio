@@ -10,7 +10,7 @@ export default function Home() {
     <section className='flex flex-col justify-center items-center w-full h-fit bg-dark font-jet'>
       <Hero />
 
-      <BlackToWhiteTextFrontToBack text='' />
+      <BlackToWhiteTextFrontToBack />
 
       <div className='flex flex-col items-center gap-10 w-full h-screen bg-white text-dark px-6 py-16'>
         <div className='flex flex-col items-center gap-3 text-center max-w-2xl'>

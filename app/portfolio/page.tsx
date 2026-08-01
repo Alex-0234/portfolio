@@ -28,14 +28,14 @@ const TYPE_LABEL: Record<PortfolioType, string> = {
 }
 
 const portfolio: PortfolioPiece[] = [
-    { number: 1, name: 'Portfolio Site', type: 'personal', startYear: 2026, startMonth: 7, description: 'This site.', href: '', video: '' },
-    { number: 2, name: 'Client Rebrand', type: 'freelance', startYear: 2026, startMonth: 4, endYear: 2026, endMonth: 5, description: '', href: '', video: '' },
+    { number: 1, name: 'Todo-tracker', type: 'personal', startYear: 2026, startMonth: 7, endYear: 2026, endMonth: 5, description: '', href: '', video: '' },
+    { number: 2, name: 'create-lazy-init', type: 'personal', startYear: 2026, startMonth: 4, endYear: 2026, endMonth: 5, description: '', href: '', video: '' },
     { number: 3, name: 'cali-ascension', type: 'personal', startYear: 2026, startMonth: 1, endYear: 2026, endMonth: 3, description: 'Gamifikovany tracker pro kalisteniku', href: 'https://cali-ascension.vercel.app/', video: '', large: true },
-    { number: 4, name: 'Landing Page', type: 'freelance', startYear: 2025, startMonth: 10, endYear: 2025, endMonth: 11, description: '', href: '', video: '' },
-    { number: 5, name: 'Design System', type: 'work', startYear: 2025, startMonth: 6, endYear: 2025, endMonth: 9, description: '', href: '', video: '' },
-    { number: 6, name: 'Side Project', type: 'personal', startYear: 2025, startMonth: 6, description: '', href: '', video: '' },
+    { number: 4, name: 'portfolio-old', type: 'personal', startYear: 2025, startMonth: 10, endYear: 2025, endMonth: 11, description: '', href: '', video: '' },
+    { number: 5, name: 'Design System', type: 'freelance', startYear: 2025, startMonth: 6, endYear: 2025, endMonth: 9, description: '', href: '', video: '' },
+    { number: 6, name: 'Side Project', type: 'freelance', startYear: 2025, startMonth: 6, description: '', href: '', video: '' },
     { number: 7, name: 'E-commerce Build', type: 'freelance', startYear: 2025, startMonth: 3, endYear: 2025, endMonth: 4, description: '', href: '', video: '' },
-    { number: 8, name: 'API Migration', type: 'work', startYear: 2025, startMonth: 1, endYear: 2025, endMonth: 2, description: '', href: '', video: '' },
+    { number: 8, name: 'Portfolio', type: 'personal', startYear: 2025, startMonth: 1, endYear: 2025, endMonth: 2, description: '', href: '', video: '' },
     { number: 9, name: 'Generative Art', type: 'personal', startYear: 2024, startMonth: 10, description: '', href: '', video: '', large: true },
     { number: 10, name: 'Booking Platform', type: 'freelance', startYear: 2024, startMonth: 6, endYear: 2024, endMonth: 8, description: '', href: '', video: '' },
 ]
