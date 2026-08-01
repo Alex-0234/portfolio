@@ -5,6 +5,7 @@ import Link from "next/link"
 interface BaseProps {
     children: string
     variant?: 'solid' | 'outline'
+    size?: 'sm' | 'md'
     className?: string
 }
 
@@ -26,14 +27,19 @@ export default function Button({
     href,
     children,
     variant = 'outline',
+    size = 'md',
     className = '',
     onClick,
     type = 'button',
     disabled,
 }: LinkProps | ActionProps) {
     const solid = variant === 'solid'
+    // sm je varianta do headeru, kde je na plnou velikost málo místa
+    const sizing = size === 'sm'
+        ? 'gap-2 px-5 py-2.5 text-[clamp(0.62rem,0.7vw,0.78rem)]'
+        : 'gap-3 px-8 py-4 text-[clamp(0.7rem,0.85vw,0.95rem)]'
 
-    const classes = `group relative inline-flex items-center gap-3 overflow-hidden border border-light px-8 py-4 font-jet text-[clamp(0.7rem,0.85vw,0.95rem)] uppercase tracking-[0.15em] whitespace-nowrap transition-colors duration-300 ${solid ? 'bg-light text-dark hover:text-light' : 'text-light hover:text-dark'} ${className}`
+    const classes = `group relative inline-flex items-center overflow-hidden border border-light ${sizing} font-jet uppercase tracking-[0.15em] whitespace-nowrap transition-colors duration-300 ${solid ? 'bg-light text-dark hover:text-light' : 'text-light hover:text-dark'} ${className}`
 
     const content = (
         <>
