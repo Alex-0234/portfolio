@@ -1,5 +1,5 @@
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
+export const SITE_URL = 'https://portfolio.alexliska.workers.dev'
 
 export const SITE_NAME = 'Alex Liška'
 export const EMAIL = 'alex.liska04@seznam.cz'
