@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import SplitReveal from "@/components/splitReveal";
 import Button from "@/components/button";
 import LocalClock from "@/components/localClock";
+import { lenisSnap } from "@/utils/lenisSnap";
 
 const GAP = 6
 
@@ -60,12 +61,15 @@ export default function Hero() {
                 pinSpacing: true,
                 invalidateOnRefresh: true,
                 onRefreshInit: applyLayout,
-                snap: {
+                // vyšší priorita = refreshuje se dřív než sekce pod ním, takže
+                // navazující trigger počítá start až z hotové pin výplně
+                refreshPriority: 2,
+                snap: lenisSnap({
                     snapTo: 'labelsDirectional',
                     duration: {min: 0.2, max: 0.5},
                     delay: 0.1,
                     ease: 'power1.inOut'
-                }
+                })
             }
         })
 

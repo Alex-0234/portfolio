@@ -2,6 +2,7 @@
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
+import { lenisSnap } from "@/utils/lenisSnap";
 
 const STEPS = [
     'Napíšete mi, co potřebujete.',
@@ -26,12 +27,13 @@ export default function BlackToWhiteTextFrontToBack() {
                 scrub: true,
                 pin: true,
                 pinSpacing: true,
-                snap: {
+                refreshPriority: 1,
+                snap: lenisSnap({
                     snapTo: 'labelsDirectional',
                     duration: {min: 0.2, max: 0.5},
                     delay: 0.1,
                     ease: 'power1.inOut'
-                }
+                })
             }
         });
 

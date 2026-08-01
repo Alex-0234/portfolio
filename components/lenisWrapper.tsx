@@ -7,6 +7,11 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
+type LenisInstance = NonNullable<LenisRef['lenis']>
+
+let instance: LenisInstance | null = null
+export const getLenis = () => instance
+
 export default function LenisSetup({ children }: { children: ReactNode }) {
     const lenisRef = useRef<LenisRef>(null);
 
@@ -15,13 +20,17 @@ export default function LenisSetup({ children }: { children: ReactNode }) {
             lenisRef.current?.lenis?.raf(time * 1000);
         }
 
+        instance = lenisRef.current?.lenis ?? null
         lenisRef.current?.lenis?.on('scroll', ScrollTrigger.update);
         gsap.ticker.add(update);
         gsap.ticker.lagSmoothing(0);
 
+        document.fonts?.ready.then(() => ScrollTrigger.refresh());
+
         return () => {
             lenisRef.current?.lenis?.off('scroll', ScrollTrigger.update);
             gsap.ticker.remove(update);
+            instance = null
         };
     }, []);
 
