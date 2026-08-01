@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next"
 
 import { SITE_URL } from "@/data/site"
 
+
 const ROUTES = [
     { path: '', priority: 1 },
     { path: '/offers', priority: 0.9 },
@@ -11,12 +12,8 @@ const ROUTES = [
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const lastModified = new Date()
-
     return ROUTES.map(({ path, priority }) => ({
         url: `${SITE_URL}${path}`,
-        lastModified,
-        changeFrequency: 'monthly',
         priority,
     }))
 }
