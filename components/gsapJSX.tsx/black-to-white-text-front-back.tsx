@@ -14,7 +14,6 @@ const STEPS = [
 const UNITS_PER_STEP = 2
 
 const START_ZOOM = 2050
-const START_Y_EM = 0
 
 export default function BlackToWhiteTextFrontToBack() {
     const runwayRef = useRef<HTMLDivElement>(null);
@@ -77,10 +76,8 @@ export default function BlackToWhiteTextFrontToBack() {
             }, afterSteps)
             .fromTo(svgRef.current, {
                 fontSize: () => `${startFontRem()}rem`,
-                y: () => `${startFontRem() * START_Y_EM}rem`,
             }, {
                 fontSize: '2.5rem',
-                y: 0,
                 duration: 6,
                 ease: 'power3.out',
                 immediateRender: false,
@@ -112,8 +109,8 @@ export default function BlackToWhiteTextFrontToBack() {
                     ref={svgRef}
                     x={400}
                     y={60}
+                    dy='0.05em'
                     textAnchor='middle'
-                    dominantBaseline='middle'
                     fill='var(--background)'
                     className='text-[2.5vw] font-bold opacity-0 pointer-events-none'
                 >
