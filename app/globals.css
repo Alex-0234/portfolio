@@ -49,11 +49,18 @@ body {
 
 .raster {
   --raster-line: color-mix(in srgb, var(--foreground) 7%, transparent);
+  --raster-cell: 6rem;
   background-image:
-    repeating-linear-gradient(to right, var(--raster-line) 0 1px, transparent 1px 6rem),
-    repeating-linear-gradient(to bottom, var(--raster-line) 0 1px, transparent 1px 6rem);
+    repeating-linear-gradient(to right, var(--raster-line) 0 1px, transparent 1px var(--raster-cell)),
+    repeating-linear-gradient(to bottom, var(--raster-line) 0 1px, transparent 1px var(--raster-cell));
   -webkit-mask-image: radial-gradient(ellipse 65% 55% at 50% 45%, #000, transparent);
   mask-image: radial-gradient(ellipse 65% 55% at 50% 45%, #000, transparent);
+}
+
+@media (max-width: 767px) {
+  .raster {
+    --raster-cell: 3.5rem;
+  }
 }
 
 /* markdown z DB jde do dangerouslySetInnerHTML, takže na něj nejdou napsat

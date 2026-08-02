@@ -85,7 +85,7 @@ export default function BlackToWhiteTextFrontToBack() {
     }, [])
 
     return (
-        <div ref={containerRef} className='relative flex w-full h-screen flex-col items-center justify-center bg-dark'>
+        <div ref={containerRef} className='relative flex w-full h-svh flex-col items-center justify-center bg-dark'>
             {STEPS.map((step, i) => (
                 <div
                     key={step}
