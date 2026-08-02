@@ -1,3 +1,4 @@
+
 export type PortfolioType = 'personal' | 'freelance' | 'work'
 
 export interface ProjectLinks {
@@ -35,16 +36,11 @@ export const LINKS: { key: keyof ProjectLinks; label: string }[] = [
 ]
 
 export const PORTFOLIO: PortfolioPiece[] = [
-    { number: 1, name: 'Todo-tracker', type: 'personal', startYear: 2026, startMonth: 7, endYear: 2026, endMonth: 5, description: '', links: {} },
-    { number: 2, name: 'create-lazy-init', type: 'personal', startYear: 2026, startMonth: 4, endYear: 2026, endMonth: 5, description: 'CLI nástroj pro rychlé zakládání rozpracovaných projektů.', links: {} },
-    { number: 3, name: 'cali-ascension', type: 'personal', startYear: 2026, startMonth: 1, endYear: 2026, endMonth: 3, description: 'Gamifikovaná aplikace pro sledování tréninků se zaměřením na kalisteniku. Pomáhá s plynulým postupem ke složitějším cvikům.', links: { web: 'https://cali-ascension.vercel.app/', github: 'https://github.com/Alex-0234/cali-ascension' }, large: true },
-    { number: 4, name: 'portfolio-old', type: 'personal', startYear: 2025, startMonth: 10, endYear: 2025, endMonth: 11, description: '', links: {} },
-    { number: 5, name: 'Design System', type: 'freelance', startYear: 2025, startMonth: 6, endYear: 2025, endMonth: 9, description: '', links: {} },
-    { number: 6, name: 'Side Project', type: 'freelance', startYear: 2025, startMonth: 6, description: '', links: {} },
-    { number: 7, name: 'E-commerce Build', type: 'freelance', startYear: 2025, startMonth: 3, endYear: 2025, endMonth: 4, description: '', links: {} },
-    { number: 8, name: 'Portfolio', type: 'personal', startYear: 2025, startMonth: 1, endYear: 2025, endMonth: 2, description: '', links: {} },
-    { number: 9, name: 'Generative Art', type: 'personal', startYear: 2024, startMonth: 10, description: '', links: {}, large: true },
-    { number: 10, name: 'Booking Platform', type: 'freelance', startYear: 2024, startMonth: 6, endYear: 2024, endMonth: 8, description: '', links: {} },
+    { number: 1, name: 'create-lazy-init', type: 'personal', startYear: 2026, startMonth: 6, description: 'CLI nástroj pro rychlou inicializaci projektů.', video: '/videos/cli-terminal.webm', links: { github: 'https://github.com/Alex-0234/create-lazy-init', npm: 'https://www.npmjs.com/package/create-lazy-init' } },
+    { number: 2, name: 'cali-ascension', type: 'personal', startYear: 2026, startMonth: 2,  description: 'Gamifikovaná aplikace pro sledování tréninků se zaměřením na kalisteniku. Pomáhá s plynulým postupem ke složitějším cvikům.', video: '/videos/cali-ascension.webm', links: { web: 'https://cali-ascension.vercel.app/', github: 'https://github.com/Alex-0234/cali-ascension' }, image: '/images/cali-512x512.png', large: true },
+    { number: 3, name: 'portfolio-old', type: 'personal', startYear: 2026, startMonth: 7, endYear: 2026, endMonth: 8, description: 'This was my old portfolio website. A single page made as a homework assignment. Then updated for freelance work. And now it\'s being replaced by a new multipage portfolio!', links: { github: 'https://github.com/Alex-0234/portfolio-old', web: 'portfolio-old.alexliska.workers.dev'} },
+    { number: 4, name: 'portfolio', type: 'personal', startYear: 2025, startMonth: 8, description: 'This current website. It is a multipage portfolio for scalability and increased visibility on google.', links: {} },
+
 ]
 
 const formatMonthYear = (year: number, month: number) => `${String(month).padStart(2, '0')}/${year}`

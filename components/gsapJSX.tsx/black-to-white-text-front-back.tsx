@@ -80,7 +80,7 @@ export default function BlackToWhiteTextFrontToBack() {
                 ease: 'power3.out',
                 immediateRender: false,
             }, afterSteps)
-            .addLabel('svg-end', afterSteps + 3)
+            .addLabel('svg-end', afterSteps + 6)
 
     }, [])
 

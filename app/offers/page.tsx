@@ -35,7 +35,6 @@ const microClasses = 'font-jet text-xs uppercase tracking-[0.2em] text-light/50'
 export default function Offers() {
     return (
         <section className='flex w-full flex-col bg-dark font-jet text-light'>
-            {/* úvod - stránka se otevírá jedním tvrzením, detaily čekají níž a v kalkulačce */}
             <header className='flex min-h-screen w-full flex-col justify-center gap-10 px-6 pt-32 pb-16'>
                 <div className='mx-auto flex w-full max-w-6xl flex-col gap-8'>
                     <p className={microClasses}>[ pevný rozsah · ceny od · žádná překvapení ]</p>
@@ -67,7 +66,6 @@ export default function Offers() {
                     </div>
                 </div>
 
-                {/* rychlý přehled - z úvodu je vidět celý ceník, aniž by musel scrollovat */}
                 <ul className='mx-auto mt-8 grid w-full max-w-6xl grid-cols-1 border-t border-light/10 sm:grid-cols-2 lg:grid-cols-4'>
                     {PACKAGES.map((pkg) => (
                         <li key={pkg.id} className='border-b border-light/10 lg:border-b-0 lg:border-r lg:last:border-r-0'>
@@ -128,7 +126,6 @@ export default function Offers() {
 
                 <div className='flex flex-col'>
                     {FAQ.map((item) => (
-                        // native details drží accordion funkční i bez javascriptu
                         <details key={item.q} className='group border-b border-light/10'>
                             <summary className='flex cursor-pointer items-center justify-between gap-4 py-5 list-none [&::-webkit-details-marker]:hidden'>
                                 <span className='text-sm sm:text-base'>{item.q}</span>

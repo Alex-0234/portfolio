@@ -58,6 +58,7 @@ export default function Portfolio() {
                 ref={sectionRef}
                 className='relative w-full bg-dark pt-28 pb-24 font-jet xl:h-screen xl:overflow-hidden xl:pt-16 xl:@container-size'
             >
+                {/* TODO - fix this showing in first project */}
                 <div className='mx-6 mb-6 flex flex-col gap-2 xl:absolute xl:top-20 xl:left-6 xl:z-20 xl:mb-0'>
                     <h1 className='text-xs uppercase tracking-[0.2em] text-light/50'>
                         <span aria-hidden>[ </span>Vybrané práce<span aria-hidden> ]</span>
@@ -90,7 +91,7 @@ export default function Portfolio() {
                                 onClick={() => openProject(project)}
                                 onPointerEnter={(e) => e.pointerType === 'mouse' && setHovered(project)}
                                 onPointerLeave={() => setHovered(null)}
-                                className={`relative flex min-h-40 shrink-0 cursor-pointer flex-col justify-between border border-light/10 p-4 text-left transition-[opacity,border-color] duration-300 hover:border-light/30 xl:min-h-0 xl:p-3 ${
+                                className={`relative flex min-h-40 shrink-1 cursor-pointer flex-col justify-between border border-light/10 p-4 text-left transition-[opacity,border-color] duration-300 hover:border-light/30 xl:min-h-0 xl:p-3 ${
                                     project.large ? 'xl:row-span-3' : ''
                                 }`}
                                 style={{
@@ -102,6 +103,11 @@ export default function Portfolio() {
                                     <span>{String(project.number).padStart(2, '0')}</span>
                                     <span>{TYPE_LABEL[project.type]}</span>
                                 </div>
+                                 {project.image && project.large && (
+                                    // eslint-disable-next-line @next/next/no-img-element
+                                    <img src={project.image} alt={project.name} className='h-full w-full object-cover' />
+                                )}
+
                                 <div className='mt-8 xl:mt-0'>
                                     <p className='text-light text-[1rem] leading-tight'>{project.name}</p>
                                     <p className='text-light/50 text-xs mt-1'>{formatDateRange(project)}</p>
