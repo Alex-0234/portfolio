@@ -138,6 +138,7 @@ export default function Hero() {
                 duration={0.8}
                 ease='power3.out'
                 split='chars'
+                disableBelow={768}
                 className='absolute top-[50%] w-[88vw] text-center text-[max(1.25rem,2.5vw)] font-bold leading-[1.4] md:w-auto md:text-nowrap'
             >
                 Tvorba webových stránek v Pardubicích a okolí na míru.
@@ -163,6 +164,7 @@ export default function Hero() {
             >
                 <SplitReveal
                     as='h2'
+                    disableBelow={768}
                     className='invisible text-[max(0.9375rem,1.5vw)] font-bold leading-[1.4]'
                     onReady={(tl) => { underheaderTl.current = tl }}
                 >
@@ -172,6 +174,7 @@ export default function Hero() {
                 <SplitReveal
                     as='h3'
                     split='chars'
+                    disableBelow={768}
                     className='invisible text-[max(0.8125rem,1.2vw)] font-bold leading-[1.4]'
                     onReady={(tl) => { underunderheaderTl.current = tl }}
                 >

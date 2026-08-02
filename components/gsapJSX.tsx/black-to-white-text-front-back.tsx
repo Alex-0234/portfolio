@@ -18,6 +18,7 @@ export default function BlackToWhiteTextFrontToBack() {
     const containerRef = useRef<HTMLDivElement>(null);
     const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
     const svgRef = useRef<SVGTextElement>(null);
+    const mm = gsap.matchMedia('max-width: 768px');
 
     useGSAP(() => {
         const tl1 = gsap.timeline({
@@ -71,8 +72,9 @@ export default function BlackToWhiteTextFrontToBack() {
                 duration: 0.01,
             }, afterSteps)
             .fromTo(svgRef.current, {
-                fontSize: '1500rem',
-                y: '100px',
+                fontSize: `${window.innerWidth * 0.5}rem`,
+
+                //y: '100px',
             }, {
                 fontSize: '2.5rem',
                 duration: 6,
