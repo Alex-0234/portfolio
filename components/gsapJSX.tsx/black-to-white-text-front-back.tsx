@@ -85,37 +85,35 @@ export default function BlackToWhiteTextFrontToBack() {
     }, [])
 
     return (
-        <div ref={containerRef} className='relative w-full h-lvh bg-dark'>
-            <div className='absolute inset-x-0 top-0 flex h-svh flex-col items-center justify-center'>
-                {STEPS.map((step, i) => (
-                    <div
-                        key={step}
-                        ref={(el) => { stepRefs.current[i] = el }}
-                        className='absolute inset-0 flex flex-col items-center justify-center gap-6 opacity-0'
-                    >
-                        <span className='font-jet text-[0.9vw] tracking-[0.4em] text-light/50'>
-                            {String(i + 1).padStart(2, '0')}
-                        </span>
-                        <span className='text-[3vw] font-bold uppercase leading-[1.3] text-light'>
-                            {step}
-                        </span>
-                    </div>
-                ))}
+        <div ref={containerRef} className='relative flex w-full h-lvh flex-col items-center justify-center bg-dark'>
+            {STEPS.map((step, i) => (
+                <div
+                    key={step}
+                    ref={(el) => { stepRefs.current[i] = el }}
+                    className='absolute inset-0 flex flex-col items-center justify-center gap-6 opacity-0'
+                >
+                    <span className='font-jet text-[0.9vw] tracking-[0.4em] text-light/50'>
+                        {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span className='text-[3vw] font-bold uppercase leading-[1.3] text-light'>
+                        {step}
+                    </span>
+                </div>
+            ))}
 
-                <svg viewBox='0 0 800 120' className='absolute top-0 left-0 h-full w-full font-jet pointer-events-none'>
-                    <text
-                        ref={svgRef}
-                        x={400}
-                        y={60}
-                        textAnchor='middle'
-                        dominantBaseline='middle'
-                        fill='var(--background)'
-                        className='text-[2.5vw] font-bold opacity-0 pointer-events-none'
-                    >
-                        HOTOVO!
-                    </text>
-                </svg>
-            </div>
+            <svg viewBox='0 0 800 120' className='absolute top-0 left-0 h-full w-full font-jet pointer-events-none'>
+                <text
+                    ref={svgRef}
+                    x={400}
+                    y={60}
+                    textAnchor='middle'
+                    dominantBaseline='middle'
+                    fill='var(--background)'
+                    className='text-[2.5vw] font-bold opacity-0 pointer-events-none'
+                >
+                    HOTOVO!
+                </text>
+            </svg>
         </div>
     )
 }
