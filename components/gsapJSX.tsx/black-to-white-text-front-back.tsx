@@ -13,12 +13,15 @@ const STEPS = [
 
 const UNITS_PER_STEP = 2
 
+const NARROW = '(max-width: 767px)'
+const START_Y = '0rem'
+const START_Y_SM = '-750rem'
+
 export default function BlackToWhiteTextFrontToBack() {
     const runwayRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
     const svgRef = useRef<SVGTextElement>(null);
-    const mm = gsap.matchMedia('max-width: 768px');
 
     useGSAP(() => {
         const tl1 = gsap.timeline({
@@ -72,8 +75,8 @@ export default function BlackToWhiteTextFrontToBack() {
                 duration: 0.01,
             }, afterSteps)
             .fromTo(svgRef.current, {
-                fontSize: `${window.innerWidth * 0.5}rem`,
-                y: `${mm ? -750 : 0}rem`,
+                fontSize: () => `${window.innerWidth * 0.5}rem`,
+                y: () => (window.matchMedia(NARROW).matches ? START_Y_SM : START_Y),
             }, {
                 fontSize: '2.5rem',
                 y: 0,
