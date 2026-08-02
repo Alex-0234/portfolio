@@ -73,7 +73,7 @@ export default function BlackToWhiteTextFrontToBack() {
             }, afterSteps)
             .fromTo(svgRef.current, {
                 fontSize: `${window.innerWidth * 0.5}rem`,
-                y: '750rem',
+                y: `${mm ? -750 : 0}rem`,
             }, {
                 fontSize: '2.5rem',
                 y: 0,
