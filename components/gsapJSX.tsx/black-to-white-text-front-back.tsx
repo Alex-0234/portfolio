@@ -111,7 +111,7 @@ export default function BlackToWhiteTextFrontToBack() {
                     fill='var(--background)'
                     className='text-[2.5vw] font-bold opacity-0 pointer-events-none'
                 >
-                    KEEP BUILDING
+                    HOTOVO!
                 </text>
             </svg>
         </div>
