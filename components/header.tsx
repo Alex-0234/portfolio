@@ -25,7 +25,7 @@ const NAVIGATION: navLink[] = [
 
 const MENU_ID = 'site-menu'
 
-export default function Header({setActiveLink}: {setActiveLink: (link: string | null) => void}) {
+export default function Header() {
     const pathname = usePathname()
     const lenis = useLenis()
 
@@ -80,7 +80,6 @@ export default function Header({setActiveLink}: {setActiveLink: (link: string | 
                     <ul className='flex w-fit gap-6 lg:gap-8'>
                         {NAVIGATION.map((link) => {
                             const active = pathname === link.redirect
-                            setActiveLink(active ? link.redirect : null)
                             return (
                                 <li
                                     key={link.redirect}
