@@ -15,7 +15,7 @@ const UNITS_PER_STEP = 2
 
 const NARROW = '(max-width: 767px)'
 const START_Y = '0rem'
-const START_Y_SM = '-750rem'
+const START_Y_SM = '750rem'
 
 export default function BlackToWhiteTextFrontToBack() {
     const runwayRef = useRef<HTMLDivElement>(null);
