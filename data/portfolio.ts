@@ -38,8 +38,8 @@ export const LINKS: { key: keyof ProjectLinks; label: string }[] = [
 export const PORTFOLIO: PortfolioPiece[] = [
     { number: 1, name: 'create-lazy-init', type: 'personal', startYear: 2026, startMonth: 6, description: 'CLI nástroj pro rychlou inicializaci projektů.', video: '/videos/cli-terminal.webm', links: { github: 'https://github.com/Alex-0234/create-lazy-init', npm: 'https://www.npmjs.com/package/create-lazy-init' } },
     { number: 2, name: 'cali-ascension', type: 'personal', startYear: 2026, startMonth: 2,  description: 'Gamifikovaná aplikace pro sledování tréninků se zaměřením na kalisteniku. Pomáhá s plynulým postupem ke složitějším cvikům.', video: '/videos/cali-ascension.webm', links: { web: 'https://cali-ascension.vercel.app/', github: 'https://github.com/Alex-0234/cali-ascension' }, image: '/images/cali-512x512.png', large: true },
-    { number: 3, name: 'portfolio-old', type: 'personal', startYear: 2026, startMonth: 7, endYear: 2026, endMonth: 8, description: 'This was my old portfolio website. A single page made as a homework assignment. Then updated for freelance work. And now it\'s being replaced by a new multipage portfolio!', links: { github: 'https://github.com/Alex-0234/portfolio-old', web: 'portfolio-old.alexliska.workers.dev'} },
-    { number: 4, name: 'portfolio', type: 'personal', startYear: 2025, startMonth: 8, description: 'This current website. It is a multipage portfolio for scalability and increased visibility on google.', links: {} },
+    { number: 3, name: 'portfolio-old', type: 'personal', startYear: 2026, startMonth: 7, endYear: 2026, endMonth: 8, description: 'Tohle je můj starý portfólio web. Vytvořený jako domácí úkol, později upravený pro freelance práci. A nyní je nahrazen novým vícestránkovým portfóliem!', links: { github: 'https://github.com/Alex-0234/portfolio-old', web: 'portfolio-old.alexliska.workers.dev'} },
+    { number: 4, name: 'portfolio', type: 'personal', startYear: 2025, startMonth: 8, description: 'Toto je můj aktuální portfólio web. Je to vícestránkový portfólio pro škálovatelnost a zvýšenou viditelnost ve vyhledávači Google.', links: {} },
 
 ]
 

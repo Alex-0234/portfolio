@@ -55,14 +55,12 @@ export default function Hero() {
             scrollTrigger: {
                 trigger: heroRef.current,
                 start: 'top top',
-                end: '+=3500',
+                end: '+=2500',
                 scrub: true,
                 pin: true,
                 pinSpacing: true,
                 invalidateOnRefresh: true,
                 onRefreshInit: applyLayout,
-                // vyšší priorita = refreshuje se dřív než sekce pod ním, takže
-                // navazující trigger počítá start až z hotové pin výplně
                 refreshPriority: 2,
                 snap: lenisSnap({
                     snapTo: 'labelsDirectional',
@@ -115,7 +113,7 @@ export default function Hero() {
     }, [])
 
     return (
-        <div ref={heroRef} className='relative flex h-screen w-full flex-col items-center justify-end uppercase leading-none'>
+        <div ref={heroRef} className='relative flex h-screen w-full flex-col items-center justify-end uppercase leading-none bg-dark'>
             <div aria-hidden className='raster pointer-events-none absolute inset-0' />
             <div aria-hidden className='grain pointer-events-none absolute inset-0 opacity-[0.04] mix-blend-overlay' />
 
@@ -155,7 +153,6 @@ export default function Hero() {
             >
                 <SplitReveal
                     as='h2'
-                    split='chars'
                     className='text-[1.5vw] font-bold leading-[1.4]'
                     onReady={(tl) => { underheaderTl.current = tl }}
                 >
