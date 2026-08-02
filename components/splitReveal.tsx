@@ -21,7 +21,6 @@ interface SplitRevealProps {
     delay?: number
     on?: 'scroll' | 'mount'
     start?: string
-    disableBelow?: number
     onReady?: (tl: gsap.core.Timeline) => void
 }
 
@@ -37,7 +36,6 @@ export default function SplitReveal({
     delay = 0,
     on = 'scroll',
     start = 'top 85%',
-    disableBelow,
     onReady,
 }: SplitRevealProps) {
     const elRef = useRef<HTMLElement>(null)
@@ -56,20 +54,9 @@ export default function SplitReveal({
     useGSAP(() => {
         if (!elRef.current) return
 
-        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-        const tooNarrow = disableBelow !== undefined
-            && window.matchMedia(`(max-width: ${disableBelow - 1}px)`).matches
-
-        if (reduced || tooNarrow) {
-            if (!onReady) return
-
-            const tl = gsap.timeline({ paused: true, delay })
-            tl.fromTo(
-                elRef.current,
-                { opacity: 0 },
-                { opacity: 1, duration: reduced ? 0.01 : duration, ease },
-            )
-            onReady(tl)
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            gsap.set(elRef.current, { visibility: 'visible' })
+            onReady?.(gsap.timeline())
             return
         }
 
@@ -103,6 +90,8 @@ export default function SplitReveal({
                     },
                 })
 
+                tl.set(elRef.current, { visibility: 'visible' }, 0)
+
                 tl.from(self[split], {
                     // 100 would park the text exactly one line-box down, which
                     // leaves czech diacritics (Ý Á Ě Ř) poking above the mask
@@ -111,7 +100,7 @@ export default function SplitReveal({
                     duration,
                     stagger,
                     ease,
-                })
+                }, 0)
 
                 onReady?.(tl)
                 // returning it lets SplitText carry the playhead across re-splits

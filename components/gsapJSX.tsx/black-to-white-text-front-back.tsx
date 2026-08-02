@@ -14,6 +14,7 @@ const STEPS = [
 const UNITS_PER_STEP = 2
 
 export default function BlackToWhiteTextFrontToBack() {
+    const runwayRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
     const svgRef = useRef<SVGTextElement>(null);
@@ -21,12 +22,10 @@ export default function BlackToWhiteTextFrontToBack() {
     useGSAP(() => {
         const tl1 = gsap.timeline({
             scrollTrigger: {
-                trigger: containerRef.current,
+                trigger: runwayRef.current,
                 start: 'top top',
                 end: '+=6500',
                 scrub: true,
-                pin: true,
-                pinSpacing: true,
                 refreshPriority: 1,
                 snap: lenisSnap({
                     snapTo: 'labelsDirectional',
@@ -85,7 +84,8 @@ export default function BlackToWhiteTextFrontToBack() {
     }, [])
 
     return (
-        <div ref={containerRef} className='relative flex w-full h-lvh flex-col items-center justify-center bg-dark'>
+        <div ref={runwayRef} className='relative h-[calc(100lvh+6500px)] w-full bg-dark'>
+        <div ref={containerRef} className='sticky top-0 flex w-full h-lvh flex-col items-center justify-center bg-dark'>
             {STEPS.map((step, i) => (
                 <div
                     key={step}
@@ -114,6 +114,7 @@ export default function BlackToWhiteTextFrontToBack() {
                     HOTOVO!
                 </text>
             </svg>
+        </div>
         </div>
     )
 }
