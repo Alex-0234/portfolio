@@ -9,6 +9,12 @@ import LocalClock from "@/components/localClock";
 import { lenisSnap } from "@/utils/lenisSnap";
 
 const GAP = 6
+const GAP_SM = 5
+const INTRO_TOP = 50
+const INTRO_TOP_SM = 44
+const SCROLLED_TOP = 10
+const SCROLLED_TOP_SM = 4
+const NARROW = '(max-width: 767px)'
 
 export default function Hero() {
     const heroRef = useRef<HTMLDivElement>(null);
@@ -23,21 +29,26 @@ export default function Hero() {
 
     useGSAP(() => {
 
+        const narrow = () => window.matchMedia(NARROW).matches
+
+        const viewport = () => heroRef.current?.offsetHeight ?? window.innerHeight
+
         const heightOf = (el: HTMLElement | null) =>
-            el ? (el.offsetHeight / window.innerHeight) * 100 : 0
+            el ? (el.offsetHeight / viewport()) * 100 : 0
 
         const stackFrom = (top: number, elements: (HTMLElement | null)[]) => {
+            const gap = narrow() ? GAP_SM : GAP
             let cursor = top
             return elements.map((el) => {
                 const position = cursor
-                cursor += heightOf(el) + GAP
+                cursor += heightOf(el) + gap
                 return position
             })
         }
 
-        const intro = () => stackFrom(50, [headerRef.current, confirmRef.current, introCtaRef.current])
+        const intro = () => stackFrom(narrow() ? INTRO_TOP_SM : INTRO_TOP, [headerRef.current, confirmRef.current, introCtaRef.current])
 
-        const scrolled = () => stackFrom(10, [headerRef.current, midStackRef.current, aboutCtaRef.current, confirmRef.current])
+        const scrolled = () => stackFrom(narrow() ? SCROLLED_TOP_SM : SCROLLED_TOP, [headerRef.current, midStackRef.current, aboutCtaRef.current, confirmRef.current])
 
         const applyLayout = () => {
             const [titleTop, confirmTop, ctaTop] = intro()
@@ -127,12 +138,12 @@ export default function Hero() {
                 duration={0.8}
                 ease='power3.out'
                 split='chars'
-                className='absolute top-[50%] text-[2.5vw] font-bold text-nowrap leading-[1.4]'
+                className='absolute top-[50%] w-[88vw] text-center text-[max(1.25rem,2.5vw)] font-bold leading-[1.4] md:w-auto md:text-nowrap'
             >
                 Tvorba webových stránek v Pardubicích a okolí na míru.
             </SplitReveal>
 
-            <p ref={confirmRef} className='absolute top-[62%] flex items-center gap-[0.9em] text-[1vw] text-confirm'>
+            <p ref={confirmRef} className='absolute top-[62%] flex max-w-[90vw] items-center justify-center gap-[0.9em] text-center text-[max(0.7rem,1vw)] text-confirm'>
 
                 <span aria-hidden className='relative flex h-[0.5em] w-[0.5em] shrink-0'>
                     <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-confirm opacity-60 [animation-duration:2.5s] motion-reduce:hidden' />
@@ -148,12 +159,11 @@ export default function Hero() {
 
             <div
                 ref={midStackRef}
-                style={{ gap: `${GAP}vh` }}
-                className='absolute top-[22%] flex w-[60vw] flex-col select-none'
+                className='absolute top-[22%] flex w-[86vw] flex-col gap-[5vh] select-none sm:w-[72vw] md:w-[60vw] md:gap-[6vh]'
             >
                 <SplitReveal
                     as='h2'
-                    className='invisible text-[1.5vw] font-bold leading-[1.4]'
+                    className='invisible text-[max(0.9375rem,1.5vw)] font-bold leading-[1.4]'
                     onReady={(tl) => { underheaderTl.current = tl }}
                 >
                     Jmenuju se Alex a weby stavím na míru — žádné šablony a žádná překvapení ve faktuře. Záleží mi na detailech, od architektury backendu až po to, jak se stránka chová při scrollování.
@@ -162,7 +172,7 @@ export default function Hero() {
                 <SplitReveal
                     as='h3'
                     split='chars'
-                    className='invisible text-[1.2vw] font-bold leading-[1.4]'
+                    className='invisible text-[max(0.8125rem,1.2vw)] font-bold leading-[1.4]'
                     onReady={(tl) => { underunderheaderTl.current = tl }}
                 >
                     Full-stack vývoj webů a webových aplikací na míru.
@@ -173,7 +183,7 @@ export default function Hero() {
                 <Button href='/about'>Víc o mně</Button>
             </div>
 
-            <div className='pointer-events-none absolute bottom-10 flex w-full justify-between px-6 font-jet text-[clamp(0.6rem,0.75vw,0.8rem)] tracking-[0.2em] text-light/50'>
+            <div className='pointer-events-none absolute bottom-16 flex w-full justify-between px-4 font-jet text-[clamp(0.6rem,0.75vw,0.8rem)] tracking-widest text-light/50 md:bottom-10 md:px-6 md:tracking-[0.2em]'>
                 <span>[ pardubice, cz ]</span>
                 <span>[ místní čas <LocalClock /> ]</span>
             </div>
