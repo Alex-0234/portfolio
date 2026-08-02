@@ -91,7 +91,7 @@ export default function Portfolio() {
                                 onClick={() => openProject(project)}
                                 onPointerEnter={(e) => e.pointerType === 'mouse' && setHovered(project)}
                                 onPointerLeave={() => setHovered(null)}
-                                className={`relative flex min-h-40 shrink-1 cursor-pointer flex-col justify-between border border-light/10 p-4 text-left transition-[opacity,border-color] duration-300 hover:border-light/30 xl:min-h-0 xl:p-3 ${
+                                className={`relative flex min-h-40 cursor-pointer flex-col justify-between border border-light/10 p-4 text-left transition-[opacity,border-color] duration-300 hover:border-light/30 xl:min-h-0 xl:p-3 ${
                                     project.large ? 'xl:row-span-3' : ''
                                 }`}
                                 style={{
