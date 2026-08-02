@@ -13,6 +13,7 @@ import {
   SITE_URL,
   THEME_COLOR,
 } from "@/data/site";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 
 const jetBrainsMono = JetBrains_Mono({
@@ -110,9 +111,9 @@ export default function RootLayout({
   return (
     <html
       lang="cs"
-      className={`${jetBrainsMono.variable} h-full antialiased`}
+      className={`${jetBrainsMono.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-svh flex flex-col">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}

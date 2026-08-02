@@ -35,7 +35,7 @@ const microClasses = 'font-jet text-xs uppercase tracking-[0.2em] text-light/50'
 export default function Offers() {
     return (
         <section className='flex w-full flex-col bg-dark font-jet text-light'>
-            <header className='flex min-h-screen w-full flex-col justify-center gap-10 px-6 pt-32 pb-16'>
+            <header className='flex min-h-svh w-full flex-col justify-center gap-10 px-6 pt-32 pb-16'>
                 <div className='mx-auto flex w-full max-w-6xl flex-col gap-8'>
                     <p className={microClasses}>[ pevný rozsah · ceny od · žádná překvapení ]</p>
 

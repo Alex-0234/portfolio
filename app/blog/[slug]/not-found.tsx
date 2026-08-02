@@ -2,7 +2,7 @@ import Button from "@/components/button"
 
 export default function PostNotFound() {
     return (
-        <section className='flex min-h-screen w-full flex-col justify-center gap-8 bg-dark px-6 pt-32 pb-16 font-jet text-light'>
+        <section className='flex min-h-svh w-full flex-col justify-center gap-8 bg-dark px-6 pt-32 pb-16 font-jet text-light'>
             <div className='mx-auto flex w-full max-w-3xl flex-col gap-6'>
                 <p className='font-jet text-xs uppercase tracking-[0.2em] text-light/50'>[ 404 ]</p>
 

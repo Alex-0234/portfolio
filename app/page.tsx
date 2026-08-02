@@ -12,12 +12,12 @@ const REASONS = [
 export default function Home() {
 
   return (
-    <section className='flex flex-col justify-center items-center w-full h-fit min-h-lvh bg-dark font-jet'>
+    <section className='flex flex-col justify-center items-center w-full h-fit bg-dark font-jet'>
       <Hero />
 
       <BlackToWhiteTextFrontToBack />
 
-      <div className='flex flex-col items-center gap-10 w-full h-screen bg-white text-dark px-6 py-16'>
+      <div className='flex flex-col items-center gap-10 w-full min-h-svh bg-white text-dark px-6 py-16'>
         <div className='flex flex-col items-center gap-3 text-center max-w-2xl'>
           <h2 className='text-2xl md:text-3xl'>Proč se mnou</h2>
           <p className='text-dark/70'>

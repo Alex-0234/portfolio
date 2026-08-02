@@ -7,6 +7,8 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
+ScrollTrigger.config({ ignoreMobileResize: true });
+
 type LenisInstance = NonNullable<LenisRef['lenis']>
 
 let instance: LenisInstance | null = null

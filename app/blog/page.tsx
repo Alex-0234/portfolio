@@ -22,7 +22,7 @@ export default async function Blog() {
 
     return (
         <section className='flex w-full flex-col bg-dark font-jet text-light'>
-            <header className='flex min-h-screen w-full flex-col justify-center gap-10 px-6 pt-32 pb-16'>
+            <header className='flex min-h-svh w-full flex-col justify-center gap-10 px-6 pt-32 pb-16'>
                 <div className='mx-auto flex w-full max-w-6xl flex-col gap-8'>
                     <p className={microClasses}>[ poznámky z praxe ]</p>
 
