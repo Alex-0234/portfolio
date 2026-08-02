@@ -12,7 +12,7 @@ const REASONS = [
 export default function Home() {
 
   return (
-    <section className='flex flex-col justify-center items-center w-full h-fit bg-dark font-jet'>
+    <section className='flex flex-col justify-center items-center w-full h-fit min-h-lvh bg-dark font-jet'>
       <Hero />
 
       <BlackToWhiteTextFrontToBack />
