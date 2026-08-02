@@ -27,6 +27,7 @@ export default function BlackToWhiteTextFrontToBack() {
                 scrub: true,
                 pin: true,
                 pinSpacing: true,
+                pinType: 'transform',
                 refreshPriority: 1,
                 snap: lenisSnap({
                     snapTo: 'labelsDirectional',

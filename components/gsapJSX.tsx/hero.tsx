@@ -72,6 +72,7 @@ export default function Hero() {
                 scrub: true,
                 pin: true,
                 pinSpacing: true,
+                pinType: 'transform',
                 invalidateOnRefresh: true,
                 onRefreshInit: applyLayout,
                 refreshPriority: 2,
