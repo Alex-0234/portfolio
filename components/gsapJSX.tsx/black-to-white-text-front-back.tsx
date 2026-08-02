@@ -13,9 +13,8 @@ const STEPS = [
 
 const UNITS_PER_STEP = 2
 
-const NARROW = '(max-width: 767px)'
-const START_Y = '0rem'
-const START_Y_SM = '750rem'
+const START_ZOOM = 2050
+const START_Y_EM = 0
 
 export default function BlackToWhiteTextFrontToBack() {
     const runwayRef = useRef<HTMLDivElement>(null);
@@ -24,6 +23,8 @@ export default function BlackToWhiteTextFrontToBack() {
     const svgRef = useRef<SVGTextElement>(null);
 
     useGSAP(() => {
+        const startFontRem = () => START_ZOOM * window.innerHeight / window.innerWidth
+
         const tl1 = gsap.timeline({
             scrollTrigger: {
                 trigger: runwayRef.current,
@@ -75,8 +76,8 @@ export default function BlackToWhiteTextFrontToBack() {
                 duration: 0.01,
             }, afterSteps)
             .fromTo(svgRef.current, {
-                fontSize: () => `${window.innerWidth * 0.5}rem`,
-                y: () => (window.matchMedia(NARROW).matches ? START_Y_SM : START_Y),
+                fontSize: () => `${startFontRem()}rem`,
+                y: () => `${startFontRem() * START_Y_EM}rem`,
             }, {
                 fontSize: '2.5rem',
                 y: 0,
