@@ -4,7 +4,6 @@ import Header from "@/components/header";
 import LenisSetup from "@/components/lenisWrapper";
 import { EMAIL, GITHUB, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/data/site";
 import "./globals.css";
-import { useState } from "react";
 
 const jetBrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains",
@@ -88,7 +87,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const [activeLink, setActiveLink] = useState<string | null>(null);
   return (
     <html
       lang="cs"
@@ -100,13 +98,11 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
         />
         <LenisSetup>
-          <Header setActiveLink={setActiveLink} />
+          <Header />
           {children}
-          {activeLink !== '/portfolio' && (
-            <div className="fixed bottom-10 w-full flex justify-center">
-              <span className='text-white font-jet mix-blend-difference'>↓ scroluj ↓</span>
-            </div>
-          )}
+          <div className="fixed bottom-10 w-full flex justify-center">
+            <span className='text-white font-jet mix-blend-difference'>↓ scroluj ↓</span>
+          </div>
         </LenisSetup>
       </body>
     </html>
