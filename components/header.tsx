@@ -25,7 +25,7 @@ const NAVIGATION: navLink[] = [
 
 const MENU_ID = 'site-menu'
 
-export default function Header() {
+export default function Header({setActiveLink}: {setActiveLink: (link: string | null) => void}) {
     const pathname = usePathname()
     const lenis = useLenis()
 
@@ -34,14 +34,12 @@ export default function Header() {
     const menuBtnRef = useRef<HTMLButtonElement>(null)
     const wasOpen = useRef(false)
 
-    // zavřít menu při přechodu na jinou stránku (i přes tlačítka zpět/vpřed)
     const [lastPath, setLastPath] = useState(pathname)
     if (lastPath !== pathname) {
         setLastPath(pathname)
         setIsOpen(false)
     }
 
-    // escape + zamknutí scrollu, dokud je menu otevřené
     useEffect(() => {
         if (!isOpen) return
 
@@ -58,7 +56,6 @@ export default function Header() {
         }
     }, [isOpen, lenis])
 
-    // fokus do menu při otevření, zpět na tlačítko při zavření
     useEffect(() => {
         if (isOpen) {
             wasOpen.current = true
@@ -83,6 +80,7 @@ export default function Header() {
                     <ul className='flex w-fit gap-6 lg:gap-8'>
                         {NAVIGATION.map((link) => {
                             const active = pathname === link.redirect
+                            setActiveLink(active ? link.redirect : null)
                             return (
                                 <li
                                     key={link.redirect}
@@ -113,7 +111,6 @@ export default function Header() {
                 </div>
             </header>
 
-            {/* mobilní menu — panel vyjíždí zpod headeru, backdrop pod ním zavírá kliknutím */}
             <div
                 ref={menuRef}
                 id={MENU_ID}
