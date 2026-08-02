@@ -1,8 +1,18 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import Header from "@/components/header";
 import LenisSetup from "@/components/lenisWrapper";
-import { EMAIL, GITHUB, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/data/site";
+import {
+  AREA_SERVED,
+  EMAIL,
+  GITHUB,
+  GOOGLE_PROFILE,
+  LINKEDIN,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+  THEME_COLOR,
+} from "@/data/site";
 import "./globals.css";
 
 const jetBrainsMono = JetBrains_Mono({
@@ -53,6 +63,12 @@ export const metadata: Metadata = {
   },
 };
 
+// barva adresního řádku na mobilu - drží se pozadí webu, aby chrome prohlížeče
+// nekončilo ostrým přechodem do tmavé stránky
+export const viewport: Viewport = {
+  themeColor: THEME_COLOR,
+};
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -63,7 +79,7 @@ const jsonLd = {
       url: SITE_URL,
       email: EMAIL,
       jobTitle: "Freelance webový vývojář",
-      sameAs: [GITHUB],
+      sameAs: [GITHUB, LINKEDIN],
       alumniOf: "Technická univerzita v Liberci",
       knowsAbout: ["React", "Next.js", "TypeScript", "Node.js", "MongoDB", "GSAP"],
     },
@@ -72,10 +88,14 @@ const jsonLd = {
       "@id": `${SITE_URL}/#sluzby`,
       name: SITE_NAME,
       url: SITE_URL,
+      image: `${SITE_URL}/opengraph-image`,
       description: SITE_DESCRIPTION,
       email: EMAIL,
       provider: { "@id": `${SITE_URL}/#alex` },
-      areaServed: { "@type": "Place", name: "Pardubice a okolí, Česká republika" },
+      // konkrétní města místo jednoho "a okolí" - lokální výsledky se páruje
+      // na názvy obcí, ne na volný text
+      areaServed: AREA_SERVED.map((name) => ({ "@type": "City", name })),
+      sameAs: [GITHUB, LINKEDIN, GOOGLE_PROFILE],
       priceRange: "10000-45000 CZK",
     },
   ],
