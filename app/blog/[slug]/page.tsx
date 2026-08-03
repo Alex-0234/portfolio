@@ -14,7 +14,7 @@ interface Props {
     params: Promise<{ slug: string }>
 }
 
-const microClasses = 'font-jet text-xs uppercase tracking-[0.2em] text-light/50'
+const microClasses = 'font-jet text-xs uppercase tracking-[0.2em] text-light/80'
 
 const absolute = (url: string) => (url.startsWith('http') ? url : `${SITE_URL}${url}`)
 
@@ -123,7 +123,7 @@ export default async function BlogPost({ params }: Props) {
                         {post.tags.map((tag) => (
                             <span
                                 key={tag}
-                                className='border border-light/15 px-2 py-0.5 text-[0.65rem] uppercase tracking-[0.15em] text-light/40'
+                                className='border border-light/15 px-2 py-0.5 text-[0.65rem] uppercase tracking-[0.15em] text-light/80'
                             >
                                 {tag}
                             </span>
