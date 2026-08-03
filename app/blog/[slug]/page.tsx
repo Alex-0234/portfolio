@@ -66,6 +66,10 @@ export default async function BlogPost({ params }: Props) {
 
     const html = renderMarkdown(post.content)
 
+    // články z doby před migrací 0004 mají rozměry coveru na NULL - z čeho si
+    // pak prohlížeč místo rezervuje? z ničeho. tak mu ho vynutíme poměrem
+    const coverHasSize = Boolean(post.coverImageWidth && post.coverImageHeight)
+
     const url = `${SITE_URL}/blog/${post.slug}`
     const publishedAt = parseDate(post.publishedAt)?.toISOString()
 
@@ -151,7 +155,9 @@ export default async function BlogPost({ params }: Props) {
                         alt={post.coverImageAlt ?? post.title}
                         width={post.coverImageWidth ?? undefined}
                         height={post.coverImageHeight ?? undefined}
-                        className='h-auto w-full border border-light/10'
+                        className={`w-full border border-light/10 ${
+                            coverHasSize ? 'h-auto' : 'aspect-video object-cover'
+                        }`}
                         fetchPriority='high'
                     />
                 </div>

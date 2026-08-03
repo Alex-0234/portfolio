@@ -3,6 +3,15 @@
 /_next/static/*
   Cache-Control: public,max-age=31536000,immutable
 
+# obrázky a videa z public/ nemají v názvu hash, takže je nejde zamknout
+# napořád jako /_next/static - týden načisto, pak měsíc ze stale, než se to
+# na pozadí přeověří. při výměně souboru počítej s tím zpožděním
+/images/*
+  Cache-Control: public,max-age=604800,stale-while-revalidate=2592000
+
+/videos/*
+  Cache-Control: public,max-age=604800,stale-while-revalidate=2592000
+
 /*
   # prohlížeč nesmí hádat typ obsahu podle těla odpovědi
   X-Content-Type-Options: nosniff
