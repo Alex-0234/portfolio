@@ -6,8 +6,6 @@ import { pageMetadata } from "@/utils/metadata"
 import { formatDate, getPublishedPosts, parseDate } from "@/utils/posts"
 import Footer from "@/components/footer"
 
-// stránka čte D1 přes binding, který za buildu neexistuje - bez tohohle by ji
-// `next build` zkusil předrenderovat a spadlo by to
 export const dynamic = 'force-dynamic'
 
 export const metadata = pageMetadata({
@@ -16,7 +14,7 @@ export const metadata = pageMetadata({
     path: "/blog",
 })
 
-const microClasses = 'font-jet text-xs uppercase tracking-[0.2em] text-light/50'
+const microClasses = 'font-jet text-xs uppercase tracking-[0.2em] text-light/80'
 
 export default async function Blog() {
     const posts = await getPublishedPosts()
@@ -50,7 +48,7 @@ export default async function Blog() {
                                         href={`/blog/${post.slug}`}
                                         className='group flex flex-col gap-2 py-6 transition-colors hover:text-light'
                                     >
-                                        <div className='flex flex-wrap items-center gap-3'>
+                                        <div className='flex flex-wrap items-center gap-3 text-light'>
                                             {post.publishedAt && (
                                                 <time
                                                     dateTime={parseDate(post.publishedAt)?.toISOString()}
@@ -62,18 +60,18 @@ export default async function Blog() {
                                             {post.tags.map((tag) => (
                                                 <span
                                                     key={tag}
-                                                    className='border border-light/15 px-2 py-0.5 text-[0.65rem] uppercase tracking-[0.15em] text-light/40'
+                                                    className='border border-light/40 px-2 py-0.5 text-[0.65rem] uppercase tracking-[0.15em] text-light/80'
                                                 >
                                                     {tag}
                                                 </span>
                                             ))}
                                         </div>
 
-                                        <h2 className='flex items-center gap-3 text-lg text-light/80 transition-colors group-hover:text-light sm:text-xl'>
+                                        <h2 className='flex items-center gap-3 text-lg text-white/80 transition-colors group-hover:text-white sm:text-xl'>
                                             {post.title}
                                             <span
                                                 aria-hidden
-                                                className='text-light/30 transition-transform duration-300 group-hover:translate-x-1'
+                                                className='text-white/30 transition-transform duration-300 group-hover:translate-x-1'
                                             >
                                                 →
                                             </span>
