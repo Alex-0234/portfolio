@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <>
-    <section className='relative z-1 flex flex-col justify-center items-center w-full h-fit bg-dark font-jet'>
+    <main className='relative z-1 flex flex-col justify-center items-center w-full h-fit bg-dark font-jet'>
       <Hero />
 
       <BlackToWhiteTextFrontToBack />
@@ -43,7 +43,7 @@ export default function Home() {
           Přečíst si víc o mně →
         </Link>
       </div>
-    </section>
+    </main>
     <Footer bg_color='dark' />
     </>
   );

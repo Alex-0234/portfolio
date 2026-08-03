@@ -100,6 +100,7 @@ export default async function BlogPost({ params }: Props) {
     }
 
     return (
+        <main className='flex w-full flex-col'>
         <article className='flex w-full flex-col bg-dark font-jet text-light'>
             <script
                 type='application/ld+json'
@@ -166,5 +167,6 @@ export default async function BlogPost({ params }: Props) {
                 <Button href='/blog'>Další články</Button>
             </footer>
         </article>
+        </main>
     )
 }

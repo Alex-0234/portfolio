@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function NotFound() {
     return (
         <>
-            <section className='flex min-h-svh w-full flex-col justify-center gap-8 bg-dark px-6 pt-32 pb-16 font-jet text-light'>
+            <main className='relative z-1 flex min-h-svh w-full flex-col justify-center gap-8 bg-dark px-6 pt-32 pb-16 font-jet text-light'>
                 <div className='mx-auto flex w-full max-w-3xl flex-col gap-6'>
                     <p className='font-jet text-xs uppercase tracking-[0.2em] text-light/50'>[ 404 ]</p>
 
@@ -29,7 +29,7 @@ export default function NotFound() {
                         <Button href='/blog'>Blog</Button>
                     </div>
                 </div>
-            </section>
+            </main>
             <Footer bg_color='dark' />
         </>
     )

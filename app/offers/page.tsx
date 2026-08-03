@@ -1,5 +1,5 @@
 import Button from "@/components/button"
-import ContactForm from "@/components/contactForm"
+import Footer from "@/components/footer"
 import PricingPackages from "@/components/pricingPackages"
 import SplitReveal from "@/components/splitReveal"
 import { PACKAGES } from "@/data/pricing"
@@ -76,7 +76,8 @@ const jsonLd = {
 
 export default function Offers() {
     return (
-        <section className='flex w-full flex-col bg-dark font-jet text-light'>
+        <>
+        <main className='relative z-1 flex w-full flex-col bg-dark font-jet text-light'>
             <script
                 type='application/ld+json'
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
@@ -182,20 +183,8 @@ export default function Offers() {
                     ))}
                 </div>
             </div>
-
-            <div id='poptavka' className='mx-auto w-full max-w-3xl px-6 pb-40 scroll-mt-16'>
-                <div className='mb-10 flex flex-col gap-3'>
-                    <p className={microClasses}>[ poptávka ]</p>
-                    <SplitReveal as='h2' split='chars' stagger={0.02} className='text-2xl md:text-4xl uppercase font-bold leading-[1.4] tracking-tight'>
-                        Pojďme spolupracovat
-                    </SplitReveal>
-                    <p className='text-sm text-light/50'>
-                        Nejste si jistí, co potřebujete? Napište mi a probereme to.
-                    </p>
-                </div>
-
-                <ContactForm />
-            </div>
-        </section>
+        </main>
+        <Footer bg_color='light' />
+        </>
     )
 }

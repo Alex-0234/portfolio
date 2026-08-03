@@ -54,30 +54,31 @@ export default function Portfolio() {
 
     return (
         <>
-            <section
+            <main
                 ref={sectionRef}
-                className='relative z-1 w-full bg-dark pt-28 pb-24 font-jet xl:h-screen xl:overflow-hidden xl:pt-16 xl:@container-size'
+                className='relative z-1 w-full bg-dark pt-28 pb-24 font-jet xl:h-screen xl:overflow-hidden xl:pt-32 xl:@container-size'
             >
-                {/* TODO - fix this showing in first project */}
-                <div className='mx-6 mb-6 flex flex-col gap-2 xl:absolute xl:top-20 xl:left-6 xl:z-20 xl:mb-0'>
-                    <h1 className='text-xs uppercase tracking-[0.2em] text-light/50'>
-                        <span aria-hidden>[ </span>Vybrané práce<span aria-hidden> ]</span>
+                {/* na xl leží lišta v pásu, který nad gridem drží xl:pt-32 - proto
+                    se s kartami nepřekrývá, i když je vytržená z toku */}
+                <header className='mb-8 flex flex-col gap-5 px-6 xl:absolute xl:inset-x-0 xl:top-16 xl:z-20 xl:mb-0 xl:h-16 xl:flex-row xl:items-center xl:justify-between xl:gap-6'>
+                    <h1 className='text-3xl font-bold uppercase leading-none tracking-[-0.02em] text-light sm:text-4xl xl:text-base xl:tracking-[0.2em]'>
+                        Vybrané práce
                     </h1>
-                </div>
 
-                <div className='mx-6 mb-6 flex w-fit flex-wrap gap-1 border border-light/10 bg-dark/90 p-1 xl:absolute xl:top-20 xl:right-6 xl:z-20 xl:mx-0 xl:mb-0'>
-                    {FILTERS.map((type) => (
-                        <button
-                            key={type}
-                            onClick={() => setActiveType(type)}
-                            className={`cursor-pointer px-4 py-2 text-sm capitalize transition-colors ${
-                                activeType === type ? 'bg-light text-dark' : 'text-light/60 hover:text-light'
-                            }`}
-                        >
-                            {type === 'all' ? 'All' : TYPE_LABEL[type]}
-                        </button>
-                    ))}
-                </div>
+                    <div className='flex w-fit flex-wrap gap-1 border border-light/10 bg-dark/90 p-1'>
+                        {FILTERS.map((type) => (
+                            <button
+                                key={type}
+                                onClick={() => setActiveType(type)}
+                                className={`cursor-pointer px-4 py-2 text-sm capitalize transition-colors ${
+                                    activeType === type ? 'bg-light text-dark' : 'text-light/60 hover:text-light'
+                                }`}
+                            >
+                                {type === 'all' ? 'All' : TYPE_LABEL[type]}
+                            </button>
+                        ))}
+                    </div>
+                </header>
 
                 <div
                     ref={trackRef}
@@ -116,7 +117,7 @@ export default function Portfolio() {
                         )
                     })}
                 </div>
-            </section>
+            </main>
 
             <ProjectPreview project={selected ? null : hovered} />
 

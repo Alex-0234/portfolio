@@ -95,7 +95,10 @@ export default function Footer({
         <>
             {/* drží ve scrollu místo, které fixní patička zabírá */}
             {/* než doběhne měření, drží místo aspoň minimální výška */}
+            {/* zároveň je to cíl odkazů na kontakt - na fixní patičku samotnou
+                skočit nejde, ta je v viewportu pořád */}
             <div
+                id='poptavka'
                 aria-hidden
                 style={spacer === null ? undefined : { height: spacer }}
                 className={`w-full shrink-0 ${spacer === null ? height : ''}`}

@@ -46,7 +46,7 @@ const microClasses = 'font-jet text-xs uppercase tracking-[0.2em] text-light/50'
 export default function About() {
     return (
         <>
-        <section className='relative z-1 flex w-full flex-col bg-dark font-jet text-light'>
+        <main className='relative z-1 flex w-full flex-col bg-dark font-jet text-light'>
             <header className='flex min-h-svh w-full flex-col justify-center gap-10 px-6 pt-32 pb-16'>
                 <div className='mx-auto flex w-full max-w-6xl flex-col-reverse gap-12 lg:flex-row lg:items-end lg:justify-between'>
                     <div className='flex flex-col gap-8 lg:max-w-2xl'>
@@ -207,7 +207,7 @@ export default function About() {
                     </div>
                 </div>
             </div>
-        </section>
+        </main>
         <Footer bg_color='light'  />
         </>
     )
