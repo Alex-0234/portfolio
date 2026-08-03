@@ -68,6 +68,18 @@ const parseTags = (value) => {
     return [...new Set(inner.split(',').map((tag) => unquote(tag.trim())).filter(Boolean))]
 }
 
+const parseDimension = (value, key, file) => {
+    if (value === undefined || value === '') return null
+
+    const number = Number(value)
+
+    if (!Number.isInteger(number) || number <= 0) {
+        throw new Error(`${file}: "${key}" musí být celé kladné číslo, ne "${value}"`)
+    }
+
+    return number
+}
+
 // --- skládání SQL -----------------------------------------------------------
 
 /** Escapování řetězce do SQL literálu - v SQLite se apostrof zdvojuje. */
@@ -75,6 +87,8 @@ const sql = (value) =>
     value === null || value === undefined || value === ''
         ? 'NULL'
         : `'${String(value).replace(/'/g, "''")}'`
+
+const num = (value) => (value === null || value === undefined ? 'NULL' : String(value))
 
 function readPost(file) {
     const { data, body } = parseFrontmatter(readFileSync(file, 'utf-8'), file)
@@ -89,15 +103,28 @@ function readPost(file) {
         throw new Error(`${file}: status musí být ${STATUSES.join(' nebo ')}, ne "${status}"`)
     }
 
+    const coverImageUrl = data.cover_image_url || null
+    const coverImageWidth = parseDimension(data.cover_image_width, 'cover_image_width', file)
+    const coverImageHeight = parseDimension(data.cover_image_height, 'cover_image_height', file)
+
+    if ((coverImageWidth === null) !== (coverImageHeight === null)) {
+        throw new Error(`${file}: cover_image_width a cover_image_height musí být uvedené obě, nebo ani jedna`)
+    }
+
+    if (!coverImageUrl && (coverImageWidth || data.cover_image_alt)) {
+        throw new Error(`${file}: cover_image_alt/width/height nedávají smysl bez cover_image_url`)
+    }
+
     return {
         file,
         slug,
         status,
         title: data.title,
         description: data.description || null,
-        coverImageUrl: data.cover_image_url || null,
-        // published_at se normálně nechává na triggeru, tohle je pro import
-        // starších článků, kde datum vydání chceš zachovat
+        coverImageUrl,
+        coverImageAlt: data.cover_image_alt || null,
+        coverImageWidth,
+        coverImageHeight,
         publishedAt: data.published_at || null,
         tags: parseTags(data.tags),
         content: body,
@@ -115,13 +142,16 @@ function buildSql(post) {
     // updated_at se nenastavuje vůbec, aby ho doplnil trigger. published_at se
     // přes COALESCE drží původní, takže reedit článku nezmění datum vydání.
     lines.push(
-        `INSERT INTO posts (slug, title, description, content, cover_image_url, status, published_at)`,
-        `VALUES (${sql(slug)}, ${sql(post.title)}, ${sql(post.description)}, ${sql(post.content)}, ${sql(post.coverImageUrl)}, ${sql(post.status)}, ${sql(post.publishedAt)})`,
+        `INSERT INTO posts (slug, title, description, content, cover_image_url, cover_image_alt, cover_image_width, cover_image_height, status, published_at)`,
+        `VALUES (${sql(slug)}, ${sql(post.title)}, ${sql(post.description)}, ${sql(post.content)}, ${sql(post.coverImageUrl)}, ${sql(post.coverImageAlt)}, ${num(post.coverImageWidth)}, ${num(post.coverImageHeight)}, ${sql(post.status)}, ${sql(post.publishedAt)})`,
         `ON CONFLICT(slug) DO UPDATE SET`,
         `  title = excluded.title,`,
         `  description = excluded.description,`,
         `  content = excluded.content,`,
         `  cover_image_url = excluded.cover_image_url,`,
+        `  cover_image_alt = excluded.cover_image_alt,`,
+        `  cover_image_width = excluded.cover_image_width,`,
+        `  cover_image_height = excluded.cover_image_height,`,
         `  status = excluded.status,`,
         `  published_at = COALESCE(excluded.published_at, posts.published_at);`
     )

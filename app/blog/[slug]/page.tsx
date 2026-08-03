@@ -4,18 +4,19 @@ import { notFound } from "next/navigation"
 
 import Button from "@/components/button"
 import SplitReveal from "@/components/splitReveal"
-import { SITE_NAME } from "@/data/site"
+import { SITE_NAME, SITE_URL } from "@/data/site"
 import { renderMarkdown } from "@/utils/markdown"
 import { formatDate, getPostBySlug, parseDate } from "@/utils/posts"
 
 export const dynamic = 'force-dynamic'
 
 interface Props {
-    // params jsou od Next 15 promise, musí se awaitnout
     params: Promise<{ slug: string }>
 }
 
 const microClasses = 'font-jet text-xs uppercase tracking-[0.2em] text-light/50'
+
+const absolute = (url: string) => (url.startsWith('http') ? url : `${SITE_URL}${url}`)
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params
@@ -27,7 +28,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     const path = `/blog/${post.slug}`
     const description = post.description ?? undefined
-    // vlastní cover z R2, jinak sdílený OG obrázek webu
     const images = [post.coverImageUrl ?? '/opengraph-image']
 
     return {
@@ -66,8 +66,45 @@ export default async function BlogPost({ params }: Props) {
 
     const html = renderMarkdown(post.content)
 
+    const url = `${SITE_URL}/blog/${post.slug}`
+    const publishedAt = parseDate(post.publishedAt)?.toISOString()
+
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@graph': [
+            {
+                '@type': 'BlogPosting',
+                '@id': `${url}#article`,
+                mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+                url,
+                headline: post.title,
+                description: post.description ?? undefined,
+                inLanguage: 'cs-CZ',
+                datePublished: publishedAt,
+                dateModified: publishedAt ? parseDate(post.updatedAt)?.toISOString() : undefined,
+                author: { '@id': `${SITE_URL}/#alex` },
+                publisher: { '@id': `${SITE_URL}/#alex` },
+                image: absolute(post.coverImageUrl ?? '/opengraph-image'),
+                keywords: post.tags.length > 0 ? post.tags.join(', ') : undefined,
+            },
+            {
+                '@type': 'BreadcrumbList',
+                '@id': `${url}#breadcrumb`,
+                itemListElement: [
+                    { '@type': 'ListItem', position: 1, name: 'Domů', item: SITE_URL },
+                    { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
+                    { '@type': 'ListItem', position: 3, name: post.title },
+                ],
+            },
+        ],
+    }
+
     return (
         <article className='flex w-full flex-col bg-dark font-jet text-light'>
+            <script
+                type='application/ld+json'
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+            />
             <header className='flex w-full flex-col gap-8 px-6 pt-32 pb-12'>
                 <div className='mx-auto flex w-full max-w-3xl flex-col gap-6'>
                     <Link href='/blog' className={`${microClasses} transition-colors hover:text-light`}>
@@ -107,13 +144,14 @@ export default async function BlogPost({ params }: Props) {
 
             {post.coverImageUrl && (
                 <div className='mx-auto w-full max-w-3xl px-6 pb-12'>
-                    {/* obrázek sedí v R2, rozměry nejsou v DB - proto <img> a ne next/image */}
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                         src={post.coverImageUrl}
-                        alt=''
-                        className='w-full border border-light/10'
-                        loading='lazy'
+                        alt={post.coverImageAlt ?? post.title}
+                        width={post.coverImageWidth ?? undefined}
+                        height={post.coverImageHeight ?? undefined}
+                        className='h-auto w-full border border-light/10'
+                        fetchPriority='high'
                     />
                 </div>
             )}

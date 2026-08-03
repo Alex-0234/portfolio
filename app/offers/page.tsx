@@ -3,6 +3,7 @@ import ContactForm from "@/components/contactForm"
 import PricingPackages from "@/components/pricingPackages"
 import SplitReveal from "@/components/splitReveal"
 import { PACKAGES } from "@/data/pricing"
+import { SITE_URL } from "@/data/site"
 import { pageMetadata } from "@/utils/metadata"
 import { formatPrice } from "@/utils/price"
 
@@ -32,9 +33,54 @@ const FAQ = [
 
 const microClasses = 'font-jet text-xs uppercase tracking-[0.2em] text-light/50'
 
+const offer = (name: string, description: string, price: number, monthly: boolean) => ({
+    '@type': 'Offer',
+    name,
+    priceCurrency: 'CZK',
+    priceSpecification: monthly
+        ? {
+            '@type': 'UnitPriceSpecification',
+            price,
+            priceCurrency: 'CZK',
+            referenceQuantity: { '@type': 'QuantitativeValue', value: 1, unitCode: 'MON' },
+        }
+        : {
+            '@type': 'PriceSpecification',
+            minPrice: price,
+            priceCurrency: 'CZK',
+        },
+    itemOffered: {
+        '@type': 'Service',
+        name,
+        description,
+        provider: { '@id': `${SITE_URL}/#sluzby` },
+    },
+})
+
+const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'OfferCatalog',
+    '@id': `${SITE_URL}/offers#cenik`,
+    name: 'Služby a ceník',
+    url: `${SITE_URL}/offers`,
+    provider: { '@id': `${SITE_URL}/#sluzby` },
+    itemListElement: PACKAGES.flatMap((pkg) =>
+        pkg.tiers
+            ? pkg.tiers.map((tier) =>
+                offer(`${pkg.name} — ${tier.name}`, tier.description, tier.price, pkg.monthly ?? false))
+            : pkg.price
+                ? [offer(pkg.name, pkg.tagline, pkg.price, pkg.monthly ?? false)]
+                : []
+    ),
+}
+
 export default function Offers() {
     return (
         <section className='flex w-full flex-col bg-dark font-jet text-light'>
+            <script
+                type='application/ld+json'
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+            />
             <header className='flex min-h-svh w-full flex-col justify-center gap-10 px-6 pt-32 pb-16'>
                 <div className='mx-auto flex w-full max-w-6xl flex-col gap-8'>
                     <p className={microClasses}>[ pevný rozsah · ceny od · žádná překvapení ]</p>

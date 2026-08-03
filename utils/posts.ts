@@ -5,6 +5,9 @@ export interface PostSummary {
     title: string
     description: string | null
     coverImageUrl: string | null
+    coverImageAlt: string | null
+    coverImageWidth: number | null
+    coverImageHeight: number | null
     publishedAt: string | null
     tags: string[]
 }
@@ -23,6 +26,9 @@ interface PostRow {
     title: string
     description: string | null
     cover_image_url: string | null
+    cover_image_alt: string | null
+    cover_image_width: number | null
+    cover_image_height: number | null
     published_at: string | null
     updated_at: string | null
     content: string
@@ -35,6 +41,9 @@ const SELECT_POSTS = `
         p.title,
         p.description,
         p.cover_image_url,
+        p.cover_image_alt,
+        p.cover_image_width,
+        p.cover_image_height,
         p.published_at,
         p.updated_at,
         p.content,
@@ -50,6 +59,9 @@ const toPost = (row: PostRow): Post => ({
     title: row.title,
     description: row.description,
     coverImageUrl: row.cover_image_url,
+    coverImageAlt: row.cover_image_alt,
+    coverImageWidth: row.cover_image_width,
+    coverImageHeight: row.cover_image_height,
     publishedAt: row.published_at,
     updatedAt: row.updated_at,
     content: row.content,

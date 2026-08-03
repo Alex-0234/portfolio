@@ -12,13 +12,15 @@ export const GOOGLE_PROFILE = 'https://share.google/IckeEuhBpCVEVYooQ'
 // města pro lokální SEO — musí odpovídat tomu, co máš na Google Business Profile
 export const AREA_SERVED = ['Pardubice', 'Přelouč', 'Chvaletice']
 
+export const ADDRESS = {
+    locality: 'Řečany nad Labem',
+    region: 'Pardubický kraj',
+    country: 'CZ',
+}
+
 export const SITE_DESCRIPTION =
     'Freelance webový vývojář z Pardubic. Landing pages, firemní weby a webové aplikace na míru — pevná cena, jasný termín.'
 
 export const THEME_COLOR = '#171717'
 
-// endpoint z Formspree, na který posílá kontaktní formulář. volá se přímo
-// z prohlížeče, takže musí být NEXT_PUBLIC_ a zapéká se do bundlu při buildu -
-// na Cloudflare ho tedy musí vidět build, ne až běžící worker.
-// když chybí, formulář spadne zpátky na mailto
 export const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? ''

@@ -1,7 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import BlackToWhiteTextFrontToBack from "@/components/gsapJSX.tsx/black-to-white-text-front-back";
 import Hero from "@/components/gsapJSX.tsx/hero";
 import Footer from "@/components/footer";
+
+export const metadata: Metadata = {
+    alternates: { canonical: '/' },
+};
 
 const REASONS = [
   { title: 'Full-stack pod jednou střechou', description: 'Nepotřebujete koordinovat tři různé dodavatele.' },

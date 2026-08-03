@@ -4,6 +4,7 @@ import Header from "@/components/header";
 import LenisSetup from "@/components/lenisWrapper";
 import ScrollHint from "@/components/scrollHint";
 import {
+  ADDRESS,
   AREA_SERVED,
   EMAIL,
   GITHUB,
@@ -45,7 +46,6 @@ export const metadata: Metadata = {
     "Next.js",
     "React",
   ],
-  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "cs_CZ",
@@ -60,14 +60,10 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
   },
   robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+    googleBot: { "max-image-preview": "large", "max-snippet": -1 },
   },
 };
 
-// barva adresního řádku na mobilu - drží se pozadí webu, aby chrome prohlížeče
-// nekončilo ostrým přechodem do tmavé stránky
 export const viewport: Viewport = {
   themeColor: THEME_COLOR,
 };
@@ -95,8 +91,12 @@ const jsonLd = {
       description: SITE_DESCRIPTION,
       email: EMAIL,
       provider: { "@id": `${SITE_URL}/#alex` },
-      // konkrétní města místo jednoho "a okolí" - lokální výsledky se páruje
-      // na názvy obcí, ne na volný text
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: ADDRESS.locality,
+        addressRegion: ADDRESS.region,
+        addressCountry: ADDRESS.country,
+      },
       areaServed: AREA_SERVED.map((name) => ({ "@type": "City", name })),
       sameAs: [GITHUB, LINKEDIN, GOOGLE_PROFILE],
       priceRange: "10000-45000 CZK",

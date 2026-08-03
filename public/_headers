@@ -2,3 +2,13 @@
 # https://opennext.js.org/cloudflare/caching#static-assets-caching
 /_next/static/*
   Cache-Control: public,max-age=31536000,immutable
+
+/*
+  # prohlížeč nesmí hádat typ obsahu podle těla odpovědi
+  X-Content-Type-Options: nosniff
+  # při odchodu na cizí web se posílá jen doména, ne celá URL
+  Referrer-Policy: strict-origin-when-cross-origin
+  # web nic z tohohle nepoužívá, tak ať to nemůže použít ani vložený skript
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
+  # cizí stránka si web nesmí načíst do iframu (clickjacking)
+  X-Frame-Options: DENY
