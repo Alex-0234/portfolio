@@ -1,3 +1,4 @@
+import Footer from "@/components/footer"
 import { pageMetadata } from "@/utils/metadata"
 
 export const metadata = pageMetadata({
@@ -8,5 +9,10 @@ export const metadata = pageMetadata({
 
 // stránka sama je interaktivní, takže metadata musí viset o patro výš
 export default function PortfolioLayout({ children }: { children: React.ReactNode }) {
-    return children
-}
+        return (<>
+            {children}
+            <Footer bg_color='light' />
+            </>
+
+        )
+    }

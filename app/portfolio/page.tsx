@@ -56,7 +56,7 @@ export default function Portfolio() {
         <>
             <section
                 ref={sectionRef}
-                className='relative w-full bg-dark pt-28 pb-24 font-jet xl:h-screen xl:overflow-hidden xl:pt-16 xl:@container-size'
+                className='relative z-1 w-full bg-dark pt-28 pb-24 font-jet xl:h-screen xl:overflow-hidden xl:pt-16 xl:@container-size'
             >
                 {/* TODO - fix this showing in first project */}
                 <div className='mx-6 mb-6 flex flex-col gap-2 xl:absolute xl:top-20 xl:left-6 xl:z-20 xl:mb-0'>

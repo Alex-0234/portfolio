@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import Header from "@/components/header";
 import LenisSetup from "@/components/lenisWrapper";
+import ScrollHint from "@/components/scrollHint";
 import {
   AREA_SERVED,
   EMAIL,
@@ -15,6 +16,7 @@ import {
 } from "@/data/site";
 import "lenis/dist/lenis.css";
 import "./globals.css";
+
 
 const jetBrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains",
@@ -121,9 +123,7 @@ export default function RootLayout({
         <LenisSetup>
           <Header />
           {children}
-          <div className="fixed bottom-10 w-full flex justify-center">
-            <span className='text-white font-jet mix-blend-difference'>↓ scroluj ↓</span>
-          </div>
+          <ScrollHint />
         </LenisSetup>
       </body>
     </html>

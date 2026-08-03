@@ -1,6 +1,7 @@
 import Link from "next/link";
 import BlackToWhiteTextFrontToBack from "@/components/gsapJSX.tsx/black-to-white-text-front-back";
 import Hero from "@/components/gsapJSX.tsx/hero";
+import Footer from "@/components/footer";
 
 const REASONS = [
   { title: 'Full-stack pod jednou střechou', description: 'Nepotřebujete koordinovat tři různé dodavatele.' },
@@ -12,7 +13,8 @@ const REASONS = [
 export default function Home() {
 
   return (
-    <section className='flex flex-col justify-center items-center w-full h-fit bg-dark font-jet'>
+    <>
+    <section className='relative z-1 flex flex-col justify-center items-center w-full h-fit bg-dark font-jet'>
       <Hero />
 
       <BlackToWhiteTextFrontToBack />
@@ -37,5 +39,7 @@ export default function Home() {
         </Link>
       </div>
     </section>
+    <Footer bg_color='dark' />
+    </>
   );
 }

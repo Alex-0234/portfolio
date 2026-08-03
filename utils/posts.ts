@@ -105,6 +105,6 @@ export function formatDate(value: string | null): string | null {
     const date = parseDate(value)
 
     return date
-        ? new Intl.DateTimeFormat('cs-CZ', { dateStyle: 'long', timeZone: 'UTC' }).format(date)
+        ? new Intl.DateTimeFormat('cs-CZ', { dateStyle: 'long', timeZone: 'Europe/Prague' }).format(date)
         : null
 }

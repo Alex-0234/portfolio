@@ -4,6 +4,7 @@ import Button from "@/components/button"
 import SplitReveal from "@/components/splitReveal"
 import { pageMetadata } from "@/utils/metadata"
 import { formatDate, getPublishedPosts, parseDate } from "@/utils/posts"
+import Footer from "@/components/footer"
 
 // stránka čte D1 přes binding, který za buildu neexistuje - bez tohohle by ji
 // `next build` zkusil předrenderovat a spadlo by to
@@ -21,7 +22,8 @@ export default async function Blog() {
     const posts = await getPublishedPosts()
 
     return (
-        <section className='flex w-full flex-col bg-dark font-jet text-light'>
+        <>
+        <section className='relative z-1 flex w-full flex-col bg-dark font-jet text-light'>
             <header className='flex min-h-svh w-full flex-col justify-center gap-10 px-6 pt-32 pb-16'>
                 <div className='mx-auto flex w-full max-w-6xl flex-col gap-8'>
                     <p className={microClasses}>[ poznámky z praxe ]</p>
@@ -95,5 +97,7 @@ export default async function Blog() {
                 </div>
             </header>
         </section>
+        <Footer bg_color='light' />
+        </>
     )
 }

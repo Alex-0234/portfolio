@@ -16,3 +16,9 @@ export const SITE_DESCRIPTION =
     'Freelance webový vývojář z Pardubic. Landing pages, firemní weby a webové aplikace na míru — pevná cena, jasný termín.'
 
 export const THEME_COLOR = '#171717'
+
+// endpoint z Formspree, na který posílá kontaktní formulář. volá se přímo
+// z prohlížeče, takže musí být NEXT_PUBLIC_ a zapéká se do bundlu při buildu -
+// na Cloudflare ho tedy musí vidět build, ne až běžící worker.
+// když chybí, formulář spadne zpátky na mailto
+export const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? ''

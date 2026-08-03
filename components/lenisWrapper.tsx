@@ -46,7 +46,7 @@ export default function LenisSetup({ children }: { children: ReactNode }) {
         <ReactLenis
             root
             ref={lenisRef}
-            options={{ lerp: 0.5, autoRaf: false }}
+            options={{ lerp: 0.4, autoRaf: false }}
         >
             {children}
         </ReactLenis>

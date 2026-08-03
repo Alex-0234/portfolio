@@ -6,6 +6,8 @@ interface BaseProps {
     children: string
     variant?: 'solid' | 'outline'
     size?: 'sm' | 'md'
+    /** pozadí, na kterém tlačítko sedí - bez tohohle splyne na světlé sekci */
+    surface?: 'dark' | 'light'
     className?: string
 }
 
@@ -28,6 +30,7 @@ export default function Button({
     children,
     variant = 'outline',
     size = 'md',
+    surface = 'dark',
     className = '',
     onClick,
     type = 'button',
@@ -39,13 +42,24 @@ export default function Button({
         ? 'gap-2 px-5 py-2.5 text-[clamp(0.62rem,0.7vw,0.78rem)]'
         : 'gap-3 px-8 py-4 text-[clamp(0.7rem,0.85vw,0.95rem)]'
 
-    const classes = `group relative inline-flex items-center overflow-hidden border border-light ${sizing} font-jet uppercase tracking-[0.15em] whitespace-nowrap transition-colors duration-300 ${solid ? 'bg-light text-dark hover:text-light' : 'text-light hover:text-dark'} ${className}`
+    // na světlém pozadí se celá dvojice barev otočí, aby zůstal stejný kontrast
+    const onLight = surface === 'light'
+
+    const edge = onLight ? 'border-dark' : 'border-light'
+    const fill = solid
+        ? (onLight ? 'bg-dark text-light hover:text-dark' : 'bg-light text-dark hover:text-light')
+        : (onLight ? 'text-dark hover:text-light' : 'text-light hover:text-dark')
+    const sweep = solid
+        ? (onLight ? 'bg-light' : 'bg-dark')
+        : (onLight ? 'bg-dark' : 'bg-light')
+
+    const classes = `group relative inline-flex items-center overflow-hidden border ${edge} ${sizing} font-jet uppercase tracking-[0.15em] whitespace-nowrap transition-colors duration-300 ${fill} ${className}`
 
     const content = (
         <>
             <span
                 aria-hidden
-                className={`absolute inset-0 translate-y-full transition-transform duration-300 ease-out group-hover:translate-y-0 ${solid ? 'bg-dark' : 'bg-light'}`}
+                className={`absolute inset-0 translate-y-full transition-transform duration-300 ease-out group-hover:translate-y-0 ${sweep}`}
             />
             <span className='relative'>{children}</span>
             <span className='relative transition-transform duration-300 group-hover:translate-x-1'>→</span>
