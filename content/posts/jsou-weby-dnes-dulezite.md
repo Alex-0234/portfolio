@@ -15,7 +15,7 @@ Podíl webů přizpůsobených mobilům dnes dosahuje skoro **60 %**. Profil na 
 
 Otázka „mám mít web?" je tím pádem dávno zodpovězená. Dnes se ptáme jinak. Je ten web ještě aktuální, funguje pořádně na mobilu a doplňuje ho rozumná přítomnost i jinde?
 
-> Poznámka: statistiky ČSÚ sledují firmy od deseti zaměstnanců. Jako OSVČ nebo mikrofirma se do nich nedostaneš, ale důvod mít slušný web tím nemizí. Spíš naopak, protože konkurence mezi malými hráči se odehrává hlavně online.
+> Poznámka: statistiky ČSÚ sledují firmy od deseti zaměstnanců. Jako OSVČ nebo mikrofirma se do nich nedostanete, ale důvod mít slušný web tím nemizí. Spíš naopak, protože konkurence mezi malými hráči se odehrává hlavně online.
 
 ## Jakou roli mají weby v roce 2026?
 
@@ -33,22 +33,22 @@ Vidět je to i v datech. V roce 2021 mělo web bez profilu na sociální síti j
 
 Nejvíc to ale vynikne na tom, kdo sociální sítě vlastně používá. Mezi lidmi od 16 do 24 let je to v Česku 95 %, tedy skoro stejně jako v Dánsku s 97 %. Ve skupině od 55 do 74 let ale sedí na sociálních sítích 71 % Dánů, kdežto v Česku pouhých **26 %**. [Zdroj: ČSÚ, Statistika a my](https://statistikaamy.csu.gov.cz/na-socialni-siti-je-kazdy-druhy-podnik-a-5-milionu-osob)
 
-Jestli tedy cílíš i na starší zákazníky, a spousta oborů to dělá úplně přirozeně (řemeslníci, lékaři, právníci, lokální služby), sociální sítě je zkrátka nezastihnou. Web zůstává kanálem, který funguje napříč generacemi.
+Jestli tedy cílíte i na starší zákazníky, a spousta oborů to dělá úplně přirozeně (řemeslníci, lékaři, právníci, lokální služby), sociální sítě je zkrátka nezastihnou. Web zůstává kanálem, který funguje napříč generacemi.
 
 ### Web vs. sociální sítě
 
 | Kritérium | Web | Sociální sítě |
 | --- | --- | --- |
-| Kdo vlastní obsah | ty | platforma |
+| Kdo vlastní obsah | vy | platforma |
 | Viditelnost ve vyhledávání (Google) | ano | omezeně |
 | Závislost na algoritmu | ne | ano |
 | Dosah na starší generace (55+) | vysoký | nízký |
 | Životnost obsahu | dlouhá | krátká |
 
-> Sociální síť si půjčuješ. Web vlastníš.
+> Sociální síť si půjčujete. Web vlastníte.
 
 ## Shrnutí
 
-Web není náhrada za sociální sítě ani obráceně. Jsou to dva nástroje na dvě různé věci. Web ti dává nezávislost na algoritmu, viditelnost ve vyhledávání a dosah na lidi, ke kterým se přes sítě nedostaneš. Sociální sítě zase umožňují rychlejší a míň formální kontakt s tou částí publika, která na nich žije.
+Web není náhrada za sociální sítě ani obráceně. Jsou to dva nástroje na dvě různé věci. Web vám dává nezávislost na algoritmu, viditelnost ve vyhledávání a dosah na lidi, ke kterým se přes sítě nedostanete. Sociální sítě zase umožňují rychlejší a míň formální kontakt s tou částí publika, která na nich žije.
 
-Jestli řešíš, jaký typ webu by ti dával smysl, mrkni na [služby a ceník](/offers).
+Jestli řešíte, jaký typ webu by vám dával smysl, mrkněte na [služby a ceník](/offers).

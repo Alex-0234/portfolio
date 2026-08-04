@@ -9,17 +9,17 @@ status: published
 
 Landing page je jedna stránka s **jedním cílem**. Dává smysl, když:
 
-- prodáváš jednu službu nebo produkt
+- prodáváte jednu službu nebo produkt
 - veškerý provoz jde z reklamy na konkrétní nabídku
-- nepotřebuješ dlouhodobě přidávat obsah
+- nepotřebujete dlouhodobě přidávat obsah
 
-## Kdy potřebuješ firemní web
+## Kdy potřebujete firemní web
 
-Jakmile máš víc služeb, chceš sbírat organický provoz z vyhledávání nebo
-plánuješ blog, jedna stránka přestane stačit.
+Jakmile máte víc služeb, chcete sbírat organický provoz z vyhledávání nebo
+plánujete blog, jedna stránka přestane stačit.
 
-> Rozhoduj podle toho, kolik různých otázek má návštěvník v hlavě, ne podle
-> toho, kolik obsahu máš připraveného.
+> Rozhodujte se podle toho, kolik různých otázek má návštěvník v hlavě, ne
+> podle toho, kolik obsahu máte připraveného.
 
 ### Rychlé srovnání
 
@@ -29,4 +29,4 @@ plánuješ blog, jedna stránka přestane stačit.
 | SEO potenciál | nízký | vysoký |
 | Cena | nižší | vyšší |
 
-Detaily k obojímu najdeš u [služeb a ceníku](/offers).
+Detaily k obojímu najdete ve [službách a ceníku](/offers).

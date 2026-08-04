@@ -120,3 +120,22 @@ export function formatDate(value: string | null): string | null {
         ? new Intl.DateTimeFormat('cs-CZ', { dateStyle: 'long', timeZone: 'Europe/Prague' }).format(date)
         : null
 }
+
+/**
+ * Jestli má smysl vedle data vydání ukazovat i datum aktualizace.
+ *
+ * Porovnávají se schválně až vykreslené řetězce, ne časy - u čerstvě vydaného
+ * článku sedí published_at a updated_at na stejnou minutu a "Publikováno 5.
+ * srpna / Aktualizováno 5. srpna" čtenáři neřekne nic.
+ *
+ * Že updated_at neskáče po každém `npm run posts`, hlídá otisk obsahu z
+ * migrace 0005 - bez něj by tahle podmínka byla k ničemu.
+ */
+export function hasMeaningfulUpdate(publishedAt: string | null, updatedAt: string | null): boolean {
+    const published = parseDate(publishedAt)
+    const updated = parseDate(updatedAt)
+
+    if (!published || !updated || updated <= published) return false
+
+    return formatDate(publishedAt) !== formatDate(updatedAt)
+}

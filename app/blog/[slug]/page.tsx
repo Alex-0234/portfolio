@@ -6,7 +6,7 @@ import Button from "@/components/button"
 import SplitReveal from "@/components/splitReveal"
 import { SITE_NAME, SITE_URL } from "@/data/site"
 import { renderMarkdown } from "@/utils/markdown"
-import { formatDate, getPostBySlug, parseDate } from "@/utils/posts"
+import { formatDate, getPostBySlug, hasMeaningfulUpdate, parseDate } from "@/utils/posts"
 
 export const dynamic = 'force-dynamic'
 
@@ -116,15 +116,29 @@ export default async function BlogPost({ params }: Props) {
                         ← zpět na blog
                     </Link>
 
-                    <div className='flex flex-wrap items-center gap-3'>
+                    <div className='flex flex-wrap items-center gap-x-3 gap-y-2'>
+                        <span className={`${microClasses} text-light`}>{SITE_NAME}</span>
+
                         {post.publishedAt && (
                             <time
                                 dateTime={parseDate(post.publishedAt)?.toISOString()}
                                 className={microClasses}
                             >
-                                {formatDate(post.publishedAt)}
+                                Publikováno {formatDate(post.publishedAt)}
                             </time>
                         )}
+
+                        {/* jen když jde o jiný den než vydání - jinak by tu stálo
+                            dvakrát totéž datum */}
+                        {hasMeaningfulUpdate(post.publishedAt, post.updatedAt) && (
+                            <time
+                                dateTime={parseDate(post.updatedAt)?.toISOString()}
+                                className={microClasses}
+                            >
+                                Aktualizováno {formatDate(post.updatedAt)}
+                            </time>
+                        )}
+
                         {post.tags.map((tag) => (
                             <span
                                 key={tag}

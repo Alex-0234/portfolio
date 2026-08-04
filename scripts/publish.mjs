@@ -8,14 +8,19 @@
  * vygeneruje .sql soubor s korektně escapovanými literály a ten se pustí
  * najednou. Články tak zůstávají v gitu vedle kódu, ne jen v databázi.
  *
+ * Článek se přepíše jen tehdy, když se změnil jeho otisk - viz migrace 0005.
+ * Opětovné spuštění beze změny je no-op a nehne s updated_at.
+ *
  *   node scripts/publish.mjs                          # vše, lokálně
  *   node scripts/publish.mjs --remote                 # vše, do produkce
- *   node scripts/publish.mjs content/posts/foo.md     # jeden článek
+ *   node scripts/publish.mjs zaklady-seo              # jeden článek podle slugu
+ *   node scripts/publish.mjs content/posts/foo.md     # nebo podle cesty
  *   node scripts/publish.mjs --remote --dry-run       # jen vypíše SQL
  */
 
 import { readFileSync, readdirSync, writeFileSync, unlinkSync, existsSync } from 'node:fs'
 import { join, resolve, basename, extname } from 'node:path'
+import { createHash } from 'node:crypto'
 import { tmpdir } from 'node:os'
 import { spawnSync } from 'node:child_process'
 
@@ -115,7 +120,7 @@ function readPost(file) {
         throw new Error(`${file}: cover_image_alt/width/height nedávají smysl bez cover_image_url`)
     }
 
-    return {
+    const post = {
         file,
         slug,
         status,
@@ -129,6 +134,37 @@ function readPost(file) {
         tags: parseTags(data.tags),
         content: body,
     }
+
+    return { ...post, contentHash: hashPost(post) }
+}
+
+/**
+ * Otisk článku. Porovnáním se sloupcem content_hash se pozná, jestli se v .md
+ * souboru něco reálně změnilo - viz migrace 0005.
+ *
+ * Tagy se řadí, protože jejich pořadí ve frontmatteru nic neznamená a
+ * přeházení by se jinak počítalo jako změna. `file` se do otisku nedává,
+ * přejmenování souboru při zachovaném slugu článek nemění.
+ *
+ * Oddělovač musí být znak, který se v hodnotách nevyskytuje, jinak by šlo
+ * posunout obsah mezi poli a otisk by vyšel stejně.
+ */
+function hashPost(post) {
+    const parts = [
+        post.slug,
+        post.title,
+        post.description,
+        post.content,
+        post.coverImageUrl,
+        post.coverImageAlt,
+        post.coverImageWidth,
+        post.coverImageHeight,
+        post.status,
+        post.publishedAt,
+        [...post.tags].sort().join(','),
+    ]
+
+    return createHash('sha256').update(parts.map((part) => part ?? '').join('\u0000')).digest('hex')
 }
 
 function buildSql(post) {
@@ -141,9 +177,14 @@ function buildSql(post) {
     //
     // updated_at se nenastavuje vůbec, aby ho doplnil trigger. published_at se
     // přes COALESCE drží původní, takže reedit článku nezmění datum vydání.
+    //
+    // Závěrečné WHERE je to podstatné: při shodě otisků se UPDATE vůbec
+    // neprovede, takže se nespustí ani AFTER UPDATE trigger a updated_at
+    // zůstane stát. `IS NOT` místo `<>` kvůli NULLu u článků z doby před
+    // migrací 0005.
     lines.push(
-        `INSERT INTO posts (slug, title, description, content, cover_image_url, cover_image_alt, cover_image_width, cover_image_height, status, published_at)`,
-        `VALUES (${sql(slug)}, ${sql(post.title)}, ${sql(post.description)}, ${sql(post.content)}, ${sql(post.coverImageUrl)}, ${sql(post.coverImageAlt)}, ${num(post.coverImageWidth)}, ${num(post.coverImageHeight)}, ${sql(post.status)}, ${sql(post.publishedAt)})`,
+        `INSERT INTO posts (slug, title, description, content, cover_image_url, cover_image_alt, cover_image_width, cover_image_height, status, published_at, content_hash)`,
+        `VALUES (${sql(slug)}, ${sql(post.title)}, ${sql(post.description)}, ${sql(post.content)}, ${sql(post.coverImageUrl)}, ${sql(post.coverImageAlt)}, ${num(post.coverImageWidth)}, ${num(post.coverImageHeight)}, ${sql(post.status)}, ${sql(post.publishedAt)}, ${sql(post.contentHash)})`,
         `ON CONFLICT(slug) DO UPDATE SET`,
         `  title = excluded.title,`,
         `  description = excluded.description,`,
@@ -153,7 +194,9 @@ function buildSql(post) {
         `  cover_image_width = excluded.cover_image_width,`,
         `  cover_image_height = excluded.cover_image_height,`,
         `  status = excluded.status,`,
-        `  published_at = COALESCE(excluded.published_at, posts.published_at);`
+        `  published_at = COALESCE(excluded.published_at, posts.published_at),`,
+        `  content_hash = excluded.content_hash`,
+        `WHERE posts.content_hash IS NOT excluded.content_hash;`
     )
 
     if (tags.length === 0) {
@@ -185,13 +228,22 @@ const remote = args.includes('--remote')
 const dryRun = args.includes('--dry-run')
 const explicit = args.filter((arg) => !arg.startsWith('--'))
 
+/**
+ * Argument smí být cesta k souboru i holý slug - `npm run post zaklady-seo` se
+ * píše líp než celá cesta. Slug se hledá jen v POSTS_DIR, takže se z něj nedá
+ * vyrobit cesta ven.
+ */
+function resolveTarget(arg) {
+    if (existsSync(arg)) return arg
+
+    const bySlug = join(POSTS_DIR, `${basename(arg, '.md')}.md`)
+    if (existsSync(bySlug)) return bySlug
+
+    throw new Error(`článek "${arg}" nenalezen — zkoušel jsem ${arg} i ${bySlug}`)
+}
+
 function collectFiles() {
-    if (explicit.length > 0) {
-        for (const file of explicit) {
-            if (!existsSync(file)) throw new Error(`soubor neexistuje: ${file}`)
-        }
-        return explicit
-    }
+    if (explicit.length > 0) return explicit.map(resolveTarget)
 
     if (!existsSync(POSTS_DIR)) {
         throw new Error(`složka ${POSTS_DIR} neexistuje — vytvoř ji a dej do ní .md soubory`)
@@ -220,7 +272,14 @@ function main() {
         seen.set(post.slug, post.file)
     }
 
-    const statements = posts.map(buildSql).join('\n\n')
+    // Závěrečný SELECT vypíše wrangler jako tabulku. Je to jediný způsob, jak
+    // se z tohohle skriptu dá poznat, jestli upsert datum posunul, nebo ho
+    // WHERE nechalo být - stav po zápisu zná jen databáze.
+    const report =
+        `SELECT slug, status, published_at, updated_at FROM posts` +
+        ` WHERE slug IN (${posts.map((post) => sql(post.slug)).join(', ')}) ORDER BY slug;`
+
+    const statements = [...posts.map(buildSql), report].join('\n\n')
 
     for (const post of posts) {
         const tags = post.tags.length > 0 ? ` [${post.tags.join(', ')}]` : ''

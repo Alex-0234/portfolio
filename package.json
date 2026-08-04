@@ -17,7 +17,10 @@
     "db:console:local": "wrangler d1 execute portfolio-blog --local --command",
     "posts:local": "node scripts/publish.mjs",
     "posts": "node scripts/publish.mjs --remote",
-    "posts:dry": "node scripts/publish.mjs --remote --dry-run"
+    "posts:dry": "node scripts/publish.mjs --remote --dry-run",
+    "post:local": "node scripts/publish.mjs",
+    "post": "node scripts/publish.mjs --remote",
+    "post:dry": "node scripts/publish.mjs --remote --dry-run"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
