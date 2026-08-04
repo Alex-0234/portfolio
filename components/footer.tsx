@@ -19,25 +19,23 @@ const NAV = [
 
 interface FooterProps {
     bg_color?: 'dark' | 'light'
-    /** minimální výška patičky - přeroste ji, když se obsah nevejde */
     height?: string
     className?: string
 }
 
+const HEIGHT = 'min-h-[60svh] sm:min-h-[70svh] max-h-[calc(100svh-4rem)]'
+
 export default function Footer({
     bg_color = 'dark',
-    height = 'min-h-[90svh] sm:min-h-[70svh]',
+    height = HEIGHT,
     className = '',
 }: FooterProps) {
     const lenis = useLenis();
-    const isMobile = () => window.innerWidth < 640;
     const onLight = bg_color === 'light'
 
     const [copied, setCopied] = useState(false)
     const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-    // patička je fixed, takže ve scrollu nezabírá místo - rozpěrka ho musí
-    // držet za ni. měříme, protože výška závisí na obsahu i na šířce okna
     const footerRef = useRef<HTMLElement>(null)
     const [spacer, setSpacer] = useState<number | null>(null)
 
@@ -54,7 +52,6 @@ export default function Footer({
         return () => observer.disconnect()
     }, [])
 
-    // bez tohohle by timeout po odchodu ze stránky sáhl na odmountovanou komponentu
     useEffect(() => () => {
         if (copyTimer.current) clearTimeout(copyTimer.current)
     }, [])
@@ -80,8 +77,6 @@ export default function Footer({
     const microClasses = `font-jet text-xs uppercase tracking-[0.2em] ${micro}`
     const linkClasses = `transition-colors ${body} ${hover}`
 
-    // vnitřní, ne vnější - patička leží pod obsahem, takže vnější stín by se
-    // schoval za něj. takhle to vypadá, že obsah vrhá stín dovnitř patičky
     const topShadow = onLight
         ? 'shadow-[inset_0_28px_44px_-30px_rgba(23,23,23,0.6)]'
         : 'shadow-[inset_0_28px_44px_-30px_rgba(255,255,255,0.45)]'
@@ -104,32 +99,33 @@ export default function Footer({
         <footer
             ref={footerRef}
             id='contact'
-            className={`fixed bottom-0 left-0 z-0 flex w-full flex-col ${height} ${surface} ${topShadow} font-jet ${className}`}
+            className={`fixed bottom-0 left-0 z-0 flex w-full flex-col overflow-hidden ${height} ${surface} ${topShadow} font-jet ${className}`}
         >
-            <div className={`flex flex-wrap items-center justify-between gap-y-3 border-b px-6 py-2 sm:py-5 sm:px-12 ${edge}`}>
-                <nav aria-label='Patička' className='flex flex-wrap gap-x-3 gap-y-1'>
+            <div className={`shrink-0 flex flex-wrap items-center justify-between gap-y-2 border-b px-6 py-2 sm:gap-y-3 sm:px-12 sm:py-5 ${edge}`}>
+                <nav aria-label='Patička' className='flex w-full flex-wrap gap-x-2 gap-y-1 sm:w-auto sm:gap-x-3'>
                     {NAV.map((item) => (
                         <Link key={item.href} href={item.href} className={`${microClasses} ${hover}`}>
                             {item.name}
                         </Link>
                     ))}
                 </nav>
-                <span className={microClasses}>[ pardubice, cz ]</span>
+
+                <span className={`hidden sm:inline ${microClasses}`}>[ pardubice, cz ]</span>
             </div>
 
-            <div className='flex w-full flex-1 justify-center px-6 py-3 sm:py-7 sm:px-12 sm:py-20'>
-                <div className='flex w-full max-w-6xl flex-col gap-3'>
-                    <h2 className='max-w-3xl text-[clamp(1.75rem,6vw,3.5rem)] font-black uppercase leading-[1.15] tracking-[-0.042em]'>
+            <div className='flex w-full min-h-0 flex-1 justify-center overflow-y-auto overscroll-contain px-6 py-4 sm:px-12 sm:py-12'>
+                <div className='flex w-full max-w-6xl flex-col gap-3 sm:gap-4'>
+                    <h2 className='max-w-3xl text-[clamp(1.5rem,5.5vw,3.5rem)] font-black uppercase leading-[1.1] tracking-[-0.042em]'>
                         Máte projekt?
                         <br />
                         Pojďme ho postavit.
                     </h2>
 
-                    <div className='grid grid-cols-1 gap-6 sm:gap-12 lg:grid-cols-2 lg:gap-16'>
-                        <div className='flex flex-col gap-4'>
-                            <p className={microClasses }>[ ozvěte se ]</p>
+                    <div className='grid grid-cols-1 gap-4 sm:gap-8 lg:grid-cols-2 lg:gap-16'>
+                        <div className='flex flex-col gap-3 sm:gap-4'>
+                            <p className={`hidden sm:block ${microClasses}`}>[ ozvěte se ]</p>
 
-                            <dl className='flex flex-col gap-3 text-sm'>
+                            <dl className='flex flex-col gap-2 text-sm sm:gap-3'>
                                 <div className='flex flex-wrap items-baseline gap-x-3 gap-y-1'>
                                     <dt className={microClasses}>ičo</dt>
                                     <dd className='flex items-baseline gap-3'>
@@ -149,9 +145,6 @@ export default function Footer({
                                             {copied ? 'zkopírováno' : ''}
                                         </span>
                                     </dd>
-                                    <span className={`${microClasses} text-[0.65rem] mt-2`}>
-                                            Zapsán v živnostenském rejstříku vedeném Městským úřadem Přelouč, vznik oprávnění 16. 7. 2026.
-                                    </span>
                                 </div>
                                 <div className='flex flex-wrap items-baseline gap-x-3 gap-y-1'>
                                     <dt className={microClasses}>e-mail</dt>
@@ -163,7 +156,12 @@ export default function Footer({
                                 </div>
                             </dl>
 
-                            <div className='flex flex-wrap gap-x-6 gap-y-2 text-sm'>
+                            <p className={`max-w-md font-jet text-[0.65rem] leading-snug ${micro}`}>
+                                Zapsán v živnostenském rejstříku vedeném Městským úřadem Přelouč,
+                                vznik oprávnění 16. 7. 2026.
+                            </p>
+
+                            <div className='flex flex-wrap gap-x-4 gap-y-2 text-xs sm:gap-x-6 sm:text-sm'>
                                 {[
                                     { name: 'GitHub', href: GITHUB },
                                     { name: 'LinkedIn', href: LINKEDIN },
@@ -188,13 +186,14 @@ export default function Footer({
                         <ContactForm
                             subject='Zpráva z patičky'
                             variant={bg_color}
+                            showEmailNote={false}
                             className='w-full'
                         />
                     </div>
                 </div>
             </div>
 
-            <div className={`mt-auto flex flex-wrap items-center justify-between gap-y-2 border-t px-6 py-3 sm:px-12 ${edge}`}>
+            <div className={`mt-auto shrink-0 flex flex-wrap items-center justify-between gap-y-2 border-t px-6 py-2 sm:px-12 sm:py-3 ${edge}`}>
                 <p className={microClasses}>
                     © {new Date().getFullYear()} Alex Liška
                 </p>

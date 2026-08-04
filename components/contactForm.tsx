@@ -6,12 +6,10 @@ import Button from "@/components/button"
 import { EMAIL, FORMSPREE_ENDPOINT } from "@/data/site"
 
 interface ContactFormProps {
-    /** předmět e-mailu - u kalkulačky nese název balíčku */
     subject?: string
-    /** shrnutí sestavené konfigurace, přiloží se pod zprávu */
     configuration?: string
-    /** pozadí, na kterém formulář sedí */
     variant?: 'dark' | 'light'
+    showEmailNote?: boolean
     className?: string
 }
 
@@ -21,13 +19,14 @@ export default function ContactForm({
     subject = 'Zpráva z webu',
     configuration,
     variant = 'dark',
+    showEmailNote = true,
     className = '',
 }: ContactFormProps) {
     const [status, setStatus] = useState<Status>('idle')
 
     const onLight = variant === 'light'
 
-    const fieldClasses = `w-full border bg-transparent px-4 py-3 font-jet text-sm focus:outline-none transition-colors ${
+    const fieldClasses = `w-full border bg-transparent px-3 py-2 font-jet text-xs sm:px-4 sm:py-3 sm:text-sm focus:outline-none transition-colors ${
         onLight
             ? 'border-dark/15 text-dark placeholder:text-dark/50 focus:border-dark/50'
             : 'border-light/15 text-light placeholder:text-light/50 focus:border-light/50'
@@ -37,14 +36,11 @@ export default function ContactForm({
         ? 'text-dark/70 hover:text-dark'
         : 'text-light/70 hover:text-light'
 
-    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault()
-        // currentTarget je po prvním awaitu null, tak si formulář držíme bokem
         const form = e.currentTarget
         const data = new FormData(form)
 
-        // bez nastaveného endpointu se chováme jako dřív, ať se dá web
-        // rozjet i lokálně bez env proměnné
         if (!FORMSPREE_ENDPOINT) {
             const body = [
                 `Jméno: ${data.get('name')}`,
@@ -67,7 +63,6 @@ export default function ContactForm({
         try {
             const res = await fetch(FORMSPREE_ENDPOINT, {
                 method: 'POST',
-                // bez tohohle Formspree odpoví přesměrováním na vlastní děkovnou stránku
                 headers: { Accept: 'application/json' },
                 body: data,
             })
@@ -82,16 +77,16 @@ export default function ContactForm({
     }
 
     return (
-        <form onSubmit={onSubmit} className={`flex flex-col gap-4 ${className}`}>
-            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+        <form onSubmit={onSubmit} className={`flex flex-col gap-3 sm:gap-4 ${className}`}>
+            <div className='grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4'>
                 <input name='name' type='text' required placeholder='Jméno' className={fieldClasses} />
                 <input name='email' type='email' required placeholder='E-mail' className={fieldClasses} />
             </div>
             <textarea
                 name='message'
-                rows={4}
+                rows={3}
                 placeholder='co budeme stavět?'
-                className={`${fieldClasses} resize-none`}
+                className={`${fieldClasses} min-h-18 resize-none sm:min-h-28`}
             />
 
             {configuration && (
@@ -100,8 +95,8 @@ export default function ContactForm({
                 </p>
             )}
 
-            <div className='flex flex-wrap items-center gap-4'>
-                <Button type='submit' variant='solid' surface={variant} disabled={status === 'sending'}>
+            <div className='flex flex-wrap items-center gap-3 sm:gap-4'>
+                <Button type='submit' variant='solid' size='fluid' surface={variant} disabled={status === 'sending'}>
                     {status === 'sending'
                         ? 'Odesílám…'
                         : configuration ? 'Odeslat s konfigurací' : 'Odeslat poptávku'}
@@ -124,12 +119,14 @@ export default function ContactForm({
                 )}
             </div>
 
-            <p className={`font-jet text-xs ${muted}`}>
-                Nebo rovnou na{' '}
-                <a href={`mailto:${EMAIL}`} className={`underline underline-offset-4 ${link}`}>
-                    {EMAIL}
-                </a>
-            </p>
+            {showEmailNote && (
+                <p className={`font-jet text-xs ${muted}`}>
+                    Nebo rovnou na{' '}
+                    <a href={`mailto:${EMAIL}`} className={`underline underline-offset-4 ${link}`}>
+                        {EMAIL}
+                    </a>
+                </p>
+            )}
         </form>
     )
 }

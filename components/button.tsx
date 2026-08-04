@@ -5,8 +5,7 @@ import Link from "next/link"
 interface BaseProps {
     children: string
     variant?: 'solid' | 'outline'
-    size?: 'sm' | 'md'
-    /** pozadí, na kterém tlačítko sedí - bez tohohle splyne na světlé sekci */
+    size?: 'sm' | 'md' | 'fluid'
     surface?: 'dark' | 'light'
     className?: string
 }
@@ -37,12 +36,12 @@ export default function Button({
     disabled,
 }: LinkProps | ActionProps) {
     const solid = variant === 'solid'
-    // sm je varianta do headeru, kde je na plnou velikost málo místa
-    const sizing = size === 'sm'
-        ? 'gap-2 px-5 py-2.5 text-[clamp(0.62rem,0.7vw,0.78rem)]'
-        : 'gap-3 px-8 py-4 text-[clamp(0.7rem,0.85vw,0.95rem)]'
+    const sizing = {
+        sm: 'gap-2 px-5 py-2.5 text-[clamp(0.62rem,0.7vw,0.78rem)]',
+        md: 'gap-3 px-8 py-4 text-[clamp(0.7rem,0.85vw,0.95rem)]',
+        fluid: 'gap-2 px-4 py-2.5 text-[0.66rem] sm:gap-3 sm:px-8 sm:py-4 sm:text-[clamp(0.7rem,0.85vw,0.95rem)]',
+    }[size]
 
-    // na světlém pozadí se celá dvojice barev otočí, aby zůstal stejný kontrast
     const onLight = surface === 'light'
 
     const edge = onLight ? 'border-dark' : 'border-light'
