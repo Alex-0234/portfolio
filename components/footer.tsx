@@ -29,7 +29,8 @@ export default function Footer({
     height = 'min-h-[90svh] sm:min-h-[70svh]',
     className = '',
 }: FooterProps) {
-    const lenis = useLenis()
+    const lenis = useLenis();
+    const isMobile = () => window.innerWidth < 640;
     const onLight = bg_color === 'light'
 
     const [copied, setCopied] = useState(false)
@@ -93,10 +94,6 @@ export default function Footer({
 
     return (
         <>
-            {/* drží ve scrollu místo, které fixní patička zabírá */}
-            {/* než doběhne měření, drží místo aspoň minimální výška */}
-            {/* zároveň je to cíl odkazů na kontakt - na fixní patičku samotnou
-                skočit nejde, ta je v viewportu pořád */}
             <div
                 id='poptavka'
                 aria-hidden
@@ -109,8 +106,8 @@ export default function Footer({
             id='contact'
             className={`fixed bottom-0 left-0 z-0 flex w-full flex-col ${height} ${surface} ${topShadow} font-jet ${className}`}
         >
-            <div className={`flex flex-wrap items-center justify-between gap-y-3 border-b px-6 py-5 sm:px-12 ${edge}`}>
-                <nav aria-label='Patička' className='flex flex-wrap gap-x-6 gap-y-2'>
+            <div className={`flex flex-wrap items-center justify-between gap-y-3 border-b px-6 py-2 sm:py-5 sm:px-12 ${edge}`}>
+                <nav aria-label='Patička' className='flex flex-wrap gap-x-3 gap-y-1'>
                     {NAV.map((item) => (
                         <Link key={item.href} href={item.href} className={`${microClasses} ${hover}`}>
                             {item.name}
@@ -120,17 +117,17 @@ export default function Footer({
                 <span className={microClasses}>[ pardubice, cz ]</span>
             </div>
 
-            <div className='flex w-full flex-1 justify-center px-6 py-14 sm:px-12 sm:py-20'>
-                <div className='flex w-full max-w-6xl flex-col gap-12'>
+            <div className='flex w-full flex-1 justify-center px-6 py-3 sm:py-7 sm:px-12 sm:py-20'>
+                <div className='flex w-full max-w-6xl flex-col gap-3'>
                     <h2 className='max-w-3xl text-[clamp(1.75rem,6vw,3.5rem)] font-black uppercase leading-[1.15] tracking-[-0.042em]'>
                         Máte projekt?
                         <br />
                         Pojďme ho postavit.
                     </h2>
 
-                    <div className='grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16'>
-                        <div className='flex flex-col gap-8'>
-                            <p className={microClasses}>[ ozvěte se ]</p>
+                    <div className='grid grid-cols-1 gap-6 sm:gap-12 lg:grid-cols-2 lg:gap-16'>
+                        <div className='flex flex-col gap-4'>
+                            <p className={microClasses }>[ ozvěte se ]</p>
 
                             <dl className='flex flex-col gap-3 text-sm'>
                                 <div className='flex flex-wrap items-baseline gap-x-3 gap-y-1'>
@@ -152,6 +149,9 @@ export default function Footer({
                                             {copied ? 'zkopírováno' : ''}
                                         </span>
                                     </dd>
+                                    <span className={`${microClasses} text-[0.65rem] mt-2`}>
+                                            Zapsán v živnostenském rejstříku vedeném Městským úřadem Přelouč, vznik oprávnění 16. 7. 2026.
+                                    </span>
                                 </div>
                                 <div className='flex flex-wrap items-baseline gap-x-3 gap-y-1'>
                                     <dt className={microClasses}>e-mail</dt>
@@ -194,7 +194,7 @@ export default function Footer({
                 </div>
             </div>
 
-            <div className={`mt-auto flex flex-wrap items-center justify-between gap-y-2 border-t px-6 py-5 sm:px-12 ${edge}`}>
+            <div className={`mt-auto flex flex-wrap items-center justify-between gap-y-2 border-t px-6 py-3 sm:px-12 ${edge}`}>
                 <p className={microClasses}>
                     © {new Date().getFullYear()} Alex Liška
                 </p>
