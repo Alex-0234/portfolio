@@ -2,7 +2,7 @@
 title: Tvorba webu v Pardubicích — jak vybrat a na co si dát pozor
 description: Praktický průvodce pro firmy z Pardubic a okolí — proč u lokálních služeb rozhoduje něco jiného, co musí web splňovat a jaké otázky položit dodavateli.
 tags: [weby, seo, pardubice]
-status: draft
+status: published
 ---
 
 ## Proč lokální web hraje jinou hru
