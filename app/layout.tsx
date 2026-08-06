@@ -80,7 +80,7 @@ const jsonLd = {
       jobTitle: "Freelance webový vývojář",
       sameAs: [GITHUB, LINKEDIN],
       alumniOf: "Technická univerzita v Liberci",
-      knowsAbout: ["React", "Next.js", "TypeScript", "Node.js", "MongoDB", "GSAP"],
+      knowsAbout: ["React", "Next.js", "TypeScript", "Node.js", "Express", "MongoDB", "GSAP"],
     },
     {
       "@type": "ProfessionalService",

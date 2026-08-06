@@ -27,6 +27,16 @@ body {
 }
 
 
+/* text, který se odhaluje až animací, schováváme jen tam, kde poběží JS -
+   v odeslaném HTML zůstává normálně viditelný, takže ho vidí i crawler,
+   který stránku nerenderuje. schová se čistě v CSS, tedy hned při prvním
+   vykreslení a bez bliknutí. inline visibility od GSAPu tohle pak přebije */
+@media (scripting: enabled) {
+  .reveal-hidden {
+    visibility: hidden;
+  }
+}
+
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }

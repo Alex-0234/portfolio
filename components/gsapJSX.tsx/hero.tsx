@@ -165,17 +165,17 @@ export default function Hero() {
                 <SplitReveal
                     as='h2'
                     disableBelow={768}
-                    className='invisible text-[max(0.9375rem,1.5vw)] font-bold leading-[1.4]'
+                    className='reveal-hidden text-[max(0.9375rem,1.5vw)] font-bold leading-[1.4]'
                     onReady={(tl) => { underheaderTl.current = tl }}
                 >
-                    Jmenuju se Alex a weby stavím na míru — žádné šablony a žádná překvapení ve faktuře. Záleží mi na detailech, od architektury backendu až po to, jak se stránka chová při scrollování.
+                    Jmenuju se Alex a weby stavím na míru — frontend v Reactu a TypeScriptu, backend na Node.js a Expressu. Animace a plynulý scroll řeším přes GSAP a Lenis. Žádné šablony a žádná překvapení ve faktuře.
                 </SplitReveal>
 
                 <SplitReveal
                     as='h3'
                     split='chars'
                     disableBelow={768}
-                    className='invisible text-[max(0.8125rem,1.2vw)] font-bold leading-[1.4]'
+                    className='reveal-hidden text-[max(0.8125rem,1.2vw)] font-bold leading-[1.4]'
                     onReady={(tl) => { underunderheaderTl.current = tl }}
                 >
                     Full-stack vývoj webů a webových aplikací na míru.
