@@ -8,7 +8,9 @@ import { formatDateRange, type PortfolioPiece } from "@/data/portfolio"
 
 const WIDTH = 320
 const HEIGHT = 270
-const CURSOR_GAP = 16
+/* musí odsadit víc, než je půlka štítku 'zobrazit' (30px na výšku), jinak
+   náhled leze rohem pod kurzor */
+const CURSOR_GAP = 36
 
 export default function ProjectPreview({ project }: { project: PortfolioPiece | null }) {
     const boxRef = useRef<HTMLDivElement>(null)

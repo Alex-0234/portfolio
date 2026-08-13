@@ -3,6 +3,7 @@ import { JetBrains_Mono } from "next/font/google";
 import Header from "@/components/header";
 import LenisSetup from "@/components/lenisWrapper";
 import ScrollHint from "@/components/scrollHint";
+import DynamicCursor from "@/components/ui/cursor";
 import {
   ADDRESS,
   AREA_SERVED,
@@ -125,6 +126,8 @@ export default function RootLayout({
           {children}
           <ScrollHint />
         </LenisSetup>
+        {/* mimo LenisSetup - fixed pozicování se láme uvnitř transformovaného předka */}
+        <DynamicCursor />
       </body>
     </html>
   );

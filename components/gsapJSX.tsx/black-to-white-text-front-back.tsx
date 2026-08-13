@@ -77,11 +77,14 @@ export default function BlackToWhiteTextFrontToBack() {
         STEPS.forEach((_, i) => {
             const at = i * UNITS_PER_STEP
 
+            /* autoAlpha místo opacity: kroky leží přes sebe na absolute inset-0,
+               takže neviditelné musí zmizet i z hit-testu - jinak výběr textu
+               vždycky spadne na poslední krok v DOM */
             tl1.fromTo(stepRefs.current[i], {
-                opacity: 0,
+                autoAlpha: 0,
                 scale: 0.6,
             }, {
-                opacity: 1,
+                autoAlpha: 1,
                 scale: 1,
                 duration: STEP_IN,
                 ease: 'power2.out',
@@ -91,7 +94,7 @@ export default function BlackToWhiteTextFrontToBack() {
                 .addLabel(`step-${i}`, at + STEP_IN + STEP_HOLD / 2)
                 .to(stepRefs.current[i], {
                     y: () => -window.innerHeight * 2 / 3,
-                    opacity: 0,
+                    autoAlpha: 0,
                     duration: STEP_OUT,
                     ease: 'power2.in',
                 }, at + STEP_IN + STEP_HOLD)
@@ -132,7 +135,7 @@ export default function BlackToWhiteTextFrontToBack() {
                 <div
                     key={step.title}
                     ref={(el) => { stepRefs.current[i] = el }}
-                    className='absolute inset-0 flex flex-col items-center justify-center gap-6 opacity-0'
+                    className='invisible absolute inset-0 flex flex-col items-center justify-center gap-6 opacity-0'
                 >
                     <span className='font-jet text-[0.9vw] tracking-[0.4em] text-light/50'>
                         {String(i + 1).padStart(2, '0')}

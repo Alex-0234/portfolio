@@ -16,6 +16,7 @@ export default function PricingPackages() {
                     <article
                         key={pkg.id}
                         id={pkg.id}
+                        data-cursor='hover'
                         className='group flex flex-col border border-light/10 bg-light/2 transition-colors duration-300 hover:border-light/30 scroll-mt-24'
                     >
                         <div className='flex items-center justify-between border-b border-light/10 px-5 py-3 font-jet text-xs uppercase tracking-[0.2em] text-light/50'>

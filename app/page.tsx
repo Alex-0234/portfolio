@@ -9,10 +9,10 @@ export const metadata: Metadata = {
 };
 
 const REASONS = [
-  { title: 'Full-stack pod jednou střechou', description: 'Nepotřebujete koordinovat tři různé dodavatele.' },
-  { title: 'Pevná cena předem', description: 'Žádná překvapení ve faktuře.' },
-  { title: 'Smysl pro detail', description: 'Technické vzdělání (mechatronika, informační systémy), ne jen hezký vzhled.' },
-  { title: 'Rychlá odezva', description: 'Komunikace bez žargonu a jasné termíny.' },
+  { title: 'Rychlost si ověříte sami', description: 'Vložte adresu do PageSpeed Insights od Googlu — uvidíte, jak rychle se web načte, jak reaguje a jestli obsah neposkakuje. Nemusíte věřit mně.' },
+  { title: 'Text vidí i vyhledávač', description: 'Animovaný text zůstává v odeslaném HTML čitelný. Google nečeká na JavaScript, takže mu neuteče půlka stránky.' },
+  { title: 'Řeknu vám, když to nemá smysl', description: 'Někdy stačí jedna stránka a firemní profil na Googlu. Nebudu vám stavět aplikaci, kterou nevyužijete.' },
+  { title: 'Průběžně to vidíte živě', description: 'Web běží na odkazu od prvního týdne. Nemusíte čekat na předání, abyste zjistili, že jste to mysleli jinak.' },
 ]
 
 export default function Home() {
@@ -28,7 +28,7 @@ export default function Home() {
         <div className='flex flex-col items-center gap-3 text-center max-w-2xl'>
           <h2 className='text-2xl md:text-3xl'>Proč se mnou</h2>
           <p className='text-dark/70'>
-            Full-stack pod jednou střechou, pevná cena předem a komunikace bez žargonu.
+            Rychlost, kterou si změříte. Průběh, který vidíte živě. A rovná řeč, i když mi zrovna nevydělá.
           </p>
         </div>
         <ul className='grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl'>

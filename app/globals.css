@@ -37,6 +37,20 @@ body {
   }
 }
 
+/* zelená drží kontrast na tmavém i na světlém pozadí, takže výběr funguje
+   i v patičce a v bílé sekci na hlavní stránce */
+::selection {
+  background: var(--confirm);
+  color: var(--background);
+}
+
+/* třídu nasazuje až komponenta kurzoru, a to jen na (pointer: fine) - do té doby
+   zůstává nativní kurzor. !important a * musí přebít cursor-pointer na tlačítkách */
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none !important;
+}
+
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }

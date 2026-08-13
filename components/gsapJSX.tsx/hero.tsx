@@ -96,8 +96,10 @@ export default function Hero() {
                 top: () => `${scrolled()[3]}%`,
                 duration: 1.5,
             }, 0)
+            /* autoAlpha, ne opacity: na nule přidá visibility:hidden, takže do
+               odscrollovaných tlačítek nejde omylem kliknout */
             .to(introCtaRef.current, {
-                opacity: 0,
+                autoAlpha: 0,
                 y: -30,
                 duration: 0.8,
             }, 0)
@@ -112,10 +114,10 @@ export default function Hero() {
         }
 
         timeline.fromTo(aboutCtaRef.current, {
-            opacity: 0,
+            autoAlpha: 0,
             y: 30,
         }, {
-            opacity: 1,
+            autoAlpha: 1,
             y: 0,
             duration: 1,
         }, 4)
@@ -158,14 +160,16 @@ export default function Hero() {
                 <Button href='/offers'>Služby</Button>
             </div>
 
+            {/* obal leží přes 'Alex Liška' - pointer-events-none ho pustí skrz,
+                text si výběr povolí zpátky sám */}
             <div
                 ref={midStackRef}
-                className='absolute top-[22%] flex w-[86vw] flex-col gap-[5vh] select-none sm:w-[72vw] md:w-[60vw] md:gap-[6vh]'
+                className='pointer-events-none absolute top-[22%] flex w-[86vw] flex-col gap-[5vh] sm:w-[72vw] md:w-[60vw] md:gap-[6vh]'
             >
                 <SplitReveal
                     as='h2'
                     disableBelow={768}
-                    className='reveal-hidden text-[max(0.9375rem,1.5vw)] font-bold leading-[1.4]'
+                    className='reveal-hidden pointer-events-auto text-[max(0.9375rem,1.5vw)] font-bold leading-[1.4]'
                     onReady={(tl) => { underheaderTl.current = tl }}
                 >
                     Jmenuju se Alex a weby stavím na míru — frontend v Reactu a TypeScriptu, backend na Node.js a Expressu. Animace a plynulý scroll řeším přes GSAP a Lenis. Žádné šablony a žádná překvapení ve faktuře.
@@ -175,7 +179,7 @@ export default function Hero() {
                     as='h3'
                     split='chars'
                     disableBelow={768}
-                    className='reveal-hidden text-[max(0.8125rem,1.2vw)] font-bold leading-[1.4]'
+                    className='reveal-hidden pointer-events-auto text-[max(0.8125rem,1.2vw)] font-bold leading-[1.4]'
                     onReady={(tl) => { underunderheaderTl.current = tl }}
                 >
                     Full-stack vývoj webů a webových aplikací na míru.
