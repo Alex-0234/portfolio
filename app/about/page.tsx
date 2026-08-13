@@ -48,7 +48,7 @@ export default function About() {
         <>
         <main className='relative z-1 flex w-full flex-col bg-dark font-jet text-light'>
             <header className='flex min-h-svh w-full flex-col justify-center gap-10 px-6 pt-32 pb-16'>
-                <div className='mx-auto flex w-full max-w-6xl flex-col-reverse gap-12 lg:flex-row lg:items-end lg:justify-between'>
+                <div className='mx-auto w-full max-w-6xl'>
                     <div className='flex flex-col gap-8 lg:max-w-2xl'>
                         <p className={microClasses}>[ pardubice a okolí · full-stack · od backendu po scroll ]</p>
 
@@ -76,10 +76,6 @@ export default function About() {
                             <Button href='/offers' variant='solid'>Služby a ceník</Button>
                             <Button href='/portfolio'>Portfolio</Button>
                         </div>
-                    </div>
-
-                    <div className='flex aspect-square w-full max-w-xs shrink-0 items-center justify-center border border-light/10 bg-light/2'>
-                        <span className={microClasses}>[ fotka ]</span>
                     </div>
                 </div>
 
