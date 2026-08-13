@@ -15,7 +15,8 @@ export default function Portfolio() {
     const trackRef = useRef<HTMLDivElement>(null)
 
     const [activeType, setActiveType] = useState<PortfolioType | 'all'>('all')
-    const [selected, setSelected] = useState<PortfolioPiece | null>(null)
+    /* zásobník otevřených oken - poslední je navrchu */
+    const [open, setOpen] = useState<PortfolioPiece[]>([])
     const [hovered, setHovered] = useState<PortfolioPiece | null>(null)
 
     useGSAP(() => {
@@ -44,10 +45,23 @@ export default function Portfolio() {
         })
     }, [])
 
+    /* už otevřený projekt se neduplikuje, jen se vytáhne navrch */
     const openProject = (project: PortfolioPiece) => {
         setHovered(null)
-        setSelected(project)
+        setOpen((prev) => [...prev.filter((p) => p.number !== project.number), project])
     }
+
+    const closeProject = (number: number) =>
+        setOpen((prev) => prev.filter((p) => p.number !== number))
+
+    const focusProject = (number: number) =>
+        setOpen((prev) => {
+            /* už je navrchu - vrátíme stejné pole, ať se zbytečně nepřekresluje */
+            if (prev[prev.length - 1]?.number === number) return prev
+            const target = prev.find((p) => p.number === number)
+            if (!target) return prev
+            return [...prev.filter((p) => p.number !== number), target]
+        })
 
     const cardBg = (project: PortfolioPiece) =>
         project.color ?? 'color-mix(in srgb, var(--foreground) 5%, transparent)'
@@ -121,11 +135,18 @@ export default function Portfolio() {
                 </div>
             </main>
 
-            <ProjectPreview project={selected ? null : hovered} />
+            <ProjectPreview project={hovered} />
 
-            {selected && (
-                <ProjectModal project={selected} onClose={() => setSelected(null)} />
-            )}
+            {open.map((project, i) => (
+                <ProjectModal
+                    key={project.number}
+                    project={project}
+                    index={i}
+                    isTop={i === open.length - 1}
+                    onClose={() => closeProject(project.number)}
+                    onFocus={() => focusProject(project.number)}
+                />
+            ))}
         </>
     )
 }

@@ -55,6 +55,7 @@ export default function ProjectPreview({ project }: { project: PortfolioPiece | 
                                 muted
                                 loop
                                 playsInline
+                                preload="metadata"
                                 className='h-full w-full object-cover'
                             />
                         ) : project.image ? (

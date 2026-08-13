@@ -57,6 +57,7 @@ const CURSORS = {
   click:   { w: 60, h: 60, r: "50%", bg: LIGHT, bd: "1px solid transparent", fg: DARK, dot: false, blend: true },
 
   /* zvláštní případy */
+  drag:    { w: 52, h: 52, r: "50%", bg: "transparent", bd: `1px dashed ${LIGHT}`, fg: LIGHT, dot: true, blend: true },
   text:    { w: 2, h: caretHeight, r: "0%", bg: LIGHT, bd: "1px solid transparent", fg: LIGHT, dot: false, blend: true },
   view:    { w: null, h: 30, r: "0%", bg: DARK_SOFT, bd: `1px solid ${CONFIRM_SOFT}`, fg: CONFIRM, dot: false, blend: false },
   off:     { w: 40, h: 40, r: "50%", bg: "transparent", bd: `1px solid ${DIM}`, fg: DIM, dot: false, blend: false },
@@ -84,6 +85,12 @@ const TEXT_FIELDS =
 const CLICKABLE = 'a[href], button, [role="button"], summary, select';
 
 const INTERACTIVE = `[data-cursor], ${CLICKABLE}, ${TEXT_FIELDS}`;
+
+/* Safari drží fullscreen pod webkit prefixem */
+const fullscreenElement = (): Element | null =>
+  document.fullscreenElement ??
+  (document as Document & { webkitFullscreenElement?: Element | null }).webkitFullscreenElement ??
+  null;
 
 function classify(el: HTMLElement): CursorVariant {
   /* ruční data-cursor má vždy přednost před odhadem */
@@ -132,14 +139,20 @@ export function useDynamicCursor(): CursorState {
     const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
     const ring = { ...pos };
     let visible = false;
+    let fullscreen = false;
     let raf = 0;
 
     /* setState se volá jen na skutečné změně, ne při každém pohybu myši */
     const show = (): void => {
-      if (!visible) {
-        visible = true;
-        setActive(true);
-      }
+      if (fullscreen || visible) return;
+      visible = true;
+      setActive(true);
+    };
+
+    const hide = (): void => {
+      if (!visible) return;
+      visible = false;
+      setActive(false);
     };
 
     const onMove = (e: PointerEvent): void => {
@@ -168,10 +181,22 @@ export function useDynamicCursor(): CursorState {
 
     /* opuštění okna: kurzor schováme, ať nezůstane viset u kraje */
     const onLeave = (): void => {
-      visible = false;
-      setActive(false);
+      hide();
       setVariant("default");
       setLabel("");
+    };
+
+    /* ve fullscreenu prohlížeč kreslí jen ten jeden prvek, takže naše vrstva
+       zmizí - ale cursor: none by platil dál a uživatel by neměl kurzor žádný.
+       Na dobu fullscreenu proto vracíme řízení nativnímu kurzoru */
+    const onFullscreenChange = (): void => {
+      fullscreen = fullscreenElement() !== null;
+      if (fullscreen) {
+        root.classList.remove(HIDE_NATIVE_CLASS);
+        hide();
+      } else {
+        root.classList.add(HIDE_NATIVE_CLASS);
+      }
     };
 
     const loop = (): void => {
@@ -190,6 +215,8 @@ export function useDynamicCursor(): CursorState {
     window.addEventListener("pointermove", onMove, { passive: true });
     document.addEventListener("pointerover", onOver);
     root.addEventListener("pointerleave", onLeave);
+    document.addEventListener("fullscreenchange", onFullscreenChange);
+    document.addEventListener("webkitfullscreenchange", onFullscreenChange);
 
     return () => {
       cancelAnimationFrame(raf);
@@ -197,6 +224,8 @@ export function useDynamicCursor(): CursorState {
       window.removeEventListener("pointermove", onMove);
       document.removeEventListener("pointerover", onOver);
       root.removeEventListener("pointerleave", onLeave);
+      document.removeEventListener("fullscreenchange", onFullscreenChange);
+      document.removeEventListener("webkitfullscreenchange", onFullscreenChange);
     };
   }, []);
 

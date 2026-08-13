@@ -46,7 +46,13 @@ export default function LenisSetup({ children }: { children: ReactNode }) {
         <ReactLenis
             root
             ref={lenisRef}
-            options={{ lerp: 0.4, autoRaf: false }}
+            /* pozor, lerp je obráceně, než se čeká: je to podíl zbývající
+               vzdálenosti dojetý za snímek, takže 1 = žádné doskluzování
+               a čím níž, tím těžší scroll. 0.1 je výchozí, 0.05 už pořádně klouže */
+            /* stopInertiaOnNavigate zabije doskluz při kliknutí na odkaz jinam.
+               Bez toho si Lenis po přechodu dojede na starou pozici a nová
+               stránka nezačne nahoře - o to víc, čím níž je lerp */
+            options={{ lerp: 0.05, autoRaf: false, stopInertiaOnNavigate: true }}
         >
             {children}
         </ReactLenis>
