@@ -5,13 +5,46 @@ import { useRef } from "react";
 import { lenisSnap } from "@/utils/lenisSnap";
 
 const STEPS = [
-    'Napíšete mi, co potřebujete.',
-    'Domluvíme rozsah, cenu a termín.',
-    'Postavím to na míru.',
-    'Předám vám hotový web.',
+    {
+        title: 'Napíšete mi, co potřebujete.',
+        detail: 'Stačí pár vět o tom, co od webu čekáte. Ozvu se do 24 hodin.',
+    },
+    {
+        title: 'Domluvíme rozsah, cenu a termín.',
+        detail: 'Pevnou cenu i termín znáte předem. Žádné překvapení na faktuře.',
+    },
+    {
+        title: 'Postavím to na míru.',
+        detail: 'Next.js, React a Tailwind. Žádné šablony ani WordPress — každý řádek psaný pro vás.',
+    },
+    {
+        title: 'Vyladím rychlost a SEO.',
+        detail: 'Obrázky převedu do WebP a AVIF, aby se stránky načetly okamžitě. Firemní profil na Googlu nastavím v ceně.',
+    },
+    {
+        title: 'Předám vám hotový web.',
+        detail: 'Údržba včetně hostingu 600 Kč měsíčně. Doménu, redakční systém i serverovou část rozepíšu v nabídce předem.',
+    },
 ]
+const PX_PER_UNIT = 320
 
-const UNITS_PER_STEP = 2
+const STEP_IN = 1.8       // fade + scale in
+const STEP_HOLD = 0.8     // fully visible and still — the snap label sits in here
+const STEP_OUT = 2        // drift up and fade out
+const STEP_OVERLAP = 0.8  // how far the next step's entrance reaches into this one's exit
+
+const UNITS_PER_STEP = STEP_IN + STEP_HOLD + STEP_OUT - STEP_OVERLAP
+
+// Where the last step has fully cleared the screen.
+const STEPS_END = (STEPS.length - 1) * UNITS_PER_STEP + STEP_IN + STEP_HOLD + STEP_OUT
+
+const SVG_ZOOM = 11
+
+const TOTAL_UNITS = STEPS_END + SVG_ZOOM
+
+// The scroll the timeline consumes, and the pinned scroll left over after it finishes.
+const SCROLL_PX = Math.round(TOTAL_UNITS * PX_PER_UNIT)
+const HOLD_PX = 800
 
 const START_ZOOM = 2050
 
@@ -28,13 +61,14 @@ export default function BlackToWhiteTextFrontToBack() {
             scrollTrigger: {
                 trigger: runwayRef.current,
                 start: 'top top',
-                end: '+=6500',
+                end: `+=${SCROLL_PX}`,
                 scrub: true,
                 refreshPriority: 1,
+                invalidateOnRefresh: true,
                 snap: lenisSnap({
-                    snapTo: 'labelsDirectional',
+                    snapTo: 'labels',
                     duration: {min: 0.2, max: 0.5},
-                    delay: 0.1,
+                    delay: 1,
                     ease: 'power1.inOut'
                 })
             }
@@ -49,21 +83,22 @@ export default function BlackToWhiteTextFrontToBack() {
             }, {
                 opacity: 1,
                 scale: 1,
-                duration: 0.8,
+                duration: STEP_IN,
                 ease: 'power2.out',
                 immediateRender: false,
             }, at)
-                .addLabel(`step-${i}`, at + 0.8)
+                // Centred in the hold, so snapping lands on a fully visible, still frame.
+                .addLabel(`step-${i}`, at + STEP_IN + STEP_HOLD / 2)
                 .to(stepRefs.current[i], {
                     y: () => -window.innerHeight * 2 / 3,
                     opacity: 0,
-                    duration: 1.2,
+                    duration: STEP_OUT,
                     ease: 'power2.in',
-                }, at + 0.8)
-                
+                }, at + STEP_IN + STEP_HOLD)
+
         })
 
-        const afterSteps = STEPS.length * UNITS_PER_STEP
+        const afterSteps = STEPS_END
 
         tl1.to(containerRef.current, {
             backgroundColor: 'var(--foreground)',
@@ -78,29 +113,38 @@ export default function BlackToWhiteTextFrontToBack() {
                 fontSize: () => `${startFontRem()}rem`,
             }, {
                 fontSize: '2.5rem',
-                duration: 6,
+                duration: SVG_ZOOM,
                 ease: 'power3.out',
                 immediateRender: false,
             }, afterSteps)
-            .addLabel('svg-end', afterSteps + 6)
+            .addLabel('svg-end', afterSteps + SVG_ZOOM)
 
     }, [])
 
     return (
-        <div ref={runwayRef} className='relative h-[calc(100lvh+6500px)] w-full bg-dark'>
+        <div
+            ref={runwayRef}
+            className='relative w-full bg-dark'
+            style={{ height: `calc(100lvh + ${SCROLL_PX + HOLD_PX}px)` }}
+        >
         <div ref={containerRef} className='sticky top-0 flex w-full h-lvh flex-col items-center justify-center bg-dark'>
             {STEPS.map((step, i) => (
                 <div
-                    key={step}
+                    key={step.title}
                     ref={(el) => { stepRefs.current[i] = el }}
                     className='absolute inset-0 flex flex-col items-center justify-center gap-6 opacity-0'
                 >
                     <span className='font-jet text-[0.9vw] tracking-[0.4em] text-light/50'>
                         {String(i + 1).padStart(2, '0')}
                     </span>
-                    <span className='text-[3vw] font-bold uppercase leading-[1.3] text-light'>
-                        {step}
-                    </span>
+                    <div className='flex flex-col items-center gap-4 px-8 text-center'>
+                        <span className='text-[3vw] font-bold uppercase leading-[1.3] text-light'>
+                            {step.title}
+                        </span>
+                        <span className='max-w-[60ch] text-pretty text-[1.05vw] leading-[1.7] text-light/60'>
+                            {step.detail}
+                        </span>
+                    </div>
                 </div>
             ))}
 
