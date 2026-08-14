@@ -4,8 +4,6 @@ import { SITE_URL } from "@/data/site"
 import { getPublishedSlugs, parseDate } from "@/utils/posts"
 
 
-export const dynamic = 'force-dynamic'
-
 const ROUTES = [
     { path: '', priority: 1, lastModified: '2026-08-03' },
     { path: '/offers', priority: 0.9, lastModified: '2026-08-03' },

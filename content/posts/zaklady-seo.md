@@ -3,6 +3,8 @@ title: Základy SEO, bez kterých se web dnes neobejde
 description: SEO faktory seřazené podle priority – od toho, bez čeho weby doslova nefungují, až po pokročilá vylepšení.
 tags: [seo, weby]
 status: published
+published_at: 2026-08-02T22:58:46.000Z
+updated_at: 2026-08-04T22:27:26.000Z
 ---
 
 ## Než začneme: co znamená "priorita" v SEO

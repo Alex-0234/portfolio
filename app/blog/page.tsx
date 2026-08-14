@@ -6,8 +6,6 @@ import { pageMetadata } from "@/utils/metadata"
 import { formatDate, getPublishedPosts, parseDate } from "@/utils/posts"
 import Footer from "@/components/footer"
 
-export const dynamic = 'force-dynamic'
-
 export const metadata = pageMetadata({
     title: "Blog",
     description: "Tipy k tvorbě webů, poznámky z praxe a rozbory vlastních projektů.",

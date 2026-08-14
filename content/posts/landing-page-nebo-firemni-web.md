@@ -3,6 +3,8 @@ title: Landing page, nebo firemní web? Rozhoduje počet URL adres
 description: Proč je rozdíl mezi jednostránkovým a vícestránkovým webem hlavně v adresách, co všechno jde nastavit zvlášť pro každou z nich a kdy jsou podstránky naopak přítěž.
 tags: [weby, seo]
 status: published
+published_at: 2026-08-02T15:07:49.000Z
+updated_at: 2026-08-06T02:50:41.000Z
 ---
 
 ## Rozdíl není ve vzhledu, ale v počtu adres

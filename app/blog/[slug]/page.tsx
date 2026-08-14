@@ -1,14 +1,31 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-
+/* 
+published_at: 2026-08-14                  # simplest — becomes 00:00 UTC
+published_at: 2026-08-14 09:30:00
+published_at: 2026-08-14T09:30:00Z
+published_at: 2026-08-14T09:30:00.000Z
+published_at: 2026-08-14T11:30:00+02:00   # Prague time, handled correctly
+ */
 import Button from "@/components/button"
 import SplitReveal from "@/components/splitReveal"
 import { SITE_NAME, SITE_URL } from "@/data/site"
 import { renderMarkdown } from "@/utils/markdown"
-import { formatDate, getPostBySlug, hasMeaningfulUpdate, parseDate } from "@/utils/posts"
+import { formatDate, getPostBySlug, getPublishedSlugs, hasMeaningfulUpdate, parseDate } from "@/utils/posts"
 
-export const dynamic = 'force-dynamic'
+/**
+ * Všechny články se předrenderují při buildu a neznámý slug končí rovnou na 404.
+ * dynamicParams: false je tu důležité - bez něj by se neznámá adresa zkusila
+ * vykreslit až ve workeru, kde ale čtení souborů z content/ není k dispozici.
+ */
+export async function generateStaticParams() {
+    const posts = await getPublishedSlugs()
+
+    return posts.map(({ slug }) => ({ slug }))
+}
+
+export const dynamicParams = false
 
 interface Props {
     params: Promise<{ slug: string }>

@@ -28,14 +28,6 @@
   "images": {
     "binding": "IMAGES"
   },
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "portfolio-blog",
-      "database_id": "da54eaf0-90fa-428c-a995-6ed4ec81f194",
-      "migrations_dir": "migrations"
-    }
-  ],
   "observability": {
     "enabled": true
   }

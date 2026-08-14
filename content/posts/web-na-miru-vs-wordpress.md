@@ -3,6 +3,8 @@ title: Web na míru, nebo WordPress?
 description: Rozhodovací kritéria místo ideologie — co říkají data o bezpečnosti a výkonu, kde má WordPress navrch a kdy se vyplatí kód na míru.
 tags: [weby, wordpress]
 status: published
+published_at: 2026-08-04T22:55:09.000Z
+updated_at: 2026-08-04T22:55:09.000Z
 ---
 
 ## Špatně položená otázka

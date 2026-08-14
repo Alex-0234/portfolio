@@ -3,6 +3,8 @@ title: Jsou weby v dnešní době důležité?
 description: Jakou roli hrají weby a stačí sociální média?
 tags: [weby, sociální média]
 status: published
+published_at: 2026-08-02T16:30:58.000Z
+updated_at: 2026-08-04T22:27:26.000Z
 ---
 
 ## Jsou webové stránky potřeba?
