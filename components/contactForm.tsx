@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react"
+import Link from "next/link"
 import Button from "@/components/button"
 
 import { EMAIL, FORMSPREE_ENDPOINT } from "@/data/site"
@@ -26,10 +27,12 @@ export default function ContactForm({
 
     const onLight = variant === 'light'
 
+    /* krytí rámečků drží WCAG 1.4.11 (non-text contrast, min. 3:1 vůči pozadí) —
+       na bílé to vychází na 50 %, na tmavé na 40 %. Níž jdou pole opticky ztratit. */
     const fieldClasses = `w-full border bg-transparent px-3 py-2 font-jet text-xs sm:px-4 sm:py-3 sm:text-sm focus:outline-none transition-colors ${
         onLight
-            ? 'border-dark/15 text-dark placeholder:text-dark/50 focus:border-dark/50'
-            : 'border-light/15 text-light placeholder:text-light/50 focus:border-light/50'
+            ? 'border-dark/50 text-dark placeholder:text-dark/60 focus:border-dark'
+            : 'border-light/40 text-light placeholder:text-light/60 focus:border-light'
     }`
     const muted = onLight ? 'text-dark/50' : 'text-light/50'
     const link = onLight
@@ -127,6 +130,13 @@ export default function ContactForm({
                     </a>
                 </p>
             )}
+
+            <p className={`font-jet text-xs ${muted}`}>
+                Vyplněné údaje použiju jen k odpovědi na Vaši poptávku —{' '}
+                <Link href='/ochrana-osobnich-udaju' className={`underline underline-offset-4 ${link}`}>
+                    jak nakládám s osobními údaji
+                </Link>
+            </p>
         </form>
     )
 }

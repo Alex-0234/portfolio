@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 
-import { LINKS, TYPE_LABEL, formatDateRange, type PortfolioPiece } from "@/data/portfolio"
+import { BRIEF_LABELS, LINKS, TYPE_LABEL, formatDateRange, type PortfolioPiece } from "@/data/portfolio"
 
 interface ProjectModalProps {
     project: PortfolioPiece
@@ -151,11 +151,23 @@ export default function ProjectModal({ project, index, isTop, onClose, onFocus }
                     <div>
                         <p className={labelClasses}>{formatDateRange(project)}</p>
                         <h2 className='mt-2 text-2xl sm:text-3xl uppercase font-bold tracking-tight'>{project.name}</h2>
+                        <p className='mt-2 text-sm text-light/70'>{project.subtitle}</p>
                     </div>
 
                     <p className='text-sm leading-relaxed text-light/60'>
                         {project.description || '[ popis brzy ]'}
                     </p>
+
+                    {project.brief && (
+                        <dl className='flex flex-col gap-4 border-t border-light/10 pt-6'>
+                            {BRIEF_LABELS.map(({ key, label }) => (
+                                <div key={key} className='flex flex-col gap-1 sm:flex-row sm:gap-6'>
+                                    <dt className={`${labelClasses} shrink-0 sm:w-28 sm:pt-0.5`}>{label}</dt>
+                                    <dd className='text-sm leading-relaxed text-light/60'>{project.brief![key]}</dd>
+                                </div>
+                            ))}
+                        </dl>
+                    )}
                 </div>
 
                 <div className='shrink-0 grid grid-cols-1 sm:grid-cols-3 gap-2 border-t border-light/15 p-4 sm:px-8 sm:py-5'>

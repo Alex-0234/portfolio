@@ -19,6 +19,13 @@ export interface Tier {
     description: string
 }
 
+/** Časově omezená sleva s důvodem — drží ceník nedotčený, až zaváděcí cena skončí,
+ *  stačí smazat `intro` a nikomu nevysvětluješ zdražení. */
+export interface Intro {
+    price: number
+    note: string
+}
+
 export interface Package {
     id: string
     number: string
@@ -26,6 +33,7 @@ export interface Package {
     tagline: string
     timeline: string
     price?: number
+    intro?: Intro
     tiers?: Tier[]
     monthly?: boolean
     scope: string
@@ -38,24 +46,28 @@ export const PACKAGES: Package[] = [
     {
         id: 'landing',
         number: '01',
-        name: 'Landing page',
-        tagline: 'jedna stránka, cca 5 sekcí',
-        timeline: '1–2 týdny',
-        price: 10000,
+        name: 'Malý web',
+        tagline: 'landing page nebo web do 3 stránek',
+        timeline: '1–2 týdny od podkladů',
+        price: 12000,
         scope: 'cena od',
-        highlights: ['jedna stránka', 'on-page SEO', 'nasazení + doména'],
+        highlights: ['až 3 stránky', 'on-page SEO', 'nasazení + doména'],
         includes: [
-            'design + vývoj (až ~5 sekcí), plně responzivní',
+            'design + vývoj, plně responzivní (úvodní stránka cca 5 sekcí)',
+            'až 3 stránky celkem (např. Úvod, Služby, Kontakt)',
             'základní on-page SEO (title, meta, nadpisy, sitemapa, OG tagy)',
             'kontaktní formulář',
             'nasazení na Cloudflare Pages + nastavení vlastní domény',
             'základní animace (plynulý scroll přes Lenis + pár GSAP přechodů)',
+            'obsah nasazuji já — administrace není součástí, lze přidat jako doplněk',
             'odkaz na autora v patičce („web od…") — odstranění za příplatek',
-            '2 kola revizí',
+            'texty a fotografie dodáváte Vy — copywriting je volitelný doplněk',
+            '2 kola připomínek v ceně, další úpravy hodinově',
         ],
         addons: [
-            { id: 'cms_hosted', name: 'vlastní hostovaný CMS (Strapi)', price: 8000, excludes: ['cms_cloud'] },
-            { id: 'cms_cloud', name: 'cloudový CMS (Sanity apod.)', price: 2800, excludes: ['cms_hosted'] },
+            { id: 'extra_page', name: 'stránka navíc', price: 2000, type: 'quantity', max: 3, unit: '/ stránka' },
+            { id: 'cms_hosted', name: 'administrace (vlastní hostovaný CMS — Strapi)', price: 8000, excludes: ['cms_cloud'] },
+            { id: 'cms_cloud', name: 'administrace (cloudový CMS — Sanity apod.)', price: 2800, excludes: ['cms_hosted'] },
             { id: 'lang', name: 'druhá jazyková verze', price: 3000 },
             { id: 'motion', name: 'animace / motion na míru', price: 3500 },
             { id: 'seo', name: 'pokročilé SEO', price: 2500 },
@@ -69,23 +81,28 @@ export const PACKAGES: Package[] = [
         number: '02',
         name: 'Firemní web',
         tagline: 'vícestránkový web pro Vaši firmu',
-        timeline: '2–4 týdny',
+        timeline: '2–4 týdny od podkladů',
         price: 25000,
+        intro: {
+            price: 16000,
+            note: 'Zaváděcí cena pro první 3 zakázky — výměnou za referenci, souhlas se zveřejněním v portfoliu a krátký citát. Platí do naplnění tří míst.',
+        },
         scope: 'cena od',
-        highlights: ['až 5 podstránek', 'administrace (CMS)', 'formulář s backendem'],
+        highlights: ['až 5 podstránek', 'formulář s backendem', 'analytika + Search Console'],
         includes: [
-            'vše z balíčku Landing page',
+            'vše z balíčku Malý web',
             'až 5 podstránek (Úvod, O nás, Služby, Reference, Kontakt)',
-            'administrace (CMS) pro novinky a reference',
-            'CMS backend běží na vlastním serveru — hosting v ceně doplňku správy, nebo si ho zajistíte sami',
-            'ostatní obsah je pevně v kódu — změny nad tento rámec jsou vícepráce',
             'formulář s backendem (databáze / zasílání e-mailem)',
             'nastavení analytiky a Search Console',
             'prémiové animace (GSAP + Lenis)',
-            'předání administrace + zaškolení v úpravě obsahu',
-            '2 kola revizí',
+            'obsah nasazuji já — administraci si přidáte jako doplněk, pokud ji chcete',
+            'předání přístupů + zaškolení',
+            'texty a fotografie dodáváte Vy — copywriting je volitelný doplněk',
+            '2 kola připomínek v ceně, další úpravy hodinově',
         ],
         addons: [
+            { id: 'cms_hosted', name: 'administrace (vlastní hostovaný CMS — Strapi)', price: 9000, excludes: ['cms_cloud'] },
+            { id: 'cms_cloud', name: 'administrace (cloudový CMS — Sanity apod.)', price: 4000, excludes: ['cms_hosted'] },
             { id: 'extra_page', name: 'stránka navíc', price: 2500, type: 'quantity', max: 5, unit: '/ stránka' },
             { id: 'lang', name: 'další jazyk', price: 5000 },
             { id: 'catalog', name: 'jednoduchý katalog produktů', price: 15000 },
@@ -102,18 +119,20 @@ export const PACKAGES: Package[] = [
         id: 'mvp',
         number: '03',
         name: 'Webová aplikace',
-        tagline: 'full-stack MVP — React + Node + MongoDB',
-        timeline: '4–8 týdnů',
+        tagline: 'full-stack MVP na Next.js — cena po úvodní analýze',
+        timeline: '4–8 týdnů od podkladů',
         price: 45000,
         scope: 'cena od',
         highlights: ['autentizace', 'API + databáze', 'admin dashboard'],
         includes: [
+            'úvodní analýza rozsahu — teprve z ní vzejde pevná cena a termín',
             'autentizace (přihlášení / registrace)',
             'databáze + základní CRUD a business logika',
-            'backend / API na míru',
+            'backend / API na míru (Next.js route handlers, případně samostatný Node backend)',
             'administrační rozhraní nebo dashboard',
             'responzivní UI + nasazení se základním CI/CD',
-            '2 kola revizí',
+            'texty a fotografie dodáváte Vy — copywriting je volitelný doplněk',
+            '2 kola připomínek v ceně, další úpravy hodinově',
         ],
         addons: [
             { id: 'payments', name: 'platební integrace', price: 20000 },
@@ -136,20 +155,26 @@ export const PACKAGES: Package[] = [
         scope: 'měsíčně',
         highlights: ['hosting frontendu', 'aktualizace a záplaty', 'monitoring + zálohy'],
         tiers: [
-            { id: 'basic', name: 'Základ', price: 600, description: 'hosting, aktualizace, záplaty, monitoring, zálohy' },
-            { id: 'standard', name: 'Standard', price: 1500, description: 'vše ze Základu + 1–2 h měsíčních úprav' },
-            { id: 'app', name: 'Aplikace', price: 3200, description: 'vše ze Základu + monitoring chyb, prioritní podpora, 3–4 h úprav' },
+            { id: 'basic', name: 'Základ', price: 1500, description: 'hosting, aktualizace, záplaty, monitoring, zálohy' },
+            { id: 'standard', name: 'Standard', price: 2500, description: 'vše ze Základu + 1–2 h měsíčních úprav' },
+            { id: 'app', name: 'Aplikace', price: 3900, description: 'vše ze Základu + monitoring chyb, prioritní podpora, 3–4 h úprav' },
         ],
         includes: [
-            'hosting frontendu v ceně (Cloudflare Pages)',
+            'hosting frontendu v ceně (Cloudflare Pages) — žádná další faktura za provoz webu',
             'aktualizace závislostí a bezpečnostní záplaty',
             'monitoring dostupnosti (uptime)',
-            'monitoring domény',
+            'hlídání expirace domény — registraci platíte přímo registrátorovi a doména zůstává psaná na Vás',
             'zálohy',
             'pro weby postavené mnou (jiné po dohodě)',
         ],
         addons: [
-            { id: 'cms_hosting', name: 'hosting CMS / backend serveru', price: 500 },
+            {
+                id: 'cms_hosting',
+                name: 'hosting CMS / backend serveru',
+                price: 700,
+                includedIn: ['app'],
+                note: 'Hosting backendu je v úrovni Aplikace už zahrnutý — webová aplikace se bez něj neobejde.',
+            },
             {
                 id: 'priority',
                 name: 'prioritní podpora',

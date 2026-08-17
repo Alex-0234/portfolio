@@ -172,7 +172,7 @@ export default function Hero() {
                     className='reveal-hidden pointer-events-auto text-[max(0.9375rem,1.5vw)] font-bold leading-[1.4]'
                     onReady={(tl) => { underheaderTl.current = tl }}
                 >
-                    Jmenuju se Alex a weby stavím na míru — frontend v Reactu a TypeScriptu, backend na Node.js a Expressu. Animace a plynulý scroll řeším přes GSAP a Lenis. Žádné šablony a žádná překvapení ve faktuře.
+                    Jmenuju se Alex a weby stavím na míru — v Next.js, Reactu a TypeScriptu, včetně backendu a databáze. Animace a plynulý scroll řeším přes GSAP a Lenis. Žádné šablony a žádná překvapení ve faktuře.
                 </SplitReveal>
 
                 <SplitReveal

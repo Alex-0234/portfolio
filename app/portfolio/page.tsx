@@ -29,6 +29,13 @@ export default function Portfolio() {
 
             const getScrollDistance = () => Math.max(0, track.scrollWidth - window.innerWidth)
 
+            /* karty jsou široké na třetinu obrazovky, takže se pár projektů vejde
+               bez posunu - pin by pak jen zablokoval stránku bez efektu. Jakmile
+               projektů přibude a track přeteče, horizontální scroll naskočí sám.
+               Práh je 1px, ne 0 - track vychází přesně na šířku kontejneru a
+               rozdíl v desetinách pixelu není důvod stránku pinovat. */
+            if (getScrollDistance() < 1) return
+
             gsap.to(track, {
                 x: () => -getScrollDistance(),
                 ease: 'none',
@@ -96,7 +103,9 @@ export default function Portfolio() {
 
                 <div
                     ref={trackRef}
-                    className='mx-auto grid w-full max-w-6xl grid-cols-1 gap-4 px-6 sm:grid-cols-2 lg:grid-cols-3 xl:mx-0 xl:h-full xl:w-max xl:max-w-none xl:grid-flow-col-dense xl:grid-cols-none xl:grid-rows-9 xl:gap-2 xl:p-2 xl:px-2 xl:auto-cols-[calc(1600cqh/40)]'
+                    /* na xl leží karty ve dvou řádcích a jsou široké na třetinu
+                       obrazovky - tři se vejdou do záběru, zbytek odjede scrollem */
+                    className='mx-auto grid w-full max-w-6xl grid-cols-1 gap-4 px-6 sm:grid-cols-2 xl:mx-0 xl:h-full xl:w-max xl:max-w-none xl:grid-flow-col-dense xl:grid-cols-none xl:grid-rows-2 xl:gap-3 xl:p-3 xl:auto-cols-[calc((100cqw-3rem)/3)]'
                 >
                     {PORTFOLIO.map((project) => {
                         const dimmed = activeType !== 'all' && project.type !== activeType
@@ -108,8 +117,8 @@ export default function Portfolio() {
                                 onPointerLeave={() => setHovered(null)}
                                 data-cursor='view'
                                 data-cursor-label='zobrazit'
-                                className={`relative flex min-h-40 cursor-pointer flex-col justify-between border border-light/10 p-4 text-left transition-[opacity,border-color] duration-300 hover:border-light/30 xl:min-h-0 xl:p-3 ${
-                                    project.large ? 'xl:row-span-3' : ''
+                                className={`relative flex min-h-56 cursor-pointer flex-col justify-between gap-4 overflow-hidden border border-light/10 p-5 text-left transition-[opacity,border-color] duration-300 hover:border-light/30 xl:min-h-0 ${
+                                    project.large ? 'xl:row-span-2' : ''
                                 }`}
                                 style={{
                                     backgroundColor: cardBg(project),
@@ -120,14 +129,17 @@ export default function Portfolio() {
                                     <span>{String(project.number).padStart(2, '0')}</span>
                                     <span>{TYPE_LABEL[project.type]}</span>
                                 </div>
-                                 {project.image && project.large && (
+                                {project.image && project.large && (
+                                    /* min-h-0 kvůli flexu - bez něj obrázek nejde zmenšit
+                                       pod svoji vlastní výšku a vytlačí text z karty */
                                     // eslint-disable-next-line @next/next/no-img-element
-                                    <img src={project.image} alt={project.name} className='h-full w-full object-cover' />
+                                    <img src={project.image} alt={project.name} className='min-h-0 w-full flex-1 object-cover' />
                                 )}
 
-                                <div className='mt-8 xl:mt-0'>
-                                    <p className='text-light text-[1rem] leading-tight'>{project.name}</p>
-                                    <p className='text-light/50 text-xs mt-1'>{formatDateRange(project)}</p>
+                                <div>
+                                    <p className='text-light text-lg leading-tight xl:text-xl'>{project.name}</p>
+                                    <p className='text-light/70 text-sm mt-2 leading-snug'>{project.subtitle}</p>
+                                    <p className='text-light/40 text-xs mt-2'>{formatDateRange(project)}</p>
                                 </div>
                             </button>
                         )

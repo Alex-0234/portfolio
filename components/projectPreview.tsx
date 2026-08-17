@@ -72,7 +72,7 @@ export default function ProjectPreview({ project }: { project: PortfolioPiece | 
                         <p className='text-xs uppercase tracking-[0.2em] text-light/50'>{formatDateRange(project)}</p>
                         <p className='text-sm uppercase text-light'>{project.name}</p>
                         <p className='line-clamp-2 text-xs leading-relaxed text-light/50'>
-                            {project.description || '[ popis brzy ]'}
+                            {project.subtitle}
                         </p>
                     </div>
                 </>

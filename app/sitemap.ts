@@ -10,6 +10,7 @@ const ROUTES = [
     { path: '/portfolio', priority: 0.8, lastModified: '2026-08-03' },
     { path: '/about', priority: 0.8, lastModified: '2026-08-03' },
     { path: '/blog', priority: 0.5, lastModified: '2026-08-03' },
+    { path: '/ochrana-osobnich-udaju', priority: 0.2, lastModified: '2026-08-17' },
 ]
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

@@ -75,6 +75,8 @@ export default function PricingModal({ pkg, onClose }: PricingModalProps) {
             : sum + (selected.has(addon.id) ? addon.price : 0)
     ), 0)
     const total = base + extras
+    /* zaváděcí cena se odečítá jen ze základu — doplňky se neslevňují */
+    const introTotal = pkg.intro ? pkg.intro.price + extras : null
     const monthSuffix = pkg.monthly ? ' / měs.' : ''
 
     const includedNotes = pkg.addons
@@ -94,6 +96,7 @@ export default function PricingModal({ pkg, onClose }: PricingModalProps) {
             return selected.has(addon.id) ? [`+ ${addon.name} — ${formatPrice(addon.price)}`] : []
         }),
         `Odhadovaná cena: ${formatPrice(total)}${monthSuffix}`,
+        ...(introTotal !== null ? [`Zaváděcí cena (první 3 zakázky): ${formatPrice(introTotal)}`] : []),
     ].join('\n')
 
     return (
@@ -127,6 +130,11 @@ export default function PricingModal({ pkg, onClose }: PricingModalProps) {
                         <h2 className='text-2xl uppercase font-bold tracking-tight'>{pkg.name}</h2>
                         <p className='mt-1 text-sm text-light/50'>{pkg.tagline}</p>
                         <p className='mt-1 text-sm text-light/50'>odhad · {pkg.timeline}</p>
+                        {pkg.intro && (
+                            <p className='mt-4 border-l-2 border-confirm/60 pl-3 text-sm leading-relaxed text-light/60'>
+                                {pkg.intro.note}
+                            </p>
+                        )}
                     </div>
 
                     {pkg.tiers && (
@@ -247,10 +255,19 @@ export default function PricingModal({ pkg, onClose }: PricingModalProps) {
 
                     <section className='flex flex-col gap-2 border-t border-light/10 pt-6 text-xs text-light/50'>
                         <p>Odráží vybrané doplňky — plně individuální zadání může finální cenu upravit.</p>
-                        <p>Práce nad rámec dohodnutého zadání se účtuje hodinově (~600 Kč/h) · záloha 30–50 % předem.</p>
+                        <p>Práce nad rámec dohodnutého zadání se účtuje hodinově (~600 Kč/h) · záloha 50 % předem.</p>
                         <p>
-                            Doména a placené služby třetích stran (rezervační systém, platební brána…) nejsou součástí
-                            ceny. Vlastní hostovaný CMS/backend potřebuje vlastní server.
+                            Termín běží od dodání podkladů (texty, fotky, přístupy), ne od objednávky. V ceně jsou
+                            2 kola připomínek, další úpravy hodinově.
+                        </p>
+                        <p>
+                            Doména se registruje na Vás a platíte ji přímo registrátorovi — zůstává Vaše i kdybychom
+                            spolu přestali spolupracovat. Ve správě Vám hlídám datum expirace. Placené služby třetích
+                            stran (rezervační systém, platební brána…) nejsou součástí ceny.
+                        </p>
+                        <p>
+                            Hosting frontendu je v ceně správy. Administrace (CMS) a backend aplikace potřebují vlastní
+                            server navíc — ten je doplňkem správy, u úrovně Aplikace už zahrnutým.
                         </p>
                     </section>
 
@@ -266,9 +283,16 @@ export default function PricingModal({ pkg, onClose }: PricingModalProps) {
 
                 <div className='shrink-0 flex flex-wrap items-center justify-between gap-4 border-t border-light/15 bg-dark px-5 py-4 sm:px-8'>
                     <div>
-                        <p className={labelClasses}>Odhadovaná celková cena</p>
-                        <p className='mt-1 text-2xl font-bold tabular-nums'>
-                            {formatPrice(total)}
+                        <p className={labelClasses}>
+                            {introTotal !== null ? 'Zaváděcí cena' : 'Odhadovaná celková cena'}
+                        </p>
+                        <p className='mt-1 flex flex-wrap items-baseline gap-2 text-2xl font-bold tabular-nums'>
+                            {introTotal !== null && (
+                                <span className='text-base font-normal text-light/40 line-through decoration-light/40'>
+                                    {formatPrice(total)}
+                                </span>
+                            )}
+                            <span>{formatPrice(introTotal ?? total)}</span>
                             {pkg.monthly && <span className='text-sm font-normal text-light/50'> / měs.</span>}
                         </p>
                     </div>

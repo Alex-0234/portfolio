@@ -9,26 +9,55 @@ import { formatPrice } from "@/utils/price"
 
 export const metadata = pageMetadata({
     title: "Služby a ceník",
-    description: "Landing page, firemní web, webová aplikace nebo správa webu — pevné ceny od, kalkulačka a poptávkový formulář.",
+    description: "Malý web, firemní web, webová aplikace nebo správa webu — ceny od, kalkulačka a poptávkový formulář.",
     path: "/offers",
 })
 
 const PROCESS = [
-    { title: 'Poptávka', description: 'Napíšete mi přes formulář nebo e-mail, co potřebujete.' },
-    { title: 'Úvodní konzultace', description: 'Probereme rozsah, cíle a rozpočet.' },
-    { title: 'Návrh a nacenění', description: 'Dostanete konkrétní nabídku s pevnou cenou a termínem.' },
+    { title: 'Poptávka a konzultace', description: 'Napíšete mi přes formulář nebo e-mail, co potřebujete, a probereme rozsah, cíle i rozpočet.' },
+    { title: 'Návrh a nacenění', description: 'Dostanete konkrétní nabídku s pevnou cenou a termínem — u webových aplikací až po úvodní analýze rozsahu.' },
+    { title: 'Předání podkladů', description: 'Pošlete texty, fotky a přístupy. Teprve tímhle krokem začíná běžet termín.' },
     { title: 'Vývoj', description: 'Stavím web, průběžně vidíte progres.' },
     { title: 'Předání a zaškolení', description: 'Dostanete přístupy, administraci a případně zaškolení.' },
     { title: 'Podpora', description: 'Volitelně navazuje balíček Správa a údržba.' },
 ]
 
 const FAQ = [
-    { q: 'Jak dlouho trvá tvorba webu?', a: 'Podle rozsahu — landing page 1–2 týdny, firemní web 2–4 týdny, webová aplikace 4–8 týdnů.' },
+    {
+        q: 'Jak dlouho trvá tvorba webu?',
+        a: 'Podle rozsahu — malý web 1–2 týdny, firemní web 2–4 týdny, webová aplikace 4–8 týdnů. Termín běží od dodání podkladů, ne od objednávky: nejčastější příčinou zpoždění nebývá vývoj, ale čekání na texty a fotky.',
+    },
+    {
+        q: 'Kdo píše texty a dodává fotky?',
+        a: 'Standardně Vy — texty a fotografie nejsou v ceně balíčku. Pokud na to nemáte čas nebo chuť, copywriting je volitelný doplněk u každého balíčku.',
+    },
     { q: 'Co když přesně nevím, co potřebuju?', a: 'Není problém, na to je úvodní konzultace — společně to vyladíme.' },
-    { q: 'Poskytujete hosting?', a: 'Ano, v rámci balíčku Správa a údržba. Bez něj hosting předávám na Váš účet.' },
-    { q: 'Jak probíhá platba?', a: 'Záloha 30–50 % předem, zbytek po předání. Práce nad rámec zadání se účtuje hodinově.' },
-    { q: 'Budu moct web upravovat sám?', a: 'U firemního webu ano — novinky a reference jdou upravovat přes administraci, na kterou Vás zaškolím.' },
-    { q: 'Co po předání, když najdu chybu?', a: 'Opravy v rámci dohodnutého rozsahu jsou součástí revizí, cokoliv navíc řešíme ve správě nebo hodinově.' },
+    {
+        q: 'Poskytujete hosting?',
+        a: 'Hosting frontendu je v ceně balíčku Správa a údržba, takže za provoz webu už nedostanete druhou fakturu. Bez správy hosting předávám na Váš účet. Administrace (CMS) a backend aplikace potřebují server navíc — ten je doplňkem správy a v úrovni Aplikace je rovnou zahrnutý.',
+    },
+    {
+        q: 'Kdo platí doménu a komu bude patřit?',
+        a: 'Doména se registruje na Vás, jste jejím držitelem od začátku a platíte ji přímo registrátorovi — obvykle pár set korun ročně. Není to schované v mé faktuře schválně: doménu, kterou drží dodavatel, Vám nikdo nevrátí, když se spolupráce rozejde. Ve správě Vám hlídám datum expirace, protože propadlá doména dnes končí v aukci.',
+    },
+    { q: 'Jak probíhá platba?', a: 'Záloha 50 % předem, zbytek po předání. Práce nad rámec zadání se účtuje hodinově.' },
+    {
+        q: 'Budu moct web upravovat sám?',
+        a: 'Podle toho, jestli si přiberete administraci (CMS) jako doplněk. S ní si novinky, reference a texty upravujete sami a zaškolím Vás. Bez ní obsah nasazuji já — u webů, které se mění párkrát do roka, to vychází levněji než platit administraci, kterou nikdo neotevře.',
+    },
+    {
+        q: 'Proč není administrace rovnou v ceně?',
+        a: 'Protože ji velká část malých firem nikdy nepoužije. Je to nejdražší část webu na výrobu i na následnou podporu, takže mi přijde férovější nechat rozhodnutí na Vás, než ji naúčtovat všem.',
+    },
+    {
+        q: 'Kolik mám kol připomínek?',
+        a: 'Dvě kola připomínek jsou v ceně u všech balíčků. Další úpravy se účtují hodinově (~600 Kč/h). Uvádím to schválně konkrétním číslem — „revize v ceně" bez čísla je věta, na které se spolupráce často pokazí.',
+    },
+    { q: 'Co po předání, když najdu chybu?', a: 'Chyba proti dohodnutému zadání se opravuje zdarma i po vyčerpání kol připomínek. Nové požadavky nad rámec zadání řešíme ve správě nebo hodinově.' },
+    {
+        q: 'Za jak dlouho odpovíte na poptávku?',
+        a: 'Do 24 hodin v pracovní dny.',
+    },
 ]
 
 const microClasses = 'font-jet text-xs uppercase tracking-[0.2em] text-light/50'
@@ -69,7 +98,9 @@ const jsonLd = {
             ? pkg.tiers.map((tier) =>
                 offer(`${pkg.name} — ${tier.name}`, tier.description, tier.price, pkg.monthly ?? false))
             : pkg.price
-                ? [offer(pkg.name, pkg.tagline, pkg.price, pkg.monthly ?? false)]
+                /* strukturovaná data musí sedět na cenu, která je na stránce vidět,
+                   jinak to Google hlásí jako nesoulad */
+                ? [offer(pkg.name, pkg.tagline, pkg.intro?.price ?? pkg.price, pkg.monthly ?? false)]
                 : []
     ),
 }

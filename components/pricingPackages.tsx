@@ -36,11 +36,26 @@ export default function PricingPackages() {
                                 ))}
                             </ul>
 
+                            {pkg.intro && (
+                                <p className='mt-5 border-l-2 border-confirm/60 pl-3 text-xs leading-relaxed text-light/60'>
+                                    {pkg.intro.note}
+                                </p>
+                            )}
+
                             <div className='mt-auto flex flex-wrap items-end justify-between gap-4 pt-8'>
                                 <div>
-                                    <p className='font-jet text-xs uppercase tracking-[0.2em] text-light/50'>{pkg.scope}</p>
-                                    <p className='mt-1 text-3xl font-bold tabular-nums'>
-                                        {formatPrice(pkg.tiers ? pkg.tiers[0].price : pkg.price ?? 0)}
+                                    <p className='font-jet text-xs uppercase tracking-[0.2em] text-light/50'>
+                                        {pkg.intro ? 'zaváděcí cena' : pkg.scope}
+                                    </p>
+                                    <p className='mt-1 flex flex-wrap items-baseline gap-2 text-3xl font-bold tabular-nums'>
+                                        {pkg.intro && (
+                                            <span className='text-lg font-normal text-light/40 line-through decoration-light/40'>
+                                                {formatPrice(pkg.price ?? 0)}
+                                            </span>
+                                        )}
+                                        <span>
+                                            {formatPrice(pkg.intro?.price ?? (pkg.tiers ? pkg.tiers[0].price : pkg.price ?? 0))}
+                                        </span>
                                         {pkg.monthly && <span className='text-sm font-normal text-light/50'> / měs.</span>}
                                     </p>
                                 </div>

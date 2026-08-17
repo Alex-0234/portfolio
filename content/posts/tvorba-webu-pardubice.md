@@ -68,10 +68,10 @@ Ceny se v regionu pohybují od pár tisíc za šablonu po statisíce za rozsáhl
 
 U mě je ceník veřejný a pevný:
 
-- **Landing page od 10 000 Kč** — jedna stránka, zhruba pět sekcí, on-page SEO, formulář, nasazení i s doménou. Hotovo za 1–2 týdny.
-- **Firemní web od 25 000 Kč** — až pět podstránek, administrace pro novinky a reference, formulář s backendem, analytika a Search Console. 2–4 týdny.
-- **Webová aplikace od 45 000 Kč** — přihlašování, databáze, API a administrace, když už nejde o prezentaci.
-- **Správa od 600 Kč měsíčně** — hosting, aktualizace, monitoring dostupnosti a zálohy.
+- **Malý web od 12 000 Kč** — landing page nebo web do tří stránek, on-page SEO, formulář, nasazení i s doménou. Hotovo za 1–2 týdny.
+- **Firemní web od 25 000 Kč** — až pět podstránek, formulář s backendem, analytika a Search Console. Administrace je volitelný doplněk. 2–4 týdny.
+- **Webová aplikace od 45 000 Kč** — přihlašování, databáze, API a administrace, když už nejde o prezentaci. Cena po úvodní analýze.
+- **Správa od 1 500 Kč měsíčně** — hosting, aktualizace, monitoring dostupnosti a zálohy.
 
 Kompletní rozpis včetně doplňků je ve [službách a ceníku](/offers), kde si jde cenu i rovnou spočítat.
 

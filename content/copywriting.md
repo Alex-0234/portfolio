@@ -131,22 +131,26 @@ Vykání, čeština. Přeloženo a upraveno ze starého (anglického) portfolia 
 - cena od (from-price scope)
 - měsíčně (monthly scope)
 
-### Balíček 1 — Landing Page
-**Cena:** od **10 000 Kč**
-**Tagline:** jedna stránka, cca 5 sekcí
-**Termín:** 1–2 týdny
+### Balíček 1 — Malý web
+**Cena:** od **12 000 Kč**
+**Tagline:** landing page nebo web do 3 stránek
+**Termín:** 1–2 týdny od dodání podkladů
 **Zahrnuje:**
-- design + vývoj (až ~5 sekcí), plně responzivní
+- design + vývoj, plně responzivní (úvodní stránka cca 5 sekcí)
+- až 3 stránky celkem (např. Úvod, Služby, Kontakt)
 - základní on-page SEO (title, meta, nadpisy, sitemapa, OG tagy)
 - kontaktní formulář (Formspree/EmailJS nebo lehký vlastní endpoint)
 - nasazení na Cloudflare Pages + nastavení vlastní domény (hosting v ceně u balíčku správy, jinak předáno na Váš účet)
 - základní animace (plynulý scroll přes Lenis + pár GSAP přechodů)
+- obsah nasazuji já — administrace není součástí, lze přidat jako doplněk
 - odkaz na autora v patičce („web od…") — odstranění za příplatek
-- 2 kola revizí
+- texty a fotografie dodává klient — copywriting je volitelný doplněk
+- 2 kola připomínek v ceně, další úpravy hodinově
 
 **Doplňky:**
-- vlastní hostovaný CMS (Strapi) — plná kontrola nad obsahem (vyžaduje hosting backendu) — **8 000 Kč** *(nelze kombinovat s cloudovým CMS)*
-- cloudový CMS (Sanity apod.) — bez vlastního serveru, běží u poskytovatele — **2 800 Kč** *(nelze kombinovat s vlastním hostovaným CMS)*
+- stránka navíc (nad rámec 3) — **2 000 Kč / stránka**, max. 3 stránky navíc
+- administrace (vlastní hostovaný CMS — Strapi) — plná kontrola nad obsahem (vyžaduje hosting backendu) — **8 000 Kč** *(nelze kombinovat s cloudovým CMS)*
+- administrace (cloudový CMS — Sanity apod.) — bez vlastního serveru, běží u poskytovatele — **2 800 Kč** *(nelze kombinovat s vlastním hostovaným CMS)*
 - druhá jazyková verze — **3 000 Kč**
 - animace / motion na míru — **3 500 Kč**
 - pokročilé SEO (jednorázové nastavení) — **2 500 Kč**
@@ -156,23 +160,24 @@ Vykání, čeština. Přeloženo a upraveno ze starého (anglického) portfolia 
 
 ### Balíček 2 — Firemní web (Business Website)
 **Cena:** od **25 000 Kč**
+**Zaváděcí cena:** **16 000 Kč** pro první 3 zakázky — výměnou za referenci, souhlas se zveřejněním v portfoliu a krátký citát. Platí do naplnění tří míst; pak se položka `intro` v `data/pricing.ts` smaže a ceník zůstává nedotčený.
 **Tagline:** vícestránkový web pro Vaši firmu
-**Termín:** 2–4 týdny
+**Termín:** 2–4 týdny od dodání podkladů
 **Zahrnuje:**
-- vše z balíčku Landing Page
+- vše z balíčku Malý web
 - až 5 podstránek (Úvod, O nás, Služby, Reference, Kontakt) — další za příplatek
-- administrace (CMS) pro novinky/aktuality — přidávání, úprava a mazání příspěvků
-- administrace (CMS) pro reference — jméno, popis, fotka
-- CMS backend běží na vlastním serveru — měsíční hosting v ceně doplňku správy, nebo zajišťuje klient
-- ostatní obsah (texty, kontakty, struktura stránek) je pevně v kódu — změny nad tento rámec se účtují jako vícepráce
 - formulář s backendem (ukládání do databáze / zasílání e-mailem)
 - nastavení analytiky a Search Console
 - prémiové animace (GSAP + Lenis)
-- předání administrace + zaškolení v úpravě obsahu
+- obsah nasazuji já — administrace je volitelný doplněk
+- předání přístupů + zaškolení
 - odkaz na autora v patičce — odstranění za příplatek
-- 2 kola revizí
+- texty a fotografie dodává klient — copywriting je volitelný doplněk
+- 2 kola připomínek v ceně, další úpravy hodinově
 
 **Doplňky:**
+- administrace (vlastní hostovaný CMS — Strapi) — novinky a reference; backend běží na vlastním serveru, měsíční hosting v ceně doplňku správy — **9 000 Kč** *(nelze kombinovat s cloudovým CMS)*
+- administrace (cloudový CMS — Sanity apod.) — bez vlastního serveru — **4 000 Kč** *(nelze kombinovat s vlastním hostovaným CMS)*
 - stránka navíc (nad rámec 5) — **2 500 Kč / stránka**, max. 5 stránek navíc
 - další jazyk — **5 000 Kč**
 - jednoduchý katalog produktů — **15 000 Kč**
@@ -186,15 +191,17 @@ Vykání, čeština. Přeloženo a upraveno ze starého (anglického) portfolia 
 
 ### Balíček 3 — Webová aplikace (MVP)
 **Cena:** od **45 000 Kč**
-**Tagline:** full-stack, React + Node + MongoDB
-**Termín:** 4–8 týdnů
+**Tagline:** full-stack MVP na Next.js — cena po úvodní analýze
+**Termín:** 4–8 týdnů od dodání podkladů
 **Zahrnuje:**
+- úvodní analýza rozsahu — teprve z ní vzejde pevná cena a termín
 - autentizace (přihlášení / registrace)
 - databáze + základní CRUD / business logika
-- backend / API na míru
+- backend / API na míru (Next.js route handlers, případně samostatný Node backend)
 - administrační rozhraní nebo dashboard
 - responzivní UI + nasazení se základním CI/CD
-- 2 kola revizí
+- texty a fotografie dodává klient — copywriting je volitelný doplněk
+- 2 kola připomínek v ceně, další úpravy hodinově
 
 **Doplňky:**
 - platební integrace — **20 000 Kč**
@@ -210,22 +217,22 @@ Vykání, čeština. Přeloženo a upraveno ze starého (anglického) portfolia 
 **Tagline:** základní péče, web zůstává v pořádku
 **Termín:** průběžně
 **Zahrnuje:**
-- hosting frontendu v ceně (Cloudflare Pages)
+- hosting frontendu v ceně (Cloudflare Pages) — žádná další faktura za provoz webu
 - aktualizace závislostí a bezpečnostní záplaty
 - monitoring dostupnosti (uptime)
-- monitoring domény
+- hlídání expirace domény — registraci platí klient přímo registrátorovi, doména je psaná na něj
 - zálohy
 - pro weby postavené mnou (jiné po dohodě)
 
 **Úrovně:**
 | Úroveň | Cena | Popis |
 |---|---|---|
-| Základ | **600 Kč / měs.** | hosting frontendu, aktualizace závislostí, bezpečnostní záplaty, kontrola dostupnosti, monitoring domény, zálohy |
-| Standard | **1 500 Kč / měs.** | vše ze Základu + 1–2 h měsíčních úprav |
-| Aplikace | **3 200 Kč / měs.** | vše ze Základu + monitoring chyb, prioritní podpora, 3–4 h měsíčních úprav |
+| Základ | **1 500 Kč / měs.** | hosting frontendu, aktualizace závislostí, bezpečnostní záplaty, kontrola dostupnosti, monitoring domény, zálohy |
+| Standard | **2 500 Kč / měs.** | vše ze Základu + 1–2 h měsíčních úprav |
+| Aplikace | **3 900 Kč / měs.** | vše ze Základu + monitoring chyb, prioritní podpora, 3–4 h měsíčních úprav |
 
 **Doplňky:**
-- hosting CMS/backend serveru (provozní náklady, aktualizace, zálohy) — **500 Kč / měs.**
+- hosting CMS/backend serveru (provozní náklady, aktualizace, zálohy) — **700 Kč / měs.** *(už zahrnuto v úrovni Aplikace)*
 - prioritní podpora — **400 Kč / měs.** *(už zahrnuto v úrovni Aplikace, nelze přidat navíc)*
 - hodina úprav navíc měsíčně — **600 Kč / měs.**
 
@@ -236,10 +243,12 @@ Vykání, čeština. Přeloženo a upraveno ze starého (anglického) portfolia 
 - Odhadovaná celková cena
 - Odráží vybrané doplňky — plně individuální zadání může finální cenu upravit.
 - Vyberte si úroveň
-- Práce nad rámec dohodnutého zadání se účtuje hodinově (~600 Kč/h) · záloha 30–50 % předem.
+- Práce nad rámec dohodnutého zadání se účtuje hodinově (~600 Kč/h) · záloha 50 % předem.
+- Termín běží od dodání podkladů (texty, fotky, přístupy), ne od objednávky. V ceně jsou 2 kola připomínek, další úpravy hodinově.
 - Co je součástí
 - / stránka
-- Doména a placené služby třetích stran (rezervační systém, platební brána…) nejsou součástí ceny. Vlastní hostovaný CMS/backend potřebuje vlastní server — buď formou doplňku ke správě, nebo si ho zajistíte sami.
+- Doména se registruje na klienta a platí ji přímo registrátorovi — zůstává jeho. Ve správě mu hlídám datum expirace. Placené služby třetích stran (rezervační systém, platební brána…) nejsou součástí ceny.
+- Hosting frontendu je v ceně správy. Administrace (CMS) a backend aplikace potřebují vlastní server navíc — doplněk správy, u úrovně Aplikace už zahrnutý.
 - Odebrat stránku / Přidat stránku
 
 ### Poptávkový formulář
@@ -262,19 +271,23 @@ Vykání, čeština. Přeloženo a upraveno ze starého (anglického) portfolia 
 Jednostránkový web si vystačí s málem, ale samostatné stránky potřebují víc textu, aby nepůsobily prázdně a dávaly smysl i pro SEO. Pár bloků navíc, co starý web neměl:
 
 ### Jak probíhá spolupráce (hodí se na Služby nebo O mně)
-1. **Poptávka** — napíšete mi přes formulář nebo e-mail, co potřebujete.
-2. **Úvodní konzultace** — probereme rozsah, cíle a rozpočet.
-3. **Návrh a nacenění** — dostanete konkrétní nabídku s pevnou cenou a termínem.
+1. **Poptávka a konzultace** — napíšete mi přes formulář nebo e-mail, co potřebujete, a probereme rozsah, cíle i rozpočet.
+2. **Návrh a nacenění** — dostanete konkrétní nabídku s pevnou cenou a termínem; u webových aplikací až po úvodní analýze rozsahu.
+3. **Předání podkladů** — pošlete texty, fotky a přístupy. Teprve tímhle krokem začíná běžet termín.
 4. **Vývoj** — stavím web, průběžně vidíte progres.
 5. **Předání a zaškolení** — dostanete přístupy, administraci a případně zaškolení.
 6. **Podpora** — volitelně navazuje balíček Správa a údržba.
 
 ### FAQ — Časté dotazy (Služby)
-- **Jak dlouho trvá tvorba webu?** Podle rozsahu — landing page 1–2 týdny, firemní web 2–4 týdny, webová aplikace 4–8 týdnů.
+- **Jak dlouho trvá tvorba webu?** Podle rozsahu — malý web 1–2 týdny, firemní web 2–4 týdny, webová aplikace 4–8 týdnů. Termín běží od dodání podkladů, ne od objednávky.
+- **Kdo píše texty a dodává fotky?** Standardně klient. Copywriting je volitelný doplněk u každého balíčku.
+- **Kolik mám kol připomínek?** Dvě kola v ceně u všech balíčků, další úpravy hodinově (~600 Kč/h).
 - **Co když přesně nevím, co potřebuju?** Není problém, na to je úvodní konzultace — společně to vyladíme.
 - **Poskytujete hosting?** Ano, v rámci balíčku Správa a údržba. Bez něj hosting předávám na Váš účet.
-- **Jak probíhá platba?** Záloha 30–50 % předem, zbytek po předání. Práce nad rámec zadání se účtuje hodinově.
-- **Budu moct web upravovat sám?** U firemního webu ano — obsah (novinky, reference) jde upravovat přes administraci, na kterou Vás zaškolím.
+- **Jak probíhá platba?** Záloha 50 % předem, zbytek po předání. Práce nad rámec zadání se účtuje hodinově.
+- **Budu moct web upravovat sám?** Podle toho, jestli si přiberete administraci (CMS) jako doplněk. S ní si novinky, reference a texty upravujete sami a zaškolím Vás. Bez ní obsah nasazuji já.
+- **Proč není administrace rovnou v ceně?** Protože ji velká část malých firem nikdy nepoužije. Je to nejdražší část webu na výrobu i na následnou podporu — férovější je nechat rozhodnutí na klientovi.
+- **Za jak dlouho odpovíte na poptávku?** Do 24 hodin v pracovní dny.
 - **Co po předání, když najdu chybu?** Opravy v rámci dohodnutého rozsahu jsou součástí revizí, cokoliv navíc řešíme v rámci správy nebo hodinově.
 
 ### Blog — úvodní mikrotext (než tam bude obsah)
@@ -290,7 +303,7 @@ Náměty na kategorie/první příspěvky:
 - **Úvod:** *Tvorba webových stránek | Alex Liška — Pardubice a okolí* *(máš)* — description: „Freelance webový vývojář z Pardubic. Landing pages, firemní weby a webové aplikace na míru — pevná cena, jasný termín."
 - **O mně:** *O mně | Alex Liška — freelance webový vývojář* — description: „Full-stack vývojář s technickým vzděláním (mechatronika, informační systémy). Poznejte, kdo stojí za Vaším projektem."
 - **Portfolio:** *Portfolio | Alex Liška* — description: „Vybrané projekty — osobní, freelance i pracovní. Weby a webové aplikace postavené na míru."
-- **Služby:** *Služby a ceník | Alex Liška* — description: „Landing page, firemní web, webová aplikace nebo správa webu — pevné ceny od, kalkulačka a poptávkový formulář."
+- **Služby:** *Služby a ceník | Alex Liška* — description: „Malý web, firemní web, webová aplikace nebo správa webu — ceny od, kalkulačka a poptávkový formulář."
 
 ### Patička (Footer) — pokud budeš chtít jednotnou patičku napříč stránkami
 - Pozdravte se
@@ -306,7 +319,7 @@ Náměty na kategorie/první příspěvky:
 
 ## Poznámky
 - Vykání používej všude, kde oslovuješ návštěvníka přímo („napište mi", „nejste si jistí", „dostanete"). Popisy o sobě zůstávají v 1. osobě jednotného čísla.
-- Ceny doplňků, úrovní správy i základní ceny „od" u všech čtyř balíčků jsou doplněné (Landing 10 000 Kč, Firemní web 25 000 Kč, MVP 45 000 Kč, Správa od 600 Kč/měs. včetně hostingu frontendu).
+- Ceny doplňků, úrovní správy i základní ceny „od" u všech čtyř balíčků jsou doplněné (Malý web 12 000 Kč, Firemní web 25 000 Kč / zaváděcích 16 000 Kč pro první 3 zakázky, MVP 45 000 Kč, Správa od 1 500 Kč/měs. včetně hostingu frontendu).
 - `cms` a `cms_hosted` (Landing) se vzájemně vylučují — v UI/copy by mělo jít vybrat jen jedno z toho.
 - `extra_page` (Firemní web) je množstevní doplněk, max. 5 stránek navíc — v kalkulačce se tedy chová jako počitadlo, ne zaškrtávátko.
 - `priority_support` (Správa) nejde přidat k úrovni Aplikace — tam už je zahrnutá.

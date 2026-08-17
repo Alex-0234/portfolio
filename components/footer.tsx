@@ -5,9 +5,7 @@ import Link from 'next/link'
 import { useLenis } from 'lenis/react'
 
 import ContactForm from './contactForm'
-import { EMAIL, GITHUB, LINKEDIN, GOOGLE_PROFILE } from '@/data/site'
-
-const ICO = '29805473'
+import { EMAIL, GITHUB, LINKEDIN, GOOGLE_MAPS, ICO, PHONE, PHONE_HOURS, RESPONSE_TIME } from '@/data/site'
 
 const NAV = [
     { name: 'Úvod', href: '/' },
@@ -148,12 +146,27 @@ export default function Footer({
                                 </div>
                                 <div className='flex flex-wrap items-baseline gap-x-3 gap-y-1'>
                                     <dt className={microClasses}>e-mail</dt>
-                                    <dd>
+                                    <dd className='flex flex-wrap items-baseline gap-x-3 gap-y-1'>
                                         <a href={`mailto:${EMAIL}`} className={`${linkClasses} underline underline-offset-4`}>
                                             {EMAIL}
                                         </a>
+                                        <span className={microClasses}>{RESPONSE_TIME}</span>
                                     </dd>
                                 </div>
+                                {PHONE && (
+                                    <div className='flex flex-wrap items-baseline gap-x-3 gap-y-1'>
+                                        <dt className={microClasses}>telefon</dt>
+                                        <dd className='flex flex-wrap items-baseline gap-x-3 gap-y-1'>
+                                            <a
+                                                href={`tel:${PHONE.replace(/\s/g, '')}`}
+                                                className={`${linkClasses} underline underline-offset-4`}
+                                            >
+                                                {PHONE}
+                                            </a>
+                                            <span className={microClasses}>{PHONE_HOURS}</span>
+                                        </dd>
+                                    </div>
+                                )}
                             </dl>
 
                             <p className={`max-w-md font-jet text-[0.65rem] leading-snug ${micro}`}>
@@ -165,7 +178,7 @@ export default function Footer({
                                 {[
                                     { name: 'GitHub', href: GITHUB },
                                     { name: 'LinkedIn', href: LINKEDIN },
-                                    { name: 'Google', href: GOOGLE_PROFILE },
+                                    { name: 'Google', href: GOOGLE_MAPS },
                                 ].map((item) => (
                                     <a
                                         key={item.href}
@@ -194,9 +207,14 @@ export default function Footer({
             </div>
 
             <div className={`mt-auto shrink-0 flex flex-wrap items-center justify-between gap-y-2 border-t px-6 py-2 sm:px-12 sm:py-3 ${edge}`}>
-                <p className={microClasses}>
-                    © {new Date().getFullYear()} Alex Liška
-                </p>
+                <div className='flex flex-wrap items-center gap-x-4 gap-y-1'>
+                    <p className={microClasses}>
+                        © {new Date().getFullYear()} Alex Liška
+                    </p>
+                    <Link href='/ochrana-osobnich-udaju' className={`${microClasses} ${hover}`}>
+                        Ochrana osobních údajů
+                    </Link>
+                </div>
                 <a href='#' onClick={toTop} className={`${microClasses} ${hover} cursor-pointer`}>
                     ↑ nahoru
                 </a>
