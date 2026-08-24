@@ -4,8 +4,10 @@ import { useState } from 'react'
 import { useLenis } from 'lenis/react'
 
 // jakmile je do konce stránky míň než tolik obrazovek, nápověda odjede.
-// vztažené k výšce okna, ať to sedí i na patičce, která je vysoká ~0,7-0,9 svh
-const HIDE_WITHIN_SCREENS = 0.8
+// vztažené k výšce okna, ať to sedí i na patičce - ta je na mobilu vysoká
+// 100svh-4rem (~0,93 svh) a na desktopu 0,7-0,93 svh, takže celá obrazovka
+// nápovědu schová přesně ve chvíli, kdy se patička začne odhalovat
+const HIDE_WITHIN_SCREENS = 1
 
 export default function ScrollHint() {
     const [hidden, setHidden] = useState(false)

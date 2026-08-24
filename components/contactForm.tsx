@@ -11,6 +11,10 @@ interface ContactFormProps {
     configuration?: string
     variant?: 'dark' | 'light'
     showEmailNote?: boolean
+    /* patička na mobilu bojuje o každý řádek — compact sáhne po dvou sloupcích
+       u jména a e-mailu, nižším textareu a menší poznámce o údajích. Od sm: je
+       výsledek stejný jako bez compactu. */
+    compact?: boolean
     className?: string
 }
 
@@ -21,6 +25,7 @@ export default function ContactForm({
     configuration,
     variant = 'dark',
     showEmailNote = true,
+    compact = false,
     className = '',
 }: ContactFormProps) {
     const [status, setStatus] = useState<Status>('idle')
@@ -80,8 +85,8 @@ export default function ContactForm({
     }
 
     return (
-        <form onSubmit={onSubmit} className={`flex flex-col gap-3 sm:gap-4 ${className}`}>
-            <div className='grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4'>
+        <form onSubmit={onSubmit} className={`flex flex-col ${compact ? 'gap-2.5' : 'gap-3'} sm:gap-4 ${className}`}>
+            <div className={`grid gap-3 sm:grid-cols-2 sm:gap-4 ${compact ? 'grid-cols-2' : 'grid-cols-1'}`}>
                 <input name='name' type='text' required placeholder='Jméno' className={fieldClasses} />
                 <input name='email' type='email' required placeholder='E-mail' className={fieldClasses} />
             </div>
@@ -89,7 +94,7 @@ export default function ContactForm({
                 name='message'
                 rows={3}
                 placeholder='co budeme stavět?'
-                className={`${fieldClasses} min-h-18 resize-none sm:min-h-28`}
+                className={`${fieldClasses} resize-none sm:min-h-28 ${compact ? 'min-h-16' : 'min-h-18'}`}
             />
 
             {configuration && (
@@ -131,9 +136,9 @@ export default function ContactForm({
                 </p>
             )}
 
-            <p className={`font-jet text-xs ${muted}`}>
+            <p className={`font-jet ${compact ? 'text-[0.65rem] leading-snug' : 'text-xs'} sm:text-xs ${muted}`}>
                 Vyplněné údaje použiju jen k odpovědi na Vaši poptávku —{' '}
-                <Link href='/ochrana-osobnich-udaju' className={`underline underline-offset-4 ${link}`}>
+                <Link href='/ochrana-osobnich-udaju' className={`py-1.5 underline underline-offset-4 ${link}`}>
                     jak nakládám s osobními údaji
                 </Link>
             </p>

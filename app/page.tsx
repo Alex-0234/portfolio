@@ -33,7 +33,7 @@ export default function Home() {
         </div>
         <ul className='grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl'>
           {REASONS.map((reason) => (
-            <li key={reason.title} className='rounded-xl border border-dark/10 p-6'>
+            <li key={reason.title} data-cursor="hover" className='rounded-xl border border-dark/10 p-6'>
               <p className='font-medium'>{reason.title}</p>
               <p className='text-dark/70 mt-1'>{reason.description}</p>
             </li>
