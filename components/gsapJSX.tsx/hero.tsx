@@ -13,7 +13,12 @@ const GAP_SM = 5
 const INTRO_TOP = 50
 const INTRO_TOP_SM = 44
 const SCROLLED_TOP = 10
-const SCROLLED_TOP_SM = 4
+/* hlavička je fixní a vysoká h-16, takže pod ni musí odscrollovaný nadpis
+   podlézt. Na mobilu ale procento výšky vyjde míň než těch 64 px - 4 % z 844px
+   displeje jsou 34 px a nadpis skončil přes logo i menu. Odsazení proto na
+   úzkých displejích počítáme z pixelů hlavičky, ne z procenta viewportu */
+const HEADER_PX = 64
+const HEADER_GAP_PX = 28
 const NARROW = '(max-width: 767px)'
 
 export default function Hero() {
@@ -48,7 +53,11 @@ export default function Hero() {
 
         const intro = () => stackFrom(narrow() ? INTRO_TOP_SM : INTRO_TOP, [headerRef.current, confirmRef.current, introCtaRef.current])
 
-        const scrolled = () => stackFrom(narrow() ? SCROLLED_TOP_SM : SCROLLED_TOP, [headerRef.current, midStackRef.current, aboutCtaRef.current, confirmRef.current])
+        const scrolledTop = () => narrow()
+            ? ((HEADER_PX + HEADER_GAP_PX) / viewport()) * 100
+            : SCROLLED_TOP
+
+        const scrolled = () => stackFrom(scrolledTop(), [headerRef.current, midStackRef.current, aboutCtaRef.current, confirmRef.current])
 
         const applyLayout = () => {
             const [titleTop, confirmTop, ctaTop] = intro()

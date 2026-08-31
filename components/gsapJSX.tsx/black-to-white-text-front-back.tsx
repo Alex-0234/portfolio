@@ -48,6 +48,10 @@ const HOLD_PX = 800
 
 const START_ZOOM = 2050
 
+const END_ZOOM_REM = 2.5
+/* Kolik má "HOTOVO!" nakonec měřit na úzkém displeji, v CSS pixelech. */
+const END_PX_SM = 30
+
 export default function BlackToWhiteTextFrontToBack() {
     const runwayRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -56,6 +60,14 @@ export default function BlackToWhiteTextFrontToBack() {
 
     useGSAP(() => {
         const startFontRem = () => START_ZOOM * window.innerHeight / window.innerWidth
+
+        /* viewBox 800x120 se do vysokého displeje vejde přes šířku, takže jedna
+           user unit je innerWidth/800 px. Pevných 2.5rem tím na 390px displeji
+           doběhne na 19 px - na mobilu proto cíl zadáváme v pixelech a
+           převádíme ho zpátky do jednotek viewBoxu. Desktop zůstává beze změny */
+        const endFontRem = () => window.innerWidth >= 768
+            ? END_ZOOM_REM
+            : (END_PX_SM * 800 / window.innerWidth) / 16
 
         const tl1 = gsap.timeline({
             scrollTrigger: {
@@ -115,7 +127,7 @@ export default function BlackToWhiteTextFrontToBack() {
             .fromTo(svgRef.current, {
                 fontSize: () => `${startFontRem()}rem`,
             }, {
-                fontSize: '2.5rem',
+                fontSize: () => `${endFontRem()}rem`,
                 duration: SVG_ZOOM,
                 ease: 'power3.out',
                 immediateRender: false,
@@ -137,14 +149,17 @@ export default function BlackToWhiteTextFrontToBack() {
                     ref={(el) => { stepRefs.current[i] = el }}
                     className='invisible absolute inset-0 flex flex-col items-center justify-center gap-6 opacity-0'
                 >
-                    <span className='font-jet text-[0.9vw] tracking-[0.4em] text-light/50'>
+                    {/* velikosti drží max(), protože samotné vw se na mobilu složí
+                        do nečitelna - 3vw je na 390px displeji 11 px a 1.05vw 4 px.
+                        Horní větev je pořád vw, takže na desktopu se nic nemění */}
+                    <span className='font-jet text-[max(0.625rem,0.9vw)] tracking-[0.4em] text-light/50'>
                         {String(i + 1).padStart(2, '0')}
                     </span>
-                    <div className='flex flex-col items-center gap-4 px-8 text-center'>
-                        <span className='text-[3vw] font-bold uppercase leading-[1.3] text-light'>
+                    <div className='flex flex-col items-center gap-4 px-6 text-center md:px-8'>
+                        <span className='text-[max(1.625rem,3vw)] font-bold uppercase leading-[1.3] text-light'>
                             {step.title}
                         </span>
-                        <span className='max-w-[60ch] text-pretty text-[1.05vw] leading-[1.7] text-light/60'>
+                        <span className='max-w-[60ch] text-pretty text-[max(0.9375rem,1.05vw)] leading-[1.7] text-light/60'>
                             {step.detail}
                         </span>
                     </div>
