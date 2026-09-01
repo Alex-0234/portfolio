@@ -214,25 +214,28 @@ Vykání, čeština. Přeloženo a upraveno ze starého (anglického) portfolia 
 - sada automatizovaných testů — **8 000 Kč**
 
 ### Balíček 4 — Správa a údržba (Maintenance)
-**Tagline:** základní péče, web zůstává v pořádku
+**Tagline:** web zůstává v provozu, aktuální a zálohovaný
 **Termín:** průběžně
 **Zahrnuje:**
 - hosting frontendu v ceně (Cloudflare Pages) — žádná další faktura za provoz webu
 - aktualizace závislostí a bezpečnostní záplaty
-- monitoring dostupnosti (uptime)
+- monitoring dostupnosti (uptime) — když web spadne, řeším to já, klient si toho nemusí všimnout
+- zálohy včetně ověřeného obnovení — web zpět v provozu do 24 h
+- opravy chyb v mém vlastním kódu zdarma po celou dobu správy
 - hlídání expirace domény — registraci platí klient přímo registrátorovi, doména je psaná na něj
-- zálohy
+- úpravy textů cookie lišty a GDPR podle změn legislativy
 - pro weby postavené mnou (jiné po dohodě)
 
 **Úrovně:**
 | Úroveň | Cena | Popis |
 |---|---|---|
-| Základ | **1 500 Kč / měs.** | hosting frontendu, aktualizace závislostí, bezpečnostní záplaty, kontrola dostupnosti, monitoring domény, zálohy |
-| Standard | **2 500 Kč / měs.** | vše ze Základu + 1–2 h měsíčních úprav |
-| Aplikace | **3 900 Kč / měs.** | vše ze Základu + monitoring chyb, prioritní podpora, 3–4 h měsíčních úprav |
+| Základ | **600 Kč / měs.** | hosting frontendu, aktualizace a záplaty, monitoring dostupnosti, zálohy — a opravy chyb v mé práci zdarma |
+| Standard | **1 200 Kč / měs.** | vše ze Základu + odpověď do 24 h v pracovní dny, drobné úpravy obsahu a měsíční report (dostupnost, návštěvnost, co jsem udělal) |
+| Aplikace | **2 400 Kč / měs.** | pro weby s backendem — vše ze Standardu + správa serveru, monitoring chyb a prioritní fronta |
 
 **Doplňky:**
-- hosting CMS/backend serveru (provozní náklady, aktualizace, zálohy) — **700 Kč / měs.** *(už zahrnuto v úrovni Aplikace)*
+- hosting CMS/backend serveru — **700 Kč / měs.** *(provozní náklad serveru, účtuje se navíc u všech úrovní včetně Aplikace)*
+- správa serveru (aktualizace běhového prostředí, restarty, zálohy databáze) — **700 Kč / měs.** *(už zahrnuto v úrovni Aplikace)*
 - prioritní podpora — **400 Kč / měs.** *(už zahrnuto v úrovni Aplikace, nelze přidat navíc)*
 - hodina úprav navíc měsíčně — **600 Kč / měs.**
 
@@ -319,7 +322,7 @@ Náměty na kategorie/první příspěvky:
 
 ## Poznámky
 - Vykání používej všude, kde oslovuješ návštěvníka přímo („napište mi", „nejste si jistí", „dostanete"). Popisy o sobě zůstávají v 1. osobě jednotného čísla.
-- Ceny doplňků, úrovní správy i základní ceny „od" u všech čtyř balíčků jsou doplněné (Malý web 12 000 Kč, Firemní web 25 000 Kč / zaváděcích 16 000 Kč pro první 3 zakázky, MVP 45 000 Kč, Správa od 1 500 Kč/měs. včetně hostingu frontendu).
+- Ceny doplňků, úrovní správy i základní ceny „od" u všech čtyř balíčků jsou doplněné (Malý web 12 000 Kč, Firemní web 25 000 Kč / zaváděcích 16 000 Kč pro první 3 zakázky, MVP 45 000 Kč, Správa od 600 Kč/měs. včetně hostingu frontendu).
 - `cms` a `cms_hosted` (Landing) se vzájemně vylučují — v UI/copy by mělo jít vybrat jen jedno z toho.
 - `extra_page` (Firemní web) je množstevní doplněk, max. 5 stránek navíc — v kalkulačce se tedy chová jako počitadlo, ne zaškrtávátko.
 - `priority_support` (Správa) nejde přidat k úrovni Aplikace — tam už je zahrnutá.

@@ -48,7 +48,7 @@ Ceník mám veřejný a pevný, protože považuju za neslušné nutit lidi psá
 - **Malý web — od 12 000 Kč.** Landing page nebo web do tří stránek, on-page SEO, kontaktní formulář, nasazení včetně nastavení domény. Hotovo za 1–2 týdny.
 - **Firemní web — od 25 000 Kč.** Vše z malého webu, do pěti podstránek, formulář s backendem, analytika a Search Console, zaškolení. 2–4 týdny.
 - **Webová aplikace — od 45 000 Kč.** Přihlašování, databáze, API na míru, administrační rozhraní. Přesná cena vzejde z úvodní analýzy, protože u aplikací se rozsah v průběhu vždycky upřesňuje. 4–8 týdnů.
-- **Správa a údržba — od 1 500 Kč měsíčně.** Hosting frontendu, aktualizace a záplaty, monitoring dostupnosti a domény, zálohy.
+- **Správa a údržba — od 600 Kč měsíčně.** Hosting frontendu, aktualizace a záplaty, monitoring dostupnosti a domény, zálohy.
 
 Ke každému balíčku jsou doplňky s pevnou cenou — administrace, druhý jazyk, copywriting, katalog produktů, rezervační systém, audit přístupnosti. Kompletní rozpis i kalkulačka jsou ve [službách a ceníku](/offers).
 
